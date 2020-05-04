@@ -802,3 +802,88 @@ LogConfig: Setting CVar [[r.setres:1280x720]]
 [2020.05.04-05.28.46:876][529]LogSlate: Window 'Plugins' being destroyed
 [2020.05.04-05.28.46:879][529]LogSlate: Window 'Plugins' being destroyed
 [2020.05.04-05.28.46:879][529]LogDirectoryWatcher: A directory notification for '../../../Engine/Plugins/' was aborted.
+[2020.05.04-05.30.54:939][185]LogSlate: Window 'Source Control Login' being destroyed
+[2020.05.04-05.31.04:573][182]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
+[2020.05.04-05.31.04:813][182]EditorErrors: Warning: No assets to check in!
+[2020.05.04-05.31.09:887][756]LogSlate: Took 0.000123 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2020.05.04-05.31.11:388][756]LogSlate: Window 'Pick Parent Class' being destroyed
+[2020.05.04-05.31.14:832][100]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
+[2020.05.04-05.31.15:083][100]EditorErrors: Warning: No assets to check in!
+[2020.05.04-05.31.18:534][478]LogUObjectHash: Compacting FUObjectHashTables data took   1.30ms
+[2020.05.04-05.31.18:794][478]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/NewBlueprint" FILE="../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/NewBlueprint.uasset" SILENT=true
+[2020.05.04-05.31.18:805][478]LogSavePackage: Moving '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/NewBlueprintD1B37F1045FE6DADE12C3B9E748A15CB.tmp' to '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/NewBlueprint.uasset'
+[2020.05.04-05.31.19:267][478]AssetCheck: New page: Asset Save: NewBlueprint
+[2020.05.04-05.31.19:267][478]LogContentValidation: Display: Validating Blueprint /Game/NewBlueprint.NewBlueprint
+[2020.05.04-05.31.22:010][770]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
+[2020.05.04-05.31.26:224][770]LogSlate: Window 'Submit Files' being destroyed
+[2020.05.04-05.31.26:811][770]LogSourceControl: commit successful: [master 5a69168] Haha
+[2020.05.04-05.31.27:033][770]SourceControl: [master 5a69168] Haha
+[2020.05.04-05.31.27:033][770]SourceControl:  1 file changed, 0 insertions(+), 0 deletions(-)
+[2020.05.04-05.31.27:033][770]SourceControl:  create mode 100644 Content/NewBlueprint.uasset
+[2020.05.04-05.31.27:039][770]SourceControl: Commited [master 5a69168] Haha.
+[2020.05.04-05.39.24:728][699]LogSlate: WidgetSwitcher ('None') active index changed to -1
+[2020.05.04-05.39.24:728][699]LogSlate: WidgetSwitcher ('None') active index changed to 0
+[2020.05.04-05.39.24:759][699]LogSlate: Took 0.000125 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
+[2020.05.04-05.39.26:879][937]LogSlate: WidgetSwitcher ('None') active index changed to 1
+[2020.05.04-05.39.28:695][123]Running S:/Software/UnrealEditor/UE_4.24/Engine/Binaries/DotNET/UnrealBuildTool.exe  -projectfiles -project="S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject" -game -rocket -progress
+[2020.05.04-05.39.29:027][123]Discovering modules, targets and source code for project...
+[2020.05.04-05.39.31:943][123]Binding IntelliSense data...
+[2020.05.04-05.39.34:360][123]Binding IntelliSense data... 100%
+[2020.05.04-05.39.34:360][123]Writing project files...
+[2020.05.04-05.39.41:498][123]Writing project files... 100%
+[2020.05.04-05.39.42:362][123]LogHotReload: Recompiling module ProjectBreathMint...
+[2020.05.04-05.39.42:364][123]LogVSAccessor: Warning: Couldn't access Visual Studio
+[2020.05.04-05.39.42:367][123]Candidate modules for hot reload:
+[2020.05.04-05.39.42:367][123]  ProjectBreathMint
+[2020.05.04-05.39.42:367][123]Launching UnrealBuildTool... [S:/Software/UnrealEditor/UE_4.24/Engine/Binaries/DotNET/UnrealBuildTool.exe  -ModuleWithSuffix=ProjectBreathMint,9768 Win64 Development -TargetType=Editor -Project="S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject" "S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject"  -IgnoreJunk]
+[2020.05.04-05.40.26:642][123]Using 'git status' to determine working set for adaptive non-unity build (S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint).
+Creating makefile for ProjectBreathMintEditor (no existing makefile)
+Parsing headers for ProjectBreathMintEditor
+  Running UnrealHeaderTool "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\ProjectBreathMint.uproject" "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\ProjectBreathMintEditor\Development\ProjectBreathMintEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
+Reflection code generated for ProjectBreathMintEditor in 13.4666309 seconds
+Building ProjectBreathMintEditor...
+Using Visual Studio 2019 14.24.28316 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314) and Windows 10.0.16299.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+Building 9 actions with 24 processes...
+  [1/9] Default.rc2
+  [2/9] SharedPCH.Engine.ShadowErrors.cpp
+  [3/9] ProjectBreathMint.cpp
+  [4/9] ProjectBreathMint.init.gen.cpp
+  [5/9] MyCharacter.cpp
+  [6/9] MyCharacter.gen.cpp
+  [7/9] UE4Editor-ProjectBreathMint-9768.lib
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.exp
+  [8/9] UE4Editor-ProjectBreathMint-9768.dll
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.exp
+  [9/9] ProjectBreathMintEditor.target
+Total time in Parallel executor: 21.08 seconds
+Total execution time: 44.10 seconds
+
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: New page: Compilation - 5/05/2020, 5:40:26 am
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Using 'git status' to determine working set for adaptive non-unity build (S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint).
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Creating makefile for ProjectBreathMintEditor (no existing makefile)
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Parsing headers for ProjectBreathMintEditor
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   Running UnrealHeaderTool "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\ProjectBreathMint.uproject" "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\ProjectBreathMintEditor\Development\ProjectBreathMintEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Reflection code generated for ProjectBreathMintEditor in 13.4666309 seconds
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Building ProjectBreathMintEditor...
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Using Visual Studio 2019 14.24.28316 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314) and Windows 10.0.16299.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Building 9 actions with 24 processes...
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [1/9] Default.rc2
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [2/9] SharedPCH.Engine.ShadowErrors.cpp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [3/9] ProjectBreathMint.cpp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [4/9] ProjectBreathMint.init.gen.cpp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [5/9] MyCharacter.cpp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [6/9] MyCharacter.gen.cpp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [7/9] UE4Editor-ProjectBreathMint-9768.lib
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:      Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.exp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [8/9] UE4Editor-ProjectBreathMint-9768.dll
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:      Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.exp
+[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [9/9] ProjectBreathMintEditor.target
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Total time in Parallel executor: 21.08 seconds
+[2020.05.04-05.40.26:642][123]CompilerResultsLog: Total execution time: 44.10 seconds
+[2020.05.04-05.40.26:642][123]LogMainFrame: MainFrame: Module compiling took 44.278 seconds
+[2020.05.04-05.40.26:647][123]Reloading module ProjectBreathMint after successful compile.
+[2020.05.04-05.40.26:717][123]LogClass: Could not find existing package /Script/ProjectBreathMint for HotReload of class MyCharacter, assuming a new package.
+[2020.05.04-05.40.26:720][123]LogContentBrowser: Native class hierarchy updated for 'ProjectBreathMint' in 0.0011 seconds. Added 1 classes and 2 folders.
+[2020.05.04-05.40.26:749][123]LogUObjectHash: Compacting FUObjectHashTables data took   1.30ms
+[2020.05.04-05.40.26:762][123]LogContentBrowser: Native class hierarchy populated in 0.0081 seconds. Added 3020 classes and 725 folders.
+[2020.05.04-05.40.27:030][123]LogSlate: Window 'Add C++ Class' being destroyed
