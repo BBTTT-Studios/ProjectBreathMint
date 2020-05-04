@@ -1,4 +1,4 @@
-﻿Log file open, 05/04/20 17:28:12
+﻿Log file open, 05/04/20 17:42:43
 LogWindows: Failed to load 'aqProf.dll' (GetLastError=126)
 LogWindows: File 'aqProf.dll' does not exist
 LogWindows: Failed to load 'VtuneApi.dll' (GetLastError=126)
@@ -9,7 +9,7 @@ LogConsoleResponse: Display: Failed to find resolution value strings in scalabil
 LogInit: Display: Running engine for game: ProjectBreathMint
 LogPlatformFile: Not using cached read wrapper
 LogTaskGraph: Started task graph with 5 named threads and 71 total threads with 3 sets of task threads.
-LogStats: Stats thread started at 0.132966
+LogStats: Stats thread started at 0.126592
 LogD3D11RHI: Loaded GFSDK_Aftermath_Lib.x64.dll
 LogICUInternationalization: ICU TimeZone Detection - Raw Offset: +12:00, Platform Override: ''
 LogPluginManager: Mounting plugin Paper2D
@@ -100,6 +100,248 @@ LogPluginManager: Mounting plugin SteamVR
 LogPluginManager: Mounting plugin WebMMoviePlayer
 LogPluginManager: Mounting plugin WindowsMoviePlayer
 LogPluginManager: Mounting plugin ScreenshotTools
+LogPluginManager: Mounting plugin OpenVRExpansionPlugin
+LogPluginManager: Mounting plugin VRExpansionPlugin
+LogInit: Warning: Incompatible or missing module: OpenVRExpansionPlugin
+LogInit: Warning: Incompatible or missing module: VRExpansionPlugin
+Running S:/Software/UnrealEditor/UE_4.24/Engine/Binaries/DotNET/UnrealBuildTool.exe Development Win64 -Project="S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject" -TargetType=Editor -Progress -NoHotReloadFromIDE
+Using 'git status' to determine working set for adaptive non-unity build (S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint).
+Invalidating makefile for ProjectBreathMintEditor (OpenVRExpansionPlugin.uplugin has been added)
+@progress push 5%
+Parsing headers for ProjectBreathMintEditor
+  Running UnrealHeaderTool "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\ProjectBreathMint.uproject" "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\ProjectBreathMintEditor\Development\ProjectBreathMintEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
+Reflection code generated for ProjectBreathMintEditor in 10.6395618 seconds
+@progress pop
+Building ProjectBreathMintEditor...
+Using Visual Studio 2019 14.24.28316 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314) and Windows 10.0.16299.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+Building 118 actions with 24 processes...
+  @progress 'Compiling C++ source code...' 0%
+  @progress 'Compiling C++ source code...' 1%
+  [1/118] UE4Editor-ProjectBreathMint.lib
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint.exp
+  @progress 'Compiling C++ source code...' 2%
+  [2/118] Default.rc2
+  @progress 'Compiling C++ source code...' 3%
+  [3/118] Default.rc2
+  [4/118] OpenVRExpansionPlugin.init.gen.cpp
+  @progress 'Compiling C++ source code...' 4%
+  [5/118] OpenVRExpansionPlugin.cpp
+  @progress 'Compiling C++ source code...' 5%
+  [6/118] SteamVRKeyboardComponent.cpp
+  @progress 'Compiling C++ source code...' 6%
+  [7/118] SteamVRKeyboardComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 7%
+  [8/118] OpenVRExpansionFunctionLibrary.gen.cpp
+  @progress 'Compiling C++ source code...' 8%
+  [9/118] OpenVRExpansionFunctionLibrary.cpp
+  [10/118] UE4Editor-OpenVRExpansionPlugin.lib
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\OpenVRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\OpenVRExpansionPlugin\UE4Editor-OpenVRExpansionPlugin.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\OpenVRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\OpenVRExpansionPlugin\UE4Editor-OpenVRExpansionPlugin.exp
+  @progress 'Compiling C++ source code...' 9%
+  [11/118] UE4Editor-ProjectBreathMint.dll
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint.suppressed.exp
+  @progress 'Compiling C++ source code...' 10%
+  [12/118] UE4Editor-OpenVRExpansionPlugin.dll
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\OpenVRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\OpenVRExpansionPlugin\UE4Editor-OpenVRExpansionPlugin.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\OpenVRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\OpenVRExpansionPlugin\UE4Editor-OpenVRExpansionPlugin.suppressed.exp
+  @progress 'Compiling C++ source code...' 11%
+  [13/118] SharedPCH.UnrealEd.ShadowErrors.cpp
+  @progress 'Compiling C++ source code...' 12%
+  [14/118] VRInteractibleFunctionLibrary.cpp
+  @progress 'Compiling C++ source code...' 13%
+  [15/118] GS_InteractibleSettings.cpp
+  @progress 'Compiling C++ source code...' 14%
+  [16/118] VRDialComponent.cpp
+  [17/118] VRPlayerStart.cpp
+  @progress 'Compiling C++ source code...' 15%
+  [18/118] GS_LerpToHand.cpp
+  @progress 'Compiling C++ source code...' 16%
+  [19/118] GS_Default.cpp
+  @progress 'Compiling C++ source code...' 17%
+  [20/118] VRMountComponent.cpp
+  @progress 'Compiling C++ source code...' 18%
+  [21/118] VRLogComponent.cpp
+  @progress 'Compiling C++ source code...' 19%
+  [22/118] VRGripScriptBase.cpp
+  [23/118] BucketUpdateSubsystem.cpp
+  @progress 'Compiling C++ source code...' 20%
+  [24/118] VREPhysicalAnimationComponent.cpp
+  @progress 'Compiling C++ source code...' 21%
+  [25/118] GrippablePhysicsReplication.cpp
+  @progress 'Compiling C++ source code...' 22%
+  [26/118] GrippableCapsuleComponent.cpp
+  @progress 'Compiling C++ source code...' 23%
+  [27/118] GrippableCharacter.cpp
+  @progress 'Compiling C++ source code...' 24%
+  [28/118] GrippableBoxComponent.cpp
+  @progress 'Compiling C++ source code...' 25%
+  [29/118] GrippableSkeletalMeshComponent.cpp
+  [30/118] VRBPDatatypes.cpp
+  @progress 'Compiling C++ source code...' 26%
+  [31/118] VRSliderComponent.cpp
+  @progress 'Compiling C++ source code...' 27%
+  [32/118] GrippableSphereComponent.cpp
+  @progress 'Compiling C++ source code...' 28%
+  [33/118] VRButtonComponent.cpp
+  @progress 'Compiling C++ source code...' 29%
+  [34/118] GrippableStaticMeshComponent.cpp
+  @progress 'Compiling C++ source code...' 30%
+  [35/118] GrippableActor.cpp
+  @progress 'Compiling C++ source code...' 31%
+  [36/118] GS_Melee.cpp
+  [37/118] GrippableStaticMeshActor.cpp
+  @progress 'Compiling C++ source code...' 32%
+  [38/118] VRPlayerController.cpp
+  @progress 'Compiling C++ source code...' 33%
+  [39/118] VRSimpleCharacter.cpp
+  @progress 'Compiling C++ source code...' 34%
+  [40/118] VRGripInterface.cpp
+  @progress 'Compiling C++ source code...' 35%
+  [41/118] VRTrackedParentInterface.cpp
+  @progress 'Compiling C++ source code...' 36%
+  [42/118] VRGlobalSettings.cpp
+  [43/118] ParentRelativeAttachmentComponent.cpp
+  @progress 'Compiling C++ source code...' 37%
+  [44/118] GrippableCharacter.gen.cpp
+  @progress 'Compiling C++ source code...' 38%
+  [45/118] GripMotionControllerComponent.cpp
+  @progress 'Compiling C++ source code...' 39%
+  [46/118] GripMotionControllerComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 40%
+  [47/118] VRExpansionPlugin.cpp
+  @progress 'Compiling C++ source code...' 41%
+  [48/118] VRSimpleCharacterMovementComponent.cpp
+  @progress 'Compiling C++ source code...' 42%
+  [49/118] VRAIController.cpp
+  [50/118] ReplicatedVRCameraComponent.cpp
+  @progress 'Compiling C++ source code...' 43%
+  [51/118] GS_Physics.cpp
+  @progress 'Compiling C++ source code...' 44%
+  [52/118] VRExpansionFunctionLibrary.cpp
+  @progress 'Compiling C++ source code...' 45%
+  [53/118] VRStereoWidgetComponent.cpp
+  @progress 'Compiling C++ source code...' 46%
+  [54/118] GS_Default.gen.cpp
+  @progress 'Compiling C++ source code...' 47%
+  [55/118] VRLeverComponent.cpp
+  [56/118] VRBaseCharacter.cpp
+  @progress 'Compiling C++ source code...' 48%
+  [57/118] VRAIPerceptionOverrides.cpp
+  @progress 'Compiling C++ source code...' 49%
+  [58/118] GS_InteractibleSettings.gen.cpp
+  @progress 'Compiling C++ source code...' 50%
+  [59/118] GS_GunTools.gen.cpp
+  @progress 'Compiling C++ source code...' 51%
+  [60/118] GS_GunTools.cpp
+  @progress 'Compiling C++ source code...' 52%
+  [61/118] GrippablePhysicsReplication.gen.cpp
+  @progress 'Compiling C++ source code...' 53%
+  [62/118] GrippableBoxComponent.gen.cpp
+  [63/118] ReplicatedVRCameraComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 54%
+  [64/118] VRBaseCharacterMovementComponent.cpp
+  @progress 'Compiling C++ source code...' 55%
+  [65/118] VRCharacter.cpp
+  @progress 'Compiling C++ source code...' 56%
+  [66/118] VRPathFollowingComponent.cpp
+  @progress 'Compiling C++ source code...' 57%
+  [67/118] VRRootComponent.cpp
+  @progress 'Compiling C++ source code...' 58%
+  [68/118] VRBPDatatypes.gen.cpp
+  [69/118] GS_LerpToHand.gen.cpp
+  @progress 'Compiling C++ source code...' 59%
+  [70/118] VREPhysicalAnimationComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 60%
+  [71/118] VRExpansionPlugin.init.gen.cpp
+  @progress 'Compiling C++ source code...' 61%
+  [72/118] GrippableSphereComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 62%
+  [73/118] GrippableSkeletalMeshComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 63%
+  [74/118] VRGameViewportClient.gen.cpp
+  @progress 'Compiling C++ source code...' 64%
+  [75/118] GrippableSkeletalMeshActor.gen.cpp
+  [76/118] VRBaseCharacterMovementComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 65%
+  [77/118] VRGestureComponent.cpp
+  @progress 'Compiling C++ source code...' 66%
+  [78/118] VRButtonComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 67%
+  [79/118] GrippableStaticMeshActor.gen.cpp
+  @progress 'Compiling C++ source code...' 68%
+  [80/118] GS_Physics.gen.cpp
+  @progress 'Compiling C++ source code...' 69%
+  [81/118] VRGripInterface.gen.cpp
+  [82/118] VRLogComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 70%
+  [83/118] VRInteractibleFunctionLibrary.gen.cpp
+  @progress 'Compiling C++ source code...' 71%
+  [84/118] GS_Melee.gen.cpp
+  @progress 'Compiling C++ source code...' 72%
+  [85/118] VRGlobalSettings.gen.cpp
+  @progress 'Compiling C++ source code...' 73%
+  [86/118] VRGripScriptBase.gen.cpp
+  @progress 'Compiling C++ source code...' 74%
+  [87/118] VRPlayerStart.gen.cpp
+  @progress 'Compiling C++ source code...' 75%
+  [88/118] GrippableStaticMeshComponent.gen.cpp
+  [89/118] VRTrackedParentInterface.gen.cpp
+  @progress 'Compiling C++ source code...' 76%
+  [90/118] VRDialComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 77%
+  [91/118] VRVehiclePawn.gen.cpp
+  @progress 'Compiling C++ source code...' 78%
+  [92/118] VRMountComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 79%
+  [93/118] GrippableActor.gen.cpp
+  @progress 'Compiling C++ source code...' 80%
+  [94/118] VRCharacterMovementComponent.cpp
+  @progress 'Compiling C++ source code...' 81%
+  [95/118] BucketUpdateSubsystem.gen.cpp
+  [96/118] VRWheeledVehicle.gen.cpp
+  @progress 'Compiling C++ source code...' 82%
+  [97/118] ParentRelativeAttachmentComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 83%
+  [98/118] VRSimpleCharacterMovementComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 84%
+  [99/118] VREPhysicsConstraintComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 85%
+  [100/118] GrippableCapsuleComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 86%
+  [101/118] VRExpansionFunctionLibrary.gen.cpp
+  [102/118] VRAIController.gen.cpp
+  @progress 'Compiling C++ source code...' 87%
+  [103/118] VRAIPerceptionOverrides.gen.cpp
+  @progress 'Compiling C++ source code...' 88%
+  [104/118] VRSliderComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 89%
+  [105/118] VRPlayerController.gen.cpp
+  @progress 'Compiling C++ source code...' 90%
+  [106/118] VRLeverComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 91%
+  [107/118] VRCharacterMovementComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 92%
+  [108/118] VRCharacter.gen.cpp
+  [109/118] VRBaseCharacter.gen.cpp
+  @progress 'Compiling C++ source code...' 93%
+  [110/118] VRGestureComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 94%
+  [111/118] VRStereoWidgetComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 95%
+  [112/118] VRPathFollowingComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 96%
+  [113/118] GrippableSkeletalMeshActor.cpp
+  @progress 'Compiling C++ source code...' 97%
+  [114/118] VRSimpleCharacter.gen.cpp
+  [115/118] VRRootComponent.gen.cpp
+  @progress 'Compiling C++ source code...' 98%
+  [116/118] UE4Editor-VRExpansionPlugin.lib
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\UE4Editor-VRExpansionPlugin.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\UE4Editor-VRExpansionPlugin.exp
+  @progress 'Compiling C++ source code...' 99%
+  [117/118] UE4Editor-VRExpansionPlugin.dll
+     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\UE4Editor-VRExpansionPlugin.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Plugins\VRExpansion\VRExpansionPlugin\Intermediate\Build\Win64\UE4Editor\Development\VRExpansionPlugin\UE4Editor-VRExpansionPlugin.suppressed.exp
+  @progress 'Compiling C++ source code...' 100%
+  [118/118] ProjectBreathMintEditor.target
+Total time in Parallel executor: 80.18 seconds
+Total execution time: 97.41 seconds
 LogInit: Using libcurl 7.55.1-DEV
 LogInit:  - built for x86_64-pc-win32
 LogInit:  - supports SSL with OpenSSL/1.1.1
@@ -131,7 +373,7 @@ LogInit: Compiled (64-bit): Feb 24 2020 15:39:18
 LogInit: Compiled with Visual C++: 19.16.27032.01
 LogInit: Build Configuration: Development
 LogInit: Branch Name: ++UE4+Release-4.24
-LogInit: Command Line:  -EpicPortal -epicusername=Unbansheee -epicuserid=d681d1c20a0448aea68e3c5506977aa5 -epiclocale=en
+LogInit: Command Line: 
 LogInit: Base Directory: S:/Software/UnrealEditor/UE_4.24/Engine/Binaries/Win64/
 LogInit: Installed Engine Build: 1
 LogDevObjectVersion: Number of dev versions registered: 25
@@ -164,726 +406,780 @@ LogInit: Presizing for max 25165824 objects, including 0 objects not considered 
 LogInit: Object subsystem initialized
 LogConfig: Setting CVar [[con.DebugEarlyDefault:1]]
 LogConfig: Setting CVar [[r.setres:1280x720]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.VSync:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.RHICmdBypass:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.GPUCrashDebugging:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.DefaultFeature.AmbientOcclusion:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.DefaultFeature.AmbientOcclusionStaticFraction:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[vr.InstancedStereo:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.SeparateTranslucency:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.HZBOcclusion:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.SSR.MaxRoughness:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[r.rhicmdbypass:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:191][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.AsyncLoadingThreadEnabled:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.EventDrivenLoaderEnabled:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.WarnIfTimeLimitExceeded:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMultiplier:1.5]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMinTime:0.005]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.UseBackgroundLevelStreaming:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.UnregisterComponentsTimeLimit:1.0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[s.FlushStreamingOnExit:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.MaxObjectsNotConsideredByGC:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.SizeOfPermanentObjectPool:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.FlushStreamingOnGC:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.NumRetriesBeforeForcingGC:10]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.AllowParallelGC:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.TimeBetweenPurgingPendingKillObjects:61.1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.MaxObjectsInEditor:25165824]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.IncrementalBeginDestroyEnabled:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.CreateGCClusters:1]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.MinGCClusterSize:5]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.ActorClusteringEnabled:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.BlueprintClusteringEnabled:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Setting CVar [[gc.UseDisregardForGCOnDedicatedServers:0]]
-[2020.05.04-05.28.13:191][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:191][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:3]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.LensFlareQuality:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.BloomQuality:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.VT.MaxAnisotropy:8]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:4]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.SSR.Quality:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.SSR.HalfResSceneColor:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.SceneColorFormat:2]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:0]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
-[2020.05.04-05.28.13:213][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SSGI.Quality:3]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountPerSlice:1]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:32.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMax:32.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.SampleCount:16]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.JitterIntegration:0]]
-[2020.05.04-05.28.13:214][  0]LogConfig: Setting CVar [[r.HairStrands.SkyAO.SampleCount:16]]
-[2020.05.04-05.28.13:214][  0]LogInit: Selected Device Profile: [Windows]
-[2020.05.04-05.28.13:214][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
-[2020.05.04-05.28.13:216][  0]LogHAL: Display: Platform has ~ 32 GB [34272210944 / 34359738368 / 32], which maps to Largest [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
-[2020.05.04-05.28.13:216][  0]LogInit: Going up to parent DeviceProfile []
-[2020.05.04-05.28.13:216][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:3]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
-[2020.05.04-05.28.13:216][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.LensFlareQuality:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.BloomQuality:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.VT.MaxAnisotropy:8]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:4]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSR.Quality:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSR.HalfResSceneColor:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SceneColorFormat:2]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SSGI.Quality:3]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountPerSlice:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:32.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMax:32.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.SampleCount:16]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.JitterIntegration:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[r.HairStrands.SkyAO.SampleCount:16]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[net.UseAdaptiveNetUpdateFrequency:0]]
-[2020.05.04-05.28.13:217][  0]LogConfig: Setting CVar [[p.chaos.AllowCreatePhysxBodies:1]]
-[2020.05.04-05.28.13:218][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
-[2020.05.04-05.28.13:218][  0]LogInit: Computer: DESKTOP-E08JMES
-[2020.05.04-05.28.13:218][  0]LogInit: User: BansheeeBox
-[2020.05.04-05.28.13:218][  0]LogInit: CPU Page size=4096, Cores=12
-[2020.05.04-05.28.13:218][  0]LogInit: High frequency timer resolution =10.000000 MHz
-[2020.05.04-05.28.13:218][  0]LogMemory: Memory total: Physical=31.9GB (32GB approx)
-[2020.05.04-05.28.13:218][  0]LogMemory: Platform Memory Stats for Windows
-[2020.05.04-05.28.13:218][  0]LogMemory: Process Physical Memory: 110.91 MB used, 110.92 MB peak
-[2020.05.04-05.28.13:218][  0]LogMemory: Process Virtual Memory: 108.32 MB used, 108.32 MB peak
-[2020.05.04-05.28.13:218][  0]LogMemory: Physical Memory: 8615.28 MB used,  24069.25 MB free, 32684.53 MB total
-[2020.05.04-05.28.13:218][  0]LogMemory: Virtual Memory: 5263.16 MB used,  134212464.00 MB free, 134217728.00 MB total
-[2020.05.04-05.28.13:221][  0]LogWindows: WindowsPlatformFeatures enabled
-[2020.05.04-05.28.13:243][  0]LogInit: Using OS detected language (en-US).
-[2020.05.04-05.28.13:243][  0]LogInit: Using OS detected locale (en-NZ).
-[2020.05.04-05.28.13:247][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
-[2020.05.04-05.28.13:368][  0]LogInit: Setting process to per monitor DPI aware
-[2020.05.04-05.28.13:422][  0]LogSlate: New Slate User Created.  User Index 0, Is Virtual User: 0
-[2020.05.04-05.28.13:422][  0]LogSlate: Slate User Registered.  User Index 0, Is Virtual User: 0
-[2020.05.04-05.28.13:639][  0]LogD3D11RHI: D3D11 min allowed feature level: 11_0
-[2020.05.04-05.28.13:639][  0]LogD3D11RHI: D3D11 max allowed feature level: 11_0
-[2020.05.04-05.28.13:639][  0]LogD3D11RHI: D3D11 adapters:
-[2020.05.04-05.28.13:748][  0]LogD3D11RHI:    0. 'NVIDIA GeForce RTX 2080' (Feature Level 11_0)
-[2020.05.04-05.28.13:748][  0]LogD3D11RHI:       8010/0/16342 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:3, VendorId:0x10de
-[2020.05.04-05.28.13:751][  0]LogD3D11RHI:    1. 'Microsoft Basic Render Driver' (Feature Level 11_0)
-[2020.05.04-05.28.13:751][  0]LogD3D11RHI:       0/0/16342 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
-[2020.05.04-05.28.13:751][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
-[2020.05.04-05.28.13:759][  0]LogD3D11RHI: Creating new Direct3DDevice
-[2020.05.04-05.28.13:759][  0]LogD3D11RHI:     GPU DeviceId: 0x1e87 (for the marketing name, search the web for "GPU Device Id")
-[2020.05.04-05.28.13:759][  0]LogWindows: EnumDisplayDevices:
-[2020.05.04-05.28.13:759][  0]LogWindows:    0. 'NVIDIA GeForce RTX 2080' (P:1 D:1)
-[2020.05.04-05.28.13:760][  0]LogWindows:    1. 'NVIDIA GeForce RTX 2080' (P:0 D:1)
-[2020.05.04-05.28.13:760][  0]LogWindows:    2. 'NVIDIA GeForce RTX 2080' (P:0 D:1)
-[2020.05.04-05.28.13:761][  0]LogWindows:    3. 'NVIDIA GeForce RTX 2080' (P:0 D:0)
-[2020.05.04-05.28.13:761][  0]LogWindows: DebugString: FoundDriverCount:4 
-[2020.05.04-05.28.13:761][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce RTX 2080
-[2020.05.04-05.28.13:761][  0]LogD3D11RHI:   Driver Version: 445.87 (internal:26.21.14.4587, unified:445.87)
-[2020.05.04-05.28.13:761][  0]LogD3D11RHI:      Driver Date: 4-3-2020
-[2020.05.04-05.28.13:761][  0]LogRHI: Texture pool is 5607 MB (70% of 8010 MB)
-[2020.05.04-05.28.13:842][  0]LogD3D11RHI: RHI has support for 64 bit atomics
-[2020.05.04-05.28.13:842][  0]LogD3D11RHI: Async texture creation enabled
-[2020.05.04-05.28.13:846][  0]LogD3D11RHI: HDR output is supported on display 0 (NvId: 0x80061086).
-[2020.05.04-05.28.13:862][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 1)
-[2020.05.04-05.28.15:865][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AllDesktop'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ATC'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1a'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_PVRTC'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ATCClient'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1Client'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1aClient'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_PVRTCClient'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
-[2020.05.04-05.28.15:891][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
-[2020.05.04-05.28.15:908][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
-[2020.05.04-05.28.15:908][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
-[2020.05.04-05.28.15:914][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxNoEditor'
-[2020.05.04-05.28.15:921][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
-[2020.05.04-05.28.15:927][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
-[2020.05.04-05.28.15:933][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64NoEditor'
-[2020.05.04-05.28.15:939][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Client'
-[2020.05.04-05.28.15:945][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Server'
-[2020.05.04-05.28.15:964][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Lumin'
-[2020.05.04-05.28.15:964][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LuminClient'
-[2020.05.04-05.28.15:976][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
-[2020.05.04-05.28.15:976][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
-[2020.05.04-05.28.15:982][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsNoEditor'
-[2020.05.04-05.28.15:989][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
-[2020.05.04-05.28.15:995][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
-[2020.05.04-05.28.16:002][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
-[2020.05.04-05.28.16:002][  0]LogTargetPlatformManager: Display: Building Assets For Windows
-[2020.05.04-05.28.16:007][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
-[2020.05.04-05.28.16:032][  0]LogShaderCompilers: Guid format shader working directory is -18 characters bigger than the processId version (../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Intermediate/Shaders/WorkingDirectory/31432/).
-[2020.05.04-05.28.16:032][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/BansheeeBox/AppData/Local/Temp/UnrealShaderWorkingDir/D8BCCD7D4F390B8A2ADD62BC682A980A/'.
-[2020.05.04-05.28.16:033][  0]LogXGEController: Cannot use XGE Controller as Incredibuild is not installed on this machine.
-[2020.05.04-05.28.16:033][  0]LogShaderCompilers: Cannot use XGE Shader Compiler as Incredibuild is not installed on this machine.
-[2020.05.04-05.28.16:033][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
-[2020.05.04-05.28.16:613][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
-[2020.05.04-05.28.16:659][  0]LogDerivedDataCache: Loaded boot cache 0.05s 109MB C:/Users/BansheeeBox/AppData/Local/UnrealEngine/4.24/DerivedDataCache/Boot.ddc.
-[2020.05.04-05.28.16:659][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/BansheeeBox/AppData/Local/UnrealEngine/4.24/DerivedDataCache/Boot.ddc
-[2020.05.04-05.28.16:659][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
-[2020.05.04-05.28.16:659][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
-[2020.05.04-05.28.16:659][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
-[2020.05.04-05.28.16:659][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
-[2020.05.04-05.28.16:668][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
-[2020.05.04-05.28.16:668][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  EnterprisePak pak cache file ../../../Enterprise/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
-[2020.05.04-05.28.16:668][  0]LogDerivedDataCache: Unable to find inner node EnterprisePak for hierarchical cache Hierarchy.
-[2020.05.04-05.28.16:671][  0]LogDerivedDataCache: Using Local data cache path C:/Users/BansheeeBox/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
-[2020.05.04-05.28.16:671][  0]LogDerivedDataCache: Shared data cache path not found in *engine.ini, will not use an Shared cache.
-[2020.05.04-05.28.16:671][  0]LogDerivedDataCache: Unable to find inner node Shared for hierarchical cache Hierarchy.
-[2020.05.04-05.28.16:691][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
-[2020.05.04-05.28.16:694][  0]LogSlate: Using FreeType 2.10.0
-[2020.05.04-05.28.16:694][  0]LogSlate: SlateFontServices - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
-[2020.05.04-05.28.16:786][  0]LogAssetRegistry: FAssetRegistry took 0.0021 seconds to start up
-[2020.05.04-05.28.17:017][  0]LogInit: Selected Device Profile: [Windows]
-[2020.05.04-05.28.17:151][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
-[2020.05.04-05.28.17:151][  0]LogMeshReduction: Using SimplygonMeshReduction for automatic skeletal mesh reduction
-[2020.05.04-05.28.17:151][  0]LogMeshReduction: Using ProxyLODMeshReduction for automatic mesh merging
-[2020.05.04-05.28.17:151][  0]LogMeshReduction: No distributed automatic mesh merging module available
-[2020.05.04-05.28.17:151][  0]LogMeshMerging: No distributed automatic mesh merging module available
-[2020.05.04-05.28.17:181][  0]LogNetVersion: ProjectBreathMint 1.0.0, NetCL: 10570792, EngineNetVer: 13, GameNetVer: 0 (Checksum: 2276613758)
-[2020.05.04-05.28.18:562][  0]LogPackageLocalizationCache: Processed 10 localized package path(s) for 1 prioritized culture(s) in 0.037090 seconds
-[2020.05.04-05.28.18:569][  0]LogUObjectArray: 46750 objects as part of root set at end of initial load.
-[2020.05.04-05.28.18:569][  0]LogUObjectAllocator: 8137160 out of 0 bytes used by permanent object pool.
-[2020.05.04-05.28.18:569][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
-[2020.05.04-05.28.18:973][  0]LogTcpMessaging: Initializing TcpMessaging bridge
-[2020.05.04-05.28.19:008][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
-[2020.05.04-05.28.19:062][  0]SourceControl: Source control is disabled
-[2020.05.04-05.28.19:062][  0]SourceControl: Source control is disabled
-[2020.05.04-05.28.19:063][  0]SourceControl: Source control is disabled
-[2020.05.04-05.28.19:065][  0]SourceControl: Source control is disabled
-[2020.05.04-05.28.19:066][  0]SourceControl: Source control is disabled
-[2020.05.04-05.28.19:162][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
-[2020.05.04-05.28.19:174][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
-[2020.05.04-05.28.19:174][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
-[2020.05.04-05.28.19:249][  0]LogOcInput: OculusInput pre-init called
-[2020.05.04-05.28.20:076][  0]LogEngine: Initializing Engine...
-[2020.05.04-05.28.20:077][  0]LogHMD: SteamVR initialized.  Driver: lighthouse  Display: LHR-7B94A63D
-[2020.05.04-05.28.20:077][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.000 s
-[2020.05.04-05.28.20:365][  0]LogInit: Initializing FReadOnlyCVARCache
-[2020.05.04-05.28.20:371][  0]LogAIModule: Creating AISystem for world Untitled
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: Audio Mixer Platform Settings:
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: 	Sample Rate:						  48000
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: 	Number of buffers to queue:			  2
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: 	Max Channels (voices):				  32
-[2020.05.04-05.28.20:377][  0]LogAudioMixer: Display: 	Number of Async Source Workers:		  0
-[2020.05.04-05.28.20:377][  0]LogAudio: Display: AudioDevice MaxSources: 32
-[2020.05.04-05.28.20:378][  0]LogAudio: Display: Using built-in audio occlusion.
-[2020.05.04-05.28.20:378][  0]LogAudioMixer: Display: Initializing audio mixer.
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Audio Device Output Speaker Info:
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Name: Index HMD (2- NVIDIA High Definition Audio)
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Is Default: Yes
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Sample Rate: 48000
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Channel Count Used: 2
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Device Channel Count: 2
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: Channel Order:
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: 0: FrontLeft
-[2020.05.04-05.28.20:599][  0]LogAudioMixer: Display: 1: FrontRight
-[2020.05.04-05.28.20:628][  0]LogAudioMixer: Display: Using Audio Device Index HMD (2- NVIDIA High Definition Audio)
-[2020.05.04-05.28.20:630][  0]LogInit: FAudioDevice initialized.
-[2020.05.04-05.28.20:631][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
-[2020.05.04-05.28.20:696][  0]LogDerivedDataCache: Saved boot cache 0.07s 120MB C:/Users/BansheeeBox/AppData/Local/UnrealEngine/4.24/DerivedDataCache/Boot.ddc.
-[2020.05.04-05.28.20:698][  0]LogInit: Texture streaming: Enabled
-[2020.05.04-05.28.20:711][  0]LogEngineSessionManager: EngineSessionManager initialized
-[2020.05.04-05.28.20:711][  0]LogEditorSessionSummary: Verbose: Initializing EditorSessionSummaryWriter for editor session tracking
-[2020.05.04-05.28.20:712][  0]LogEditorSessionSummary: EditorSessionSummaryWriter initialized
-[2020.05.04-05.28.20:728][  0]LogInit: Transaction tracking system initialized
-[2020.05.04-05.28.20:753][  0]BlueprintLog: New page: Editor Load
-[2020.05.04-05.28.21:022][  0]LocalizationService: Localization service is disabled
-[2020.05.04-05.28.21:756][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
-[2020.05.04-05.28.21:756][  0]LogCook: Display: Mobile HDR setting 0
-[2020.05.04-05.28.22:484][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/' took 0.05s
-[2020.05.04-05.28.24:818][  0]SourceControl: Source control is disabled
-[2020.05.04-05.28.24:818][  0]Cmd: MAP LOAD FILE="../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/VirtualRealityBP/Maps/StartupMap.umap" TEMPLATE=0 SHOWPROGRESS=1 FEATURELEVEL=3
-[2020.05.04-05.28.24:819][  0]LightingResults: New page: Lighting Build
-[2020.05.04-05.28.24:819][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
-[2020.05.04-05.28.24:819][  0]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
-[2020.05.04-05.28.24:819][  0]MapCheck: New page: Map Check
-[2020.05.04-05.28.24:819][  0]LightingResults: New page: Lighting Build
-[2020.05.04-05.28.24:851][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.58ms
-[2020.05.04-05.28.24:935][  0]LogAIModule: Creating AISystem for world StartupMap
-[2020.05.04-05.28.24:940][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
-[2020.05.04-05.28.24:972][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.30ms
-[2020.05.04-05.28.24:972][  0]Cmd: MAP CHECKDEP NOCLEARLOG
-[2020.05.04-05.28.24:972][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 0.083ms to complete.
-[2020.05.04-05.28.24:972][  0]LogFileHelpers: Loading map 'StartupMap' took 0.153
-[2020.05.04-05.28.25:084][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2020.05.04-05.28.25:089][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2020.05.04-05.28.25:094][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2020.05.04-05.28.25:099][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
-[2020.05.04-05.28.25:109][  0]LogCollectionManager: Loaded 0 collections in 0.005523 seconds
-[2020.05.04-05.28.25:121][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Collections/' took 0.00s
-[2020.05.04-05.28.25:121][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/Developers/BansheeeBox/Collections/' took 0.00s
-[2020.05.04-05.28.25:121][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/Collections/' took 0.00s
-[2020.05.04-05.28.25:121][  0]LogContentBrowser: Native class hierarchy populated in 0.0076 seconds. Added 3015 classes and 717 folders.
-[2020.05.04-05.28.25:125][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0002 seconds. Added 0 classes and 0 folders.
-[2020.05.04-05.28.25:311][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0002 seconds. Added 0 classes and 0 folders.
-[2020.05.04-05.28.25:317][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0002 seconds. Added 2 classes and 3 folders.
-[2020.05.04-05.28.25:324][  0]LogContentBrowser: Native class hierarchy updated for 'WorldBrowser' in 0.0002 seconds. Added 2 classes and 3 folders.
-[2020.05.04-05.28.25:384][  0]LogSlate: Took 0.000122 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
-[2020.05.04-05.28.25:385][  0]LogSlate: Took 0.000084 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
-[2020.05.04-05.28.25:390][  0]LogSlate: Took 0.000085 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
-[2020.05.04-05.28.25:488][  0]LogRenderer: Reallocating scene render targets to support 2100x948 Format 26 NumSamples 1 (Frame:1).
-[2020.05.04-05.28.25:582][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0002 seconds. Added 0 classes and 0 folders.
-[2020.05.04-05.28.25:582][  0]LogLoad: (Engine Initialization) Total time: 19.93 seconds
-[2020.05.04-05.28.25:582][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
-[2020.05.04-05.28.25:591][  0]LogSteamVRInputDevice: Display: SteamVR runtime 1.5.17 loaded.
-[2020.05.04-05.28.25:591][  0]LogSteamVRInputDevice: Display: Action Manifest Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
-[2020.05.04-05.28.25:591][  0]LogSteamVRInputDevice: Display: Controller Bindings Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
-[2020.05.04-05.28.25:594][  0]LogSteamVRInputDevice: Searching for Controller Bindings files at: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
-[2020.05.04-05.28.25:611][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Registering Application Manifest ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/steamvr_ue_editor_app.json : VRApplicationError_None
-[2020.05.04-05.28.25:612][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Editor Application [31432][application.generated.ue.virtual-reality-bp-game-template-11590370.ue4editor.exe] identified to SteamVR: VRApplicationError_None
-[2020.05.04-05.28.25:612][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Trying to load Action Manifest from: S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Error: [STEAMVR INPUT] Setting Action Manifest Path Result: Mismatched Action Manifest
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting main action set: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerleft
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerright
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special1
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special2
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special3
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special4
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special5
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special6
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special7
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special8
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonleft
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonright
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateleft
-[2020.05.04-05.28.25:613][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateright
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/open_console
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:614][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: Action Manifest Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
-[2020.05.04-05.28.25:615][  0]LogSteamVRInputDevice: Display: Controller Bindings Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
-[2020.05.04-05.28.25:619][  0]LogSteamVRInputDevice: Searching for Controller Bindings files at: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Registering Application Manifest ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/steamvr_ue_editor_app.json : VRApplicationError_None
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Editor Application [31432][application.generated.ue.virtual-reality-bp-game-template-11590370.ue4editor.exe] identified to SteamVR: VRApplicationError_None
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Trying to load Action Manifest from: S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Error: [STEAMVR INPUT] Setting Action Manifest Path Result: Mismatched Action Manifest
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting main action set: Success
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerleft
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerright
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special1
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special2
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special3
-[2020.05.04-05.28.25:621][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special4
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special5
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special6
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special7
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special8
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonleft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonright
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateleft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateright
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/open_console
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:622][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:623][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:623][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
-[2020.05.04-05.28.25:623][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
-[2020.05.04-05.28.25:647][  0]LogAssetRegistry: Asset discovery search completed in 8.8621 seconds
-[2020.05.04-05.28.25:649][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000005 seconds (updated 0 objects)
-[2020.05.04-05.28.25:650][  0]LogContentStreaming: Texture pool size now 1000 MB
-[2020.05.04-05.28.46:876][529]LogSlate: Window 'Plugins' being destroyed
-[2020.05.04-05.28.46:879][529]LogSlate: Window 'Plugins' being destroyed
-[2020.05.04-05.28.46:879][529]LogDirectoryWatcher: A directory notification for '../../../Engine/Plugins/' was aborted.
-[2020.05.04-05.30.54:939][185]LogSlate: Window 'Source Control Login' being destroyed
-[2020.05.04-05.31.04:573][182]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
-[2020.05.04-05.31.04:813][182]EditorErrors: Warning: No assets to check in!
-[2020.05.04-05.31.09:887][756]LogSlate: Took 0.000123 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
-[2020.05.04-05.31.11:388][756]LogSlate: Window 'Pick Parent Class' being destroyed
-[2020.05.04-05.31.14:832][100]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
-[2020.05.04-05.31.15:083][100]EditorErrors: Warning: No assets to check in!
-[2020.05.04-05.31.18:534][478]LogUObjectHash: Compacting FUObjectHashTables data took   1.30ms
-[2020.05.04-05.31.18:794][478]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/NewBlueprint" FILE="../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/NewBlueprint.uasset" SILENT=true
-[2020.05.04-05.31.18:805][478]LogSavePackage: Moving '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/NewBlueprintD1B37F1045FE6DADE12C3B9E748A15CB.tmp' to '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/NewBlueprint.uasset'
-[2020.05.04-05.31.19:267][478]AssetCheck: New page: Asset Save: NewBlueprint
-[2020.05.04-05.31.19:267][478]LogContentValidation: Display: Validating Blueprint /Game/NewBlueprint.NewBlueprint
-[2020.05.04-05.31.22:010][770]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
-[2020.05.04-05.31.26:224][770]LogSlate: Window 'Submit Files' being destroyed
-[2020.05.04-05.31.26:811][770]LogSourceControl: commit successful: [master 5a69168] Haha
-[2020.05.04-05.31.27:033][770]SourceControl: [master 5a69168] Haha
-[2020.05.04-05.31.27:033][770]SourceControl:  1 file changed, 0 insertions(+), 0 deletions(-)
-[2020.05.04-05.31.27:033][770]SourceControl:  create mode 100644 Content/NewBlueprint.uasset
-[2020.05.04-05.31.27:039][770]SourceControl: Commited [master 5a69168] Haha.
-[2020.05.04-05.39.24:728][699]LogSlate: WidgetSwitcher ('None') active index changed to -1
-[2020.05.04-05.39.24:728][699]LogSlate: WidgetSwitcher ('None') active index changed to 0
-[2020.05.04-05.39.24:759][699]LogSlate: Took 0.000125 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-BoldCondensed.ttf' (158K)
-[2020.05.04-05.39.26:879][937]LogSlate: WidgetSwitcher ('None') active index changed to 1
-[2020.05.04-05.39.28:695][123]Running S:/Software/UnrealEditor/UE_4.24/Engine/Binaries/DotNET/UnrealBuildTool.exe  -projectfiles -project="S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject" -game -rocket -progress
-[2020.05.04-05.39.29:027][123]Discovering modules, targets and source code for project...
-[2020.05.04-05.39.31:943][123]Binding IntelliSense data...
-[2020.05.04-05.39.34:360][123]Binding IntelliSense data... 100%
-[2020.05.04-05.39.34:360][123]Writing project files...
-[2020.05.04-05.39.41:498][123]Writing project files... 100%
-[2020.05.04-05.39.42:362][123]LogHotReload: Recompiling module ProjectBreathMint...
-[2020.05.04-05.39.42:364][123]LogVSAccessor: Warning: Couldn't access Visual Studio
-[2020.05.04-05.39.42:367][123]Candidate modules for hot reload:
-[2020.05.04-05.39.42:367][123]  ProjectBreathMint
-[2020.05.04-05.39.42:367][123]Launching UnrealBuildTool... [S:/Software/UnrealEditor/UE_4.24/Engine/Binaries/DotNET/UnrealBuildTool.exe  -ModuleWithSuffix=ProjectBreathMint,9768 Win64 Development -TargetType=Editor -Project="S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject" "S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject"  -IgnoreJunk]
-[2020.05.04-05.40.26:642][123]Using 'git status' to determine working set for adaptive non-unity build (S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint).
-Creating makefile for ProjectBreathMintEditor (no existing makefile)
-Parsing headers for ProjectBreathMintEditor
-  Running UnrealHeaderTool "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\ProjectBreathMint.uproject" "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\ProjectBreathMintEditor\Development\ProjectBreathMintEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-Reflection code generated for ProjectBreathMintEditor in 13.4666309 seconds
-Building ProjectBreathMintEditor...
-Using Visual Studio 2019 14.24.28316 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314) and Windows 10.0.16299.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-Building 9 actions with 24 processes...
-  [1/9] Default.rc2
-  [2/9] SharedPCH.Engine.ShadowErrors.cpp
-  [3/9] ProjectBreathMint.cpp
-  [4/9] ProjectBreathMint.init.gen.cpp
-  [5/9] MyCharacter.cpp
-  [6/9] MyCharacter.gen.cpp
-  [7/9] UE4Editor-ProjectBreathMint-9768.lib
-     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.exp
-  [8/9] UE4Editor-ProjectBreathMint-9768.dll
-     Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.exp
-  [9/9] ProjectBreathMintEditor.target
-Total time in Parallel executor: 21.08 seconds
-Total execution time: 44.10 seconds
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VSync:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.RHICmdBypass:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.GPUCrashDebugging:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.MobileHDR:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.Mobile.DisableVertexFog:1]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxMobileCascades:2]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.MobileMSAA:1]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.Mobile.UseLegacyShadingModel:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.Mobile.UseHWsRGBEncoding:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.Mobile.AllowDitheredLODTransition:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.Mobile.AllowSoftwareOcclusion:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.DiscardUnusedQuality:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.AllowOcclusionQueries:1]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.MinScreenRadiusForLights:0.030000]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.MinScreenRadiusForDepthPrepass:0.030000]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.MinScreenRadiusForCSMDepth:0.010000]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.PrecomputedVisibilityWarning:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.TextureStreaming:1]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[Compat.UseDXT5NormalMaps:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VirtualTextures:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VirtualTexturedLightmaps:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VT.TileSize:128]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VT.TileBorderSize:4]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.vt.FeedbackFactor:16]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VT.EnableCompressZlib:1]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.VT.EnableCompressCrunch:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.ClearCoatNormal:0]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.ReflectionCaptureResolution:128]]
+[2020.05.04-05.44.24:878][  0]LogConfig: Setting CVar [[r.ReflectionEnvironmentLightmapMixBasedOnRoughness:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.ForwardShading:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.VertexFoggingForOpaque:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.AllowStaticLighting:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.NormalMapsForStaticLighting:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.GenerateMeshDistanceFields:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DistanceFieldBuild.EightBit:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.GenerateLandscapeGIData:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DistanceFieldBuild.Compress:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.TessellationAdaptivePixelsPerTriangle:48.000000]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SeparateTranslucency:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.TranslucentSortPolicy:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.CustomDepth:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.CustomDepthTemporalAAJitter:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.PostProcessing.PropagateAlpha:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.Bloom:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.AmbientOcclusion:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.AmbientOcclusionStaticFraction:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.AutoExposure:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.AutoExposure.Method:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.AutoExposure.ExtendDefaultLuminanceRange:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.UsePreExposure:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.EyeAdaptation.EditorOnly:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.MotionBlur:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.LensFlare:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.TemporalAA.Upsampling:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SSGI.Enable:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.AntiAliasing:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultFeature.LightUnits:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DefaultBackBufferPixelFormat:4]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.Shadow.UnbuiltPreviewInGame:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.StencilForLODDither:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.EarlyZPass:3]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.EarlyZPassOnlyMaterialMasking:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.DBuffer:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.ClearSceneMethod:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.BasePassOutputsVelocity:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SelectiveBasePassOutputs:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[fx.GPUSimulationTextureSizeX:1024]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[fx.GPUSimulationTextureSizeY:1024]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.AllowGlobalClipPlane:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.GBufferFormat:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.MorphTarget.Mode:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[vr.InstancedStereo:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[vr.MultiView:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[vr.MobileMultiView:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[vr.MobileMultiView.Direct:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[vr.RoundRobinOcclusion:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[vr.ODSCapture:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.WireframeCullThreshold:5.000000]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.RayTracing:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.RayTracing.UseTextureLod:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportStationarySkylight:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportLowQualityLightmaps:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportPointLightWholeSceneShadows:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportAtmosphericFog:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportSkyAtmosphere:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportSkyAtmosphereAffectsHeightFog:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SkinCache.CompileShaders:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.Mobile.EnableStaticAndCSMShadowReceivers:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.Mobile.EnableMovableLightCSMShaderCulling:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.Mobile.AllowDistanceFieldShadows:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.Mobile.AllowMovableDirectionalLights:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.MobileNumDynamicPointLights:4]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.MobileDynamicPointLightsUseStaticBranch:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.Mobile.EnableMovableSpotlights:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SkinCache.SceneMemoryLimitInMB:128.000000]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.GPUSkin.Limit2BoneInfluences:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportDepthOnlyIndexBuffers:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportReversedIndexBuffers:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.SupportMaterialLayers:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[r.LightPropagationVolume:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.RendererOverrideSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:879][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.StreamingSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.MinBulkDataSizeForAsyncLoading:131072]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.AsyncLoadingThreadEnabled:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.EventDrivenLoaderEnabled:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.WarnIfTimeLimitExceeded:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMultiplier:1.5]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.TimeLimitExceededMinTime:0.005]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.UseBackgroundLevelStreaming:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.PriorityAsyncLoadingExtraTime:15.0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.LevelStreamingActorsUpdateTimeLimit:5.0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.PriorityLevelStreamingActorsUpdateExtraTime:5.0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsRegistrationGranularity:10]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.UnregisterComponentsTimeLimit:1.0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.LevelStreamingComponentsUnregistrationGranularity:5]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[s.FlushStreamingOnExit:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.GarbageCollectionSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[gc.MaxObjectsNotConsideredByGC:1]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[gc.SizeOfPermanentObjectPool:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[gc.FlushStreamingOnGC:0]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[gc.NumRetriesBeforeForcingGC:10]]
+[2020.05.04-05.44.24:879][  0]LogConfig: Setting CVar [[gc.AllowParallelGC:1]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.TimeBetweenPurgingPendingKillObjects:61.1]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.MaxObjectsInEditor:25165824]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.IncrementalBeginDestroyEnabled:1]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.CreateGCClusters:1]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.MinGCClusterSize:5]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.ActorClusteringEnabled:0]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.BlueprintClusteringEnabled:0]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Setting CVar [[gc.UseDisregardForGCOnDedicatedServers:0]]
+[2020.05.04-05.44.24:880][  0]LogConfig: Applying CVar settings from Section [/Script/Engine.NetworkSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:880][  0]LogConfig: Applying CVar settings from Section [/Script/UnrealEd.CookerSettings] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:899][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:3]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2020.05.04-05.44.24:899][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.LensFlareQuality:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.BloomQuality:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.VT.MaxAnisotropy:8]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:4]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSR.Quality:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSR.HalfResSceneColor:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SceneColorFormat:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SSGI.Quality:3]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountPerSlice:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:32.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMax:32.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.SampleCount:16]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.JitterIntegration:0]]
+[2020.05.04-05.44.24:900][  0]LogConfig: Setting CVar [[r.HairStrands.SkyAO.SampleCount:16]]
+[2020.05.04-05.44.24:900][  0]LogInit: Selected Device Profile: [Windows]
+[2020.05.04-05.44.24:901][  0]LogInit: Applying CVar settings loaded from the selected device profile: [Windows]
+[2020.05.04-05.44.24:903][  0]LogHAL: Display: Platform has ~ 32 GB [34272210944 / 34359738368 / 32], which maps to Largest [LargestMinGB=32, LargerMinGB=12, DefaultMinGB=8, SmallerMinGB=6, SmallestMinGB=0)
+[2020.05.04-05.44.24:903][  0]LogInit: Going up to parent DeviceProfile []
+[2020.05.04-05.44.24:903][  0]LogConfig: Applying CVar settings from Section [ViewDistanceQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.SkeletalMeshLODBias:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.ViewDistanceScale:1.0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Applying CVar settings from Section [AntiAliasingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.PostProcessAAQuality:3]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Applying CVar settings from Section [ShadowQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.LightFunctionQuality:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.ShadowQuality:5]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.CSM.MaxCascades:10]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.MaxResolution:2048]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.MaxCSMResolution:2048]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.RadiusThreshold:0.01]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.DistanceScale:1.0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.CSM.TransitionScale:1.0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Shadow.PreShadowResolutionFactor:1.0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DistanceFieldShadowing:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DistanceFieldAO:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.AOQuality:2]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.VolumetricFog:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridPixelSize:8]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.VolumetricFog.GridSizeZ:128]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.VolumetricFog.HistoryMissSupersampleCount:4]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.LightMaxDrawDistanceScale:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.CapsuleShadows:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Applying CVar settings from Section [PostProcessQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.MotionBlurQuality:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMipLevelFactor:0.4]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.AmbientOcclusionMaxQuality:100]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.AmbientOcclusionLevels:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.AmbientOcclusionRadiusScale:1.0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DepthOfFieldQuality:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.RenderTargetPoolMin:400]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.LensFlareQuality:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.SceneColorFringeQuality:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.EyeAdaptationQuality:2]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.BloomQuality:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.FastBlurThreshold:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Upscale.Quality:3]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Tonemapper.GrainQuantization:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.LightShaftQuality:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Filter.SizeScale:1]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Tonemapper.Quality:5]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Gather.AccumulatorQuality:1        ; higher gathering accumulator quality]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Gather.PostfilterMethod:1          ; Median3x3 postfilering method]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Gather.EnableBokehSettings:0       ; no bokeh simulation when gathering]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Gather.RingCount:4                 ; medium number of samples when gathering]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Scatter.ForegroundCompositing:1    ; additive foreground scattering]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Scatter.BackgroundCompositing:2    ; additive background scattering]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Scatter.EnableBokehSettings:1      ; bokeh simulation when scattering]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Scatter.MaxSpriteRatio:0.1         ; only a maximum of 10% of scattered bokeh]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Recombine.Quality:1                ; cheap slight out of focus]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Recombine.EnableBokehSettings:0    ; no bokeh simulation on slight out of focus]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.TemporalAAQuality:1                ; more stable temporal accumulation]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxForegroundRadius:0.025]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.DOF.Kernel.MaxBackgroundRadius:0.025]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Applying CVar settings from Section [TextureQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Streaming.MipBias:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Streaming.AmortizeCPUToGPUCopy:0]]
+[2020.05.04-05.44.24:903][  0]LogConfig: Setting CVar [[r.Streaming.MaxNumTexturesToStreamPerFrame:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.Streaming.Boost:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.MaxAnisotropy:8]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.VT.MaxAnisotropy:8]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.Streaming.LimitPoolSizeToVRAM:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.Streaming.PoolSize:1000]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.Streaming.MaxEffectiveScreenSize:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Applying CVar settings from Section [EffectsQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.TranslucencyLightingVolumeDim:4]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.RefractionQuality:2]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSR.Quality:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSR.HalfResSceneColor:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SceneColorFormat:2]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.DetailMode:2]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.TranslucencyVolumeBlur:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.MaterialQualityLevel:1 ; High quality]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSS.Scale:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSS.SampleSet:2]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSS.Quality:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSS.HalfRes:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SSGI.Quality:3]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.EmitterSpawnRateScale:1.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.ParticleLightQuality:2]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.FastApplyOnOpaque:1 ; Always have FastSkyLUT 1 in this case to avoid wrong sky]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.SampleCountPerSlice:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.AerialPerspectiveLUT.DepthResolution:16.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMin:4.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.FastSkyLUT.SampleCountMax:32.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMin:4.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.SampleCountMax:32.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.UseSmallFormat:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.TransmittanceLUT.SampleCount:10.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.SkyAtmosphere.MultiScatteringLUT.SampleCount:15.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Applying CVar settings from Section [FoliageQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[foliage.DensityScale:1.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[grass.DensityScale:1.0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Applying CVar settings from Section [ShadingQuality@3] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Scalability.ini]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.SampleCount:16]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.HairStrands.SkyLighting.JitterIntegration:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[r.HairStrands.SkyAO.SampleCount:16]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Applying CVar settings from Section [Startup] File [../../../Engine/Config/ConsoleVariables.ini]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[net.UseAdaptiveNetUpdateFrequency:0]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Setting CVar [[p.chaos.AllowCreatePhysxBodies:1]]
+[2020.05.04-05.44.24:904][  0]LogConfig: Applying CVar settings from Section [ConsoleVariables] File [S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Config/Windows/Engine.ini]
+[2020.05.04-05.44.24:904][  0]LogInit: Computer: DESKTOP-E08JMES
+[2020.05.04-05.44.24:904][  0]LogInit: User: BansheeeBox
+[2020.05.04-05.44.24:904][  0]LogInit: CPU Page size=4096, Cores=12
+[2020.05.04-05.44.24:904][  0]LogInit: High frequency timer resolution =10.000000 MHz
+[2020.05.04-05.44.24:904][  0]LogMemory: Memory total: Physical=31.9GB (32GB approx)
+[2020.05.04-05.44.24:904][  0]LogMemory: Platform Memory Stats for Windows
+[2020.05.04-05.44.24:904][  0]LogMemory: Process Physical Memory: 115.94 MB used, 115.94 MB peak
+[2020.05.04-05.44.24:904][  0]LogMemory: Process Virtual Memory: 108.68 MB used, 108.68 MB peak
+[2020.05.04-05.44.24:904][  0]LogMemory: Physical Memory: 9142.83 MB used,  23541.70 MB free, 32684.53 MB total
+[2020.05.04-05.44.24:904][  0]LogMemory: Virtual Memory: 5302.66 MB used,  134212424.00 MB free, 134217728.00 MB total
+[2020.05.04-05.44.24:908][  0]LogWindows: WindowsPlatformFeatures enabled
+[2020.05.04-05.44.24:928][  0]LogInit: Using OS detected language (en-US).
+[2020.05.04-05.44.24:928][  0]LogInit: Using OS detected locale (en-NZ).
+[2020.05.04-05.44.24:930][  0]LogTextLocalizationManager: No specific localization for 'en-US' exists, so the 'en' localization will be used.
+[2020.05.04-05.44.25:047][  0]LogInit: Setting process to per monitor DPI aware
+[2020.05.04-05.44.25:092][  0]LogSlate: New Slate User Created.  User Index 0, Is Virtual User: 0
+[2020.05.04-05.44.25:092][  0]LogSlate: Slate User Registered.  User Index 0, Is Virtual User: 0
+[2020.05.04-05.44.25:296][  0]LogD3D11RHI: D3D11 min allowed feature level: 11_0
+[2020.05.04-05.44.25:296][  0]LogD3D11RHI: D3D11 max allowed feature level: 11_0
+[2020.05.04-05.44.25:296][  0]LogD3D11RHI: D3D11 adapters:
+[2020.05.04-05.44.25:346][  0]LogD3D11RHI:    0. 'NVIDIA GeForce RTX 2080' (Feature Level 11_0)
+[2020.05.04-05.44.25:346][  0]LogD3D11RHI:       8010/0/16342 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:3, VendorId:0x10de
+[2020.05.04-05.44.25:348][  0]LogD3D11RHI:    1. 'Microsoft Basic Render Driver' (Feature Level 11_0)
+[2020.05.04-05.44.25:348][  0]LogD3D11RHI:       0/0/16342 MB DedicatedVideo/DedicatedSystem/SharedSystem, Outputs:0, VendorId:0x1414
+[2020.05.04-05.44.25:348][  0]LogD3D11RHI: Chosen D3D11 Adapter: 0
+[2020.05.04-05.44.25:356][  0]LogD3D11RHI: Creating new Direct3DDevice
+[2020.05.04-05.44.25:356][  0]LogD3D11RHI:     GPU DeviceId: 0x1e87 (for the marketing name, search the web for "GPU Device Id")
+[2020.05.04-05.44.25:356][  0]LogWindows: EnumDisplayDevices:
+[2020.05.04-05.44.25:356][  0]LogWindows:    0. 'NVIDIA GeForce RTX 2080' (P:1 D:1)
+[2020.05.04-05.44.25:357][  0]LogWindows:    1. 'NVIDIA GeForce RTX 2080' (P:0 D:1)
+[2020.05.04-05.44.25:357][  0]LogWindows:    2. 'NVIDIA GeForce RTX 2080' (P:0 D:1)
+[2020.05.04-05.44.25:357][  0]LogWindows:    3. 'NVIDIA GeForce RTX 2080' (P:0 D:0)
+[2020.05.04-05.44.25:357][  0]LogWindows: DebugString: FoundDriverCount:4 
+[2020.05.04-05.44.25:357][  0]LogD3D11RHI:     Adapter Name: NVIDIA GeForce RTX 2080
+[2020.05.04-05.44.25:357][  0]LogD3D11RHI:   Driver Version: 445.87 (internal:26.21.14.4587, unified:445.87)
+[2020.05.04-05.44.25:357][  0]LogD3D11RHI:      Driver Date: 4-3-2020
+[2020.05.04-05.44.25:357][  0]LogRHI: Texture pool is 5607 MB (70% of 8010 MB)
+[2020.05.04-05.44.25:395][  0]LogD3D11RHI: RHI has support for 64 bit atomics
+[2020.05.04-05.44.25:395][  0]LogD3D11RHI: Async texture creation enabled
+[2020.05.04-05.44.25:396][  0]LogD3D11RHI: HDR output is supported on display 0 (NvId: 0x80061086).
+[2020.05.04-05.44.25:410][  0]LogD3D11RHI: GPU Timing Frequency: 1000.000000 (Debug: 2 1)
+[2020.05.04-05.44.25:698][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AllDesktop'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTC'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ATC'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXT'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1a'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_PVRTC'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'AndroidClient'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ASTCClient'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ATCClient'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_DXTClient'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1Client'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC1aClient'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_ETC2Client'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_PVRTCClient'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_Multi'
+[2020.05.04-05.44.25:724][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Android_MultiClient'
+[2020.05.04-05.44.25:741][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOSClient'
+[2020.05.04-05.44.25:741][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'IOS'
+[2020.05.04-05.44.25:748][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxNoEditor'
+[2020.05.04-05.44.25:754][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxClient'
+[2020.05.04-05.44.25:759][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxServer'
+[2020.05.04-05.44.25:765][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64NoEditor'
+[2020.05.04-05.44.25:772][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Client'
+[2020.05.04-05.44.25:778][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LinuxAArch64Server'
+[2020.05.04-05.44.25:797][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Lumin'
+[2020.05.04-05.44.25:797][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'LuminClient'
+[2020.05.04-05.44.25:808][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOSClient'
+[2020.05.04-05.44.25:808][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'TVOS'
+[2020.05.04-05.44.25:816][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsNoEditor'
+[2020.05.04-05.44.25:822][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'Windows'
+[2020.05.04-05.44.25:828][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsClient'
+[2020.05.04-05.44.25:834][  0]LogTargetPlatformManager: Display: Loaded TargetPlatform 'WindowsServer'
+[2020.05.04-05.44.25:834][  0]LogTargetPlatformManager: Display: Building Assets For Windows
+[2020.05.04-05.44.25:838][  0]LogAudioDebug: Display: Lib vorbis DLL was dynamically loaded.
+[2020.05.04-05.44.25:861][  0]LogShaderCompilers: Guid format shader working directory is -18 characters bigger than the processId version (../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Intermediate/Shaders/WorkingDirectory/34804/).
+[2020.05.04-05.44.25:861][  0]LogShaderCompilers: Cleaned the shader compiler working directory 'C:/Users/BansheeeBox/AppData/Local/Temp/UnrealShaderWorkingDir/585AEAD646BF30D2D6A38099CD383F8D/'.
+[2020.05.04-05.44.25:861][  0]LogXGEController: Cleaning working directory: C:/Users/BansheeeBox/AppData/Local/Temp/UnrealXGEWorkingDir/
+[2020.05.04-05.44.25:862][  0]LogXGEController: Cannot use XGE Controller as Incredibuild is not installed on this machine.
+[2020.05.04-05.44.25:862][  0]LogShaderCompilers: Cannot use XGE Shader Compiler as Incredibuild is not installed on this machine.
+[2020.05.04-05.44.25:862][  0]LogShaderCompilers: Display: Using Local Shader Compiler.
+[2020.05.04-05.44.26:446][  0]LogDerivedDataCache: Display: Max Cache Size: 512 MB
+[2020.05.04-05.44.26:500][  0]LogDerivedDataCache: Loaded boot cache 0.05s 120MB C:/Users/BansheeeBox/AppData/Local/UnrealEngine/4.24/DerivedDataCache/Boot.ddc.
+[2020.05.04-05.44.26:500][  0]LogDerivedDataCache: Display: Loaded Boot cache: C:/Users/BansheeeBox/AppData/Local/UnrealEngine/4.24/DerivedDataCache/Boot.ddc
+[2020.05.04-05.44.26:500][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  Pak pak cache file ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/DerivedDataCache/DDC.ddp not found, will not use a pak cache.
+[2020.05.04-05.44.26:500][  0]LogDerivedDataCache: Unable to find inner node Pak for hierarchical cache Hierarchy.
+[2020.05.04-05.44.26:500][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  CompressedPak pak cache file ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2020.05.04-05.44.26:500][  0]LogDerivedDataCache: Unable to find inner node CompressedPak for hierarchical cache Hierarchy.
+[2020.05.04-05.44.26:508][  0]LogDerivedDataCache: Display: Pak cache opened for reading ../../../Engine/DerivedDataCache/Compressed.ddp.
+[2020.05.04-05.44.26:508][  0]LogDerivedDataCache: FDerivedDataBackendGraph:  EnterprisePak pak cache file ../../../Enterprise/DerivedDataCache/Compressed.ddp not found, will not use a pak cache.
+[2020.05.04-05.44.26:508][  0]LogDerivedDataCache: Unable to find inner node EnterprisePak for hierarchical cache Hierarchy.
+[2020.05.04-05.44.26:510][  0]LogDerivedDataCache: Using Local data cache path C:/Users/BansheeeBox/AppData/Local/UnrealEngine/Common/DerivedDataCache: Writable
+[2020.05.04-05.44.26:510][  0]LogDerivedDataCache: Shared data cache path not found in *engine.ini, will not use an Shared cache.
+[2020.05.04-05.44.26:510][  0]LogDerivedDataCache: Unable to find inner node Shared for hierarchical cache Hierarchy.
+[2020.05.04-05.44.26:531][  0]LogMaterial: Verifying Global Shaders for PCD3D_SM5
+[2020.05.04-05.44.26:533][  0]LogSlate: Using FreeType 2.10.0
+[2020.05.04-05.44.26:534][  0]LogSlate: SlateFontServices - WITH_FREETYPE: 1, WITH_HARFBUZZ: 1
+[2020.05.04-05.44.26:603][  0]LogAssetRegistry: FAssetRegistry took 0.0020 seconds to start up
+[2020.05.04-05.44.26:834][  0]LogInit: Selected Device Profile: [Windows]
+[2020.05.04-05.44.26:960][  0]LogMeshReduction: Using QuadricMeshReduction for automatic static mesh reduction
+[2020.05.04-05.44.26:960][  0]LogMeshReduction: Using SimplygonMeshReduction for automatic skeletal mesh reduction
+[2020.05.04-05.44.26:960][  0]LogMeshReduction: Using ProxyLODMeshReduction for automatic mesh merging
+[2020.05.04-05.44.26:960][  0]LogMeshReduction: No distributed automatic mesh merging module available
+[2020.05.04-05.44.26:960][  0]LogMeshMerging: No distributed automatic mesh merging module available
+[2020.05.04-05.44.26:986][  0]LogNetVersion: ProjectBreathMint 1.0.0, NetCL: 10570792, EngineNetVer: 13, GameNetVer: 0 (Checksum: 2276613758)
+[2020.05.04-05.44.28:308][  0]LogPackageLocalizationCache: Processed 10 localized package path(s) for 1 prioritized culture(s) in 0.029516 seconds
+[2020.05.04-05.44.28:314][  0]LogUObjectArray: 46750 objects as part of root set at end of initial load.
+[2020.05.04-05.44.28:314][  0]LogUObjectAllocator: 8137160 out of 0 bytes used by permanent object pool.
+[2020.05.04-05.44.28:314][  0]LogUObjectArray: CloseDisregardForGC: 0/0 objects in disregard for GC pool
+[2020.05.04-05.44.28:666][  0]LogTcpMessaging: Initializing TcpMessaging bridge
+[2020.05.04-05.44.28:669][  0]LogUdpMessaging: Initializing bridge on interface 0.0.0.0:0 to multicast group 230.0.0.1:6666.
+[2020.05.04-05.44.28:739][  0]SourceControl: Source control is disabled
+[2020.05.04-05.44.30:694][  0]LogAndroidPermission: UAndroidPermissionCallbackProxy::GetInstance
+[2020.05.04-05.44.30:705][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2020.05.04-05.44.30:705][  0]LogAudioCaptureCore: Display: No Audio Capture implementations found. Audio input will be silent.
+[2020.05.04-05.44.30:777][  0]LogOcInput: OculusInput pre-init called
+[2020.05.04-05.44.31:684][  0]LogEngine: Initializing Engine...
+[2020.05.04-05.44.31:685][  0]LogHMD: SteamVR initialized.  Driver: lighthouse  Display: LHR-7B94A63D
+[2020.05.04-05.44.31:686][  0]LogStats: UGameplayTagsManager::InitializeManager -  0.000 s
+[2020.05.04-05.44.31:950][  0]LogInit: Initializing FReadOnlyCVARCache
+[2020.05.04-05.44.31:955][  0]LogAIModule: Creating AISystem for world Untitled
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: Audio Mixer Platform Settings:
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: 	Sample Rate:						  48000
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size Requested: 1024
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: 	Callback Buffer Frame Size To Use:	  1024
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: 	Number of buffers to queue:			  2
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: 	Max Channels (voices):				  32
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: 	Number of Async Source Workers:		  0
+[2020.05.04-05.44.31:962][  0]LogAudio: Display: AudioDevice MaxSources: 32
+[2020.05.04-05.44.31:962][  0]LogAudio: Display: Using built-in audio occlusion.
+[2020.05.04-05.44.31:962][  0]LogAudioMixer: Display: Initializing audio mixer.
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Audio Device Output Speaker Info:
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Name: Index HMD (2- NVIDIA High Definition Audio)
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Is Default: Yes
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Sample Rate: 48000
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Channel Count Used: 2
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Device Channel Count: 2
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: Channel Order:
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: 0: FrontLeft
+[2020.05.04-05.44.32:184][  0]LogAudioMixer: Display: 1: FrontRight
+[2020.05.04-05.44.32:212][  0]LogAudioMixer: Display: Using Audio Device Index HMD (2- NVIDIA High Definition Audio)
+[2020.05.04-05.44.32:214][  0]LogInit: FAudioDevice initialized.
+[2020.05.04-05.44.32:214][  0]LogNetVersion: Set ProjectVersion to 1.0.0.0. Version Checksum will be recalculated on next use.
+[2020.05.04-05.44.32:271][  0]LogDerivedDataCache: Saved boot cache 0.06s 103MB C:/Users/BansheeeBox/AppData/Local/UnrealEngine/4.24/DerivedDataCache/Boot.ddc.
+[2020.05.04-05.44.32:273][  0]LogInit: Texture streaming: Enabled
+[2020.05.04-05.44.32:284][  0]LogEngineSessionManager: EngineSessionManager initialized
+[2020.05.04-05.44.32:284][  0]LogEditorSessionSummary: Verbose: Initializing EditorSessionSummaryWriter for editor session tracking
+[2020.05.04-05.44.32:285][  0]LogEditorSessionSummary: EditorSessionSummaryWriter initialized
+[2020.05.04-05.44.32:318][  0]LogInit: Transaction tracking system initialized
+[2020.05.04-05.44.32:327][  0]BlueprintLog: New page: Editor Load
+[2020.05.04-05.44.32:379][  0]LocalizationService: Localization service is disabled
+[2020.05.04-05.44.32:605][  0]LogCook: Display: Max memory allowance for cook 16384mb min free memory 0mb
+[2020.05.04-05.44.32:605][  0]LogCook: Display: Mobile HDR setting 0
+[2020.05.04-05.44.32:706][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/' took 0.01s
+[2020.05.04-05.44.33:620][  0]Cmd: MAP LOAD FILE="../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/VirtualRealityBP/Maps/StartupMap.umap" TEMPLATE=0 SHOWPROGRESS=1 FEATURELEVEL=3
+[2020.05.04-05.44.33:621][  0]LightingResults: New page: Lighting Build
+[2020.05.04-05.44.33:621][  0]LogWorld: UWorld::CleanupWorld for Untitled, bSessionEnded=true, bCleanupResources=true
+[2020.05.04-05.44.33:621][  0]LogSlate: InvalidateAllWidgets triggered.  All widgets were invalidated
+[2020.05.04-05.44.33:621][  0]MapCheck: New page: Map Check
+[2020.05.04-05.44.33:621][  0]LightingResults: New page: Lighting Build
+[2020.05.04-05.44.33:655][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.69ms
+[2020.05.04-05.44.33:728][  0]LogAIModule: Creating AISystem for world StartupMap
+[2020.05.04-05.44.33:731][  0]LogEditorServer: Finished looking for orphan Actors (0.000 secs)
+[2020.05.04-05.44.33:763][  0]LogUObjectHash: Compacting FUObjectHashTables data took   1.39ms
+[2020.05.04-05.44.33:763][  0]Cmd: MAP CHECKDEP NOCLEARLOG
+[2020.05.04-05.44.33:763][  0]MapCheck: Map check complete: 0 Error(s), 0 Warning(s), took 0.086ms to complete.
+[2020.05.04-05.44.33:763][  0]LogFileHelpers: Loading map 'StartupMap' took 0.142
+[2020.05.04-05.44.34:021][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2020.05.04-05.44.34:026][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2020.05.04-05.44.34:032][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2020.05.04-05.44.34:037][  0]LogSlate: Updating window title bar state: overlay mode, drag disabled, window buttons hidden, title bar hidden
+[2020.05.04-05.44.34:066][  0]LogCollectionManager: Loaded 0 collections in 0.004037 seconds
+[2020.05.04-05.44.34:077][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Saved/Collections/' took 0.00s
+[2020.05.04-05.44.34:077][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/Developers/BansheeeBox/Collections/' took 0.00s
+[2020.05.04-05.44.34:077][  0]LogFileCache: Scanning file cache for directory 'S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Content/Collections/' took 0.00s
+[2020.05.04-05.44.34:077][  0]LogContentBrowser: Native class hierarchy populated in 0.0086 seconds. Added 3076 classes and 730 folders.
+[2020.05.04-05.44.34:081][  0]LogContentBrowser: Native class hierarchy updated for 'WidgetCarousel' in 0.0004 seconds. Added 0 classes and 0 folders.
+[2020.05.04-05.44.34:710][  0]LogContentBrowser: Native class hierarchy updated for 'AddContentDialog' in 0.0004 seconds. Added 0 classes and 0 folders.
+[2020.05.04-05.44.34:717][  0]LogContentBrowser: Native class hierarchy updated for 'SceneOutliner' in 0.0005 seconds. Added 2 classes and 3 folders.
+[2020.05.04-05.44.34:724][  0]LogContentBrowser: Native class hierarchy updated for 'WorldBrowser' in 0.0005 seconds. Added 2 classes and 3 folders.
+[2020.05.04-05.44.34:862][  0]LogSlate: Took 0.000123 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Regular.ttf' (155K)
+[2020.05.04-05.44.34:864][  0]LogSlate: Took 0.000087 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Bold.ttf' (160K)
+[2020.05.04-05.44.34:867][  0]LogSlate: Took 0.000090 seconds to synchronously load lazily loaded font '../../../Engine/Content/Editor/Slate/Fonts/FontAwesome.ttf' (139K)
+[2020.05.04-05.44.35:008][  0]LogRenderer: Reallocating scene render targets to support 2100x948 Format 26 NumSamples 1 (Frame:1).
+[2020.05.04-05.44.35:105][  0]LogContentBrowser: Native class hierarchy updated for 'HierarchicalLODOutliner' in 0.0006 seconds. Added 0 classes and 0 folders.
+[2020.05.04-05.44.35:105][  0]LogLoad: (Engine Initialization) Total time: 118.01 seconds
+[2020.05.04-05.44.35:105][  0]LogLoad: (Engine Initialization) Total Blueprint compile time: 0.00 seconds
+[2020.05.04-05.44.35:116][  0]LogSteamVRInputDevice: Display: SteamVR runtime 1.5.17 loaded.
+[2020.05.04-05.44.35:116][  0]LogSteamVRInputDevice: Display: Action Manifest Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
+[2020.05.04-05.44.35:116][  0]LogSteamVRInputDevice: Display: Controller Bindings Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
+[2020.05.04-05.44.35:119][  0]LogSteamVRInputDevice: Searching for Controller Bindings files at: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
+[2020.05.04-05.44.35:121][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Registering Application Manifest ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/steamvr_ue_editor_app.json : VRApplicationError_None
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Editor Application [34804][application.generated.ue.virtual-reality-bp-game-template-11590370.ue4editor.exe] identified to SteamVR: VRApplicationError_None
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Trying to load Action Manifest from: S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Error: [STEAMVR INPUT] Setting Action Manifest Path Result: Mismatched Action Manifest
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting main action set: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerleft
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerright
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special1
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special2
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special3
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special4
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special5
+[2020.05.04-05.44.35:123][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special6
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special7
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special8
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonleft
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonright
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateleft
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateright
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/open_console
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:124][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Action Manifest Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
+[2020.05.04-05.44.35:125][  0]LogSteamVRInputDevice: Display: Controller Bindings Path: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
+[2020.05.04-05.44.35:129][  0]LogSteamVRInputDevice: Searching for Controller Bindings files at: ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Registering Application Manifest ../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/steamvr_ue_editor_app.json : VRApplicationError_None
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Editor Application [34804][application.generated.ue.virtual-reality-bp-game-template-11590370.ue4editor.exe] identified to SteamVR: VRApplicationError_None
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Trying to load Action Manifest from: S:/Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Config/SteamVRBindings/steamvr_manifest.json
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Error: [STEAMVR INPUT] Setting Action Manifest Path Result: Mismatched Action Manifest
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting main action set: Success
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerleft
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/controllerright
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:131][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special1
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special2
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special3
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special4
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special5
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special6
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special7
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/special8
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonleft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/skeletonright
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateleft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/out/vibrateright
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/open_console
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/TeleportLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabLeft
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/GrabRight
+[2020.05.04-05.44.35:132][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: Retrieving Action Handle: /actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d
+[2020.05.04-05.44.35:133][  0]LogSteamVRInputDevice: Display: [STEAMVR INPUT] Setting Action Handle Path Result: Success
+[2020.05.04-05.44.35:157][  0]LogAssetRegistry: Asset discovery search completed in 8.5547 seconds
+[2020.05.04-05.44.35:159][  0]LogCollectionManager: Fixed up redirectors for 0 collections in 0.000005 seconds (updated 0 objects)
+[2020.05.04-05.44.35:160][  0]LogContentStreaming: Texture pool size now 1000 MB
+[2020.05.04-05.44.35:188][  0]LogSlate: Took 0.000147 seconds to synchronously load lazily loaded font '../../../Engine/Content/Slate/Fonts/Roboto-Light.ttf' (167K)
+[2020.05.04-05.44.53:970][204]LogSlate: Window 'Plugins' being destroyed
+[2020.05.04-05.44.53:974][204]LogSlate: Window 'Plugins' being destroyed
+[2020.05.04-05.44.53:974][204]LogDirectoryWatcher: A directory notification for '../../../Engine/Plugins/' was aborted.
+[2020.05.04-05.44.53:975][204]LogDirectoryWatcher: A directory notification for '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/Plugins/' was aborted.
+[2020.05.04-05.45.00:480][942]SourceControl: fatal: S:/Software/UnrealEditor/UE_4.24/Engine/Content: 'S:/Software/UnrealEditor/UE_4.24/Engine/Content' is outside repository
+[2020.05.04-05.45.00:757][942]LogPackageName: Error: Illegal call to DoesPackageExist: '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject' is not a standard unreal filename or a long path name. Reason: Path should start with a '/'
+[2020.05.04-05.45.00:757][942]LogOutputDevice: Warning: 
 
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: New page: Compilation - 5/05/2020, 5:40:26 am
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Using 'git status' to determine working set for adaptive non-unity build (S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint).
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Creating makefile for ProjectBreathMintEditor (no existing makefile)
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Parsing headers for ProjectBreathMintEditor
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   Running UnrealHeaderTool "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\ProjectBreathMint.uproject" "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\ProjectBreathMintEditor\Development\ProjectBreathMintEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Reflection code generated for ProjectBreathMintEditor in 13.4666309 seconds
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Building ProjectBreathMintEditor...
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Using Visual Studio 2019 14.24.28316 toolchain (C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314) and Windows 10.0.16299.0 SDK (C:\Program Files (x86)\Windows Kits\10).
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Building 9 actions with 24 processes...
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [1/9] Default.rc2
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [2/9] SharedPCH.Engine.ShadowErrors.cpp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [3/9] ProjectBreathMint.cpp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [4/9] ProjectBreathMint.init.gen.cpp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [5/9] MyCharacter.cpp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [6/9] MyCharacter.gen.cpp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [7/9] UE4Editor-ProjectBreathMint-9768.lib
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:      Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.exp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [8/9] UE4Editor-ProjectBreathMint-9768.dll
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:      Creating library S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.lib and object S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint\Intermediate\Build\Win64\UE4Editor\Development\ProjectBreathMint\UE4Editor-ProjectBreathMint-9768.suppressed.exp
-[2020.05.04-05.40.26:642][123]CompilerResultsLog:   [9/9] ProjectBreathMintEditor.target
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Total time in Parallel executor: 21.08 seconds
-[2020.05.04-05.40.26:642][123]CompilerResultsLog: Total execution time: 44.10 seconds
-[2020.05.04-05.40.26:642][123]LogMainFrame: MainFrame: Module compiling took 44.278 seconds
-[2020.05.04-05.40.26:647][123]Reloading module ProjectBreathMint after successful compile.
-[2020.05.04-05.40.26:717][123]LogClass: Could not find existing package /Script/ProjectBreathMint for HotReload of class MyCharacter, assuming a new package.
-[2020.05.04-05.40.26:720][123]LogContentBrowser: Native class hierarchy updated for 'ProjectBreathMint' in 0.0011 seconds. Added 1 classes and 2 folders.
-[2020.05.04-05.40.26:749][123]LogUObjectHash: Compacting FUObjectHashTables data took   1.30ms
-[2020.05.04-05.40.26:762][123]LogContentBrowser: Native class hierarchy populated in 0.0081 seconds. Added 3020 classes and 725 folders.
-[2020.05.04-05.40.27:030][123]LogSlate: Window 'Add C++ Class' being destroyed
+Script Stack (0 frames):
+
+[2020.05.04-05.45.00:857][942]LogStats: FPlatformStackWalk::StackWalkAndDump -  0.099 s
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: === Handled ensure: ===
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: 
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: Ensure condition failed: false [File:D:/Build/++UE4/Sync/Engine/Source/Runtime/CoreUObject/Private/Misc/PackageName.cpp] [Line: 873]
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: Illegal call to DoesPackageExist: '../../../../../../Projects/Unreal/ProjectBreathMint/ProjectBreathMint/ProjectBreathMint.uproject' is not a standard unreal filename or a long path name. Reason: Path should start with a '/'
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: Stack: 
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffb315280b7 UE4Editor-CoreUObject.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffb31173bc1 UE4Editor-CoreUObject.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf8516365 UE4Editor-SourceControl.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf85164bc UE4Editor-SourceControl.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf54604f5 UE4Editor-SourceControlWindows.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf5418e4d UE4Editor-SourceControlWindows.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf541869a UE4Editor-SourceControlWindows.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf5430da6 UE4Editor-SourceControlWindows.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffae86fb4e3 UE4Editor-GitSourceControl.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffae86ffe31 UE4Editor-GitSourceControl.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffaf851ade9 UE4Editor-SourceControl.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffb1cedb479 UE4Editor-UnrealEd.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffb1d73e476 UE4Editor-UnrealEd.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ff7efdb7f62 UE4Editor.exe!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ff7efdcc3ec UE4Editor.exe!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ff7efdcc4ca UE4Editor.exe!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ff7efddceae UE4Editor.exe!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ff7efddfcbe UE4Editor.exe!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffb84157bd4 KERNEL32.DLL!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: [Callstack] 0x00007ffb8460ce51 ntdll.dll!UnknownFunction []
+[2020.05.04-05.45.00:857][942]LogOutputDevice: Error: 
+[2020.05.04-05.45.00:865][942]LogStats:                SubmitErrorReport -  0.000 s
+[2020.05.04-05.45.02:005][942]LogStats:                    SendNewReport -  1.140 s
+[2020.05.04-05.45.02:005][942]LogStats:             FDebug::EnsureFailed -  1.247 s
+[2020.05.04-05.45.08:059][942]LogSlate: Window 'Submit Files' being destroyed
+[2020.05.04-05.45.08:952][942]LogSourceControl: commit successful: [master 6a0e4bb] Yeet
+[2020.05.04-05.45.09:407][942]SourceControl: [master 6a0e4bb] Yeet
+[2020.05.04-05.45.09:407][942]SourceControl:  2 files changed, 16 insertions(+), 6 deletions(-)
+[2020.05.04-05.45.09:413][942]SourceControl: Commited [master 6a0e4bb] Yeet.
+[2020.05.04-05.45.09:418][942]LogTemp: Resetting audio stream to device id 
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Audio Device Output Speaker Info:
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Name: Index HMD (2- NVIDIA High Definition Audio)
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Is Default: Yes
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Sample Rate: 48000
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Channel Count Used: 2
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Device Channel Count: 2
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: Channel Order:
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: 0: FrontLeft
+[2020.05.04-05.45.09:637][942]LogAudioMixer: Display: 1: FrontRight
