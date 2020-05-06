@@ -96,6 +96,28 @@
 					}
 				},
 				{
+					"mode": "button",
+					"path": "/user/hand/left/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/BButtonLeft"
+						}
+					}
+				},
+				{
+					"mode": "button",
+					"path": "/user/hand/right/input/b",
+					"inputs":
+					{
+						"click":
+						{
+							"output": "/actions/main/in/BButtonRight"
+						}
+					}
+				},
+				{
 					"mode": "joystick",
 					"path": "/user/hand/left/input/thumbstick",
 					"inputs":

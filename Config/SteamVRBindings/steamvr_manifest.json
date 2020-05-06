@@ -102,6 +102,14 @@
 			"type": "boolean"
 		},
 		{
+			"name": "/actions/main/in/BButtonLeft",
+			"type": "boolean"
+		},
+		{
+			"name": "/actions/main/in/BButtonRight",
+			"type": "boolean"
+		},
+		{
 			"name": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d",
 			"type": "vector2"
 		},
@@ -230,6 +238,8 @@
 			"/actions/main/in/GrabRight": "GrabRight",
 			"/actions/main/in/TriggerLeft": "TriggerLeft",
 			"/actions/main/in/TriggerRight": "TriggerRight",
+			"/actions/main/in/BButtonLeft": "BButtonLeft",
+			"/actions/main/in/BButtonRight": "BButtonRight",
 			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "MotionControllerThumbLeft",
 			"/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d": "MotionControllerThumbRight",
 			"/actions/main": "Main Game Actions"
