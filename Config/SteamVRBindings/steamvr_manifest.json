@@ -110,6 +110,14 @@
 			"type": "boolean"
 		},
 		{
+			"name": "/actions/main/in/MenuKeyLeft",
+			"type": "boolean"
+		},
+		{
+			"name": "/actions/main/in/MenuKeyRight",
+			"type": "boolean"
+		},
+		{
 			"name": "/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d",
 			"type": "vector2"
 		},
@@ -240,6 +248,8 @@
 			"/actions/main/in/TeleportRight": "TeleportRight",
 			"/actions/main/in/TriggerLeft": "TriggerLeft",
 			"/actions/main/in/TriggerRight": "TriggerRight",
+			"/actions/main/in/MenuKeyLeft": "MenuKeyLeft",
+			"/actions/main/in/MenuKeyRight": "MenuKeyRight",
 			"/actions/main/in/MotionControllerThumbLeft_X,MotionControllerThumbLeft_Y X Y_axis2d": "MotionControllerThumbLeft",
 			"/actions/main/in/MotionControllerThumbRight_X,MotionControllerThumbRight_Y X Y_axis2d": "MotionControllerThumbRight",
 			"/actions/main": "Main Game Actions"
