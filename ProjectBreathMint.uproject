@@ -41,6 +41,10 @@
 		{
 			"Name": "NiagaraExtras",
 			"Enabled": true
+		},
+		{
+			"Name": "OceanPlugin",
+			"Enabled": true
 		}
 	],
 	"TargetPlatforms": [
