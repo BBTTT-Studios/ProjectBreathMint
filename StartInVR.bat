@@ -1,0 +1,1 @@
+"S:\Software\UnrealEditor\UE_4.24\Engine\Binaries\Win64\UE4Editor.exe" "S:\Projects\Unreal\ProjectBreathMint\ProjectBreathMint.uproject"  -game  -vr  -ResX=1280 -ResY=960 -WinX=0 -WinY=0 -NoVSync -log -SaveToUserDir
