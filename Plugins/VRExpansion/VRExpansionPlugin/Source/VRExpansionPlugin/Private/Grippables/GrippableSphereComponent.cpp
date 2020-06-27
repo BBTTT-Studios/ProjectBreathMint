@@ -47,11 +47,9 @@ void UGrippableSphereComponent::PreReplication(IRepChangedPropertyTracker & Chan
 	DOREPLIFETIME_ACTIVE_OVERRIDE(UGrippableSphereComponent, VRGripInterfaceSettings, bRepGripSettingsAndGameplayTags);
 	DOREPLIFETIME_ACTIVE_OVERRIDE(UGrippableSphereComponent, GameplayTags, bRepGripSettingsAndGameplayTags);
 
-	PRAGMA_DISABLE_DEPRECATION_WARNINGS
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeLocation, bReplicateMovement);
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeRotation, bReplicateMovement);
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeScale3D, bReplicateMovement);
-	PRAGMA_ENABLE_DEPRECATION_WARNINGS
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeLocation, bReplicateMovement);
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeRotation, bReplicateMovement);
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeScale3D, bReplicateMovement);
 }
 
 bool UGrippableSphereComponent::ReplicateSubobjects(UActorChannel* Channel, class FOutBunch *Bunch, FReplicationFlags *RepFlags)
@@ -109,6 +107,11 @@ void UGrippableSphereComponent::EndPlay(const EEndPlayReason::Type EndPlayReason
 void UGrippableSphereComponent::SetDenyGripping(bool bDenyGripping)
 {
 	VRGripInterfaceSettings.bDenyGripping = bDenyGripping;
+}
+
+void UGrippableSphereComponent::SetGripPriority(int NewGripPriority)
+{
+	VRGripInterfaceSettings.AdvancedGripSettings.GripPriority = NewGripPriority;
 }
 
 void UGrippableSphereComponent::TickGrip_Implementation(UGripMotionControllerComponent * GrippingController, const FBPActorGripInformation & GripInformation, float DeltaTime) {}
@@ -176,12 +179,12 @@ float UGrippableSphereComponent::GripBreakDistance_Implementation()
 	return VRGripInterfaceSettings.ConstraintBreakDistance;
 }
 
-void UGrippableSphereComponent::ClosestGripSlotInRange_Implementation(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController, FName OverridePrefix)
+void UGrippableSphereComponent::ClosestGripSlotInRange_Implementation(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName, UGripMotionControllerComponent * CallingController, FName OverridePrefix)
 {
 	if (OverridePrefix.IsNone())
 		bSecondarySlot ? OverridePrefix = "VRGripS" : OverridePrefix = "VRGripP";
 
-	UVRExpansionFunctionLibrary::GetGripSlotInRangeByTypeName_Component(OverridePrefix, this, WorldLocation, bSecondarySlot ? VRGripInterfaceSettings.SecondarySlotRange : VRGripInterfaceSettings.PrimarySlotRange, bHadSlotInRange, SlotWorldTransform);
+	UVRExpansionFunctionLibrary::GetGripSlotInRangeByTypeName_Component(OverridePrefix, this, WorldLocation, bSecondarySlot ? VRGripInterfaceSettings.SecondarySlotRange : VRGripInterfaceSettings.PrimarySlotRange, bHadSlotInRange, SlotWorldTransform, SlotName);
 }
 
 bool UGrippableSphereComponent::AllowsMultipleGrips_Implementation()

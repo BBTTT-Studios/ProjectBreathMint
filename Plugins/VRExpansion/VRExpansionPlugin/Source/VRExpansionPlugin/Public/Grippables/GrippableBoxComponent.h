@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GripMotionControllerComponent.h"
 #include "VRBPDatatypes.h"
 #include "VRGripInterface.h"
 #include "VRExpansionFunctionLibrary.h"
@@ -38,6 +39,10 @@ public:
 	// Sets the Deny Gripping variable on the FBPInterfaceSettings struct
 	UFUNCTION(BlueprintCallable, Category = "VRGripInterface")
 		void SetDenyGripping(bool bDenyGripping);
+
+	// Sets the grip priority on the FBPInterfaceSettings struct
+	UFUNCTION(BlueprintCallable, Category = "VRGripInterface")
+		void SetGripPriority(int NewGripPriority);
 
 	// Called when a object is gripped
 	// If you override the OnGrip event then you will need to call the parent implementation or this event will not fire!!
@@ -140,7 +145,7 @@ public:
 
 		// Get closest primary slot in range
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")
-		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
+		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName, UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
 
 	// Check if an object allows multiple grips at one time
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")

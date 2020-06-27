@@ -13,6 +13,8 @@
 #include "VRPlayerController.h"
 #include "GameFramework/PhysicsVolume.h"
 
+DEFINE_LOG_CATEGORY(LogVRBaseCharacterMovement);
+
 UVRBaseCharacterMovementComponent::UVRBaseCharacterMovementComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -66,6 +68,8 @@ UVRBaseCharacterMovementComponent::UVRBaseCharacterMovementComponent(const FObje
 	bEnableServerDualMoveScopedMovementUpdates = true;
 
 	bNotifyTeleported = false;
+
+	bJustUnseated = false;
 }
 
 void UVRBaseCharacterMovementComponent::OnMovementModeChanged(EMovementMode PreviousMovementMode, uint8 PreviousCustomMode)
@@ -121,80 +125,119 @@ bool UVRBaseCharacterMovementComponent::ForcePositionUpdate(float DeltaTime)
 
 void UVRBaseCharacterMovementComponent::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
 {
+	// Scope all of the movements, including PRC
 	{
-		// Scope these, they nest with Outer references so it should work fine
-		FVRCharacterScopedMovementUpdate ScopedMovementUpdate(UpdatedComponent, bEnableScopedMovementUpdates ? EScopedUpdate::DeferredUpdates : EScopedUpdate::ImmediateUpdates);
-
-		if (MovementMode == MOVE_Custom && CustomMovementMode == (uint8)EVRCustomMovementMode::VRMOVE_Seated)
+		UParentRelativeAttachmentComponent* OuterScopePRC = nullptr;
+		if (BaseVRCharacterOwner && BaseVRCharacterOwner->ParentRelativeAttachment && BaseVRCharacterOwner->ParentRelativeAttachment->bUpdateInCharacterMovement)
 		{
-			const FVector InputVector = ConsumeInputVector();
-			if (!HasValidData() || ShouldSkipUpdate(DeltaTime))
+			OuterScopePRC = BaseVRCharacterOwner->ParentRelativeAttachment;
+		}
+
+		FScopedMovementUpdate ScopedPRCMovementUpdate(OuterScopePRC, EScopedUpdate::DeferredUpdates);
+		
+		{
+			UReplicatedVRCameraComponent* OuterScopeCamera = nullptr;
+			if (BaseVRCharacterOwner && BaseVRCharacterOwner->VRReplicatedCamera)
 			{
-				return;
+				OuterScopeCamera = BaseVRCharacterOwner->VRReplicatedCamera;
 			}
 
-			// Skip the perform movement logic, run the re-seat logic instead - running base movement component tick instead
-			Super::Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+			FScopedMovementUpdate ScopedCameraMovementUpdate(OuterScopeCamera, EScopedUpdate::DeferredUpdates);
 
-			// See if we fell out of the world.
-			const bool bIsSimulatingPhysics = UpdatedComponent->IsSimulatingPhysics();
-			if (CharacterOwner->GetLocalRole() == ROLE_Authority && (!bCheatFlying || bIsSimulatingPhysics) && !CharacterOwner->CheckStillInWorld())
+			// Scope in the character movements first
 			{
-				return;
-			}
+				// Scope these, they nest with Outer references so it should work fine
+				FVRCharacterScopedMovementUpdate ScopedMovementUpdate(UpdatedComponent, bEnableScopedMovementUpdates ? EScopedUpdate::DeferredUpdates : EScopedUpdate::ImmediateUpdates);
 
-			// If we are the owning client or the server then run the re-basing
-			if (CharacterOwner->GetLocalRole() > ROLE_SimulatedProxy)
-			{
-				// Run offset logic here, the server will update simulated proxies with the movement replication
-				if (AVRBaseCharacter* BaseChar = Cast<AVRBaseCharacter>(CharacterOwner))
+				if (MovementMode == MOVE_Custom && CustomMovementMode == (uint8)EVRCustomMovementMode::VRMOVE_Seated)
 				{
-					BaseChar->TickSeatInformation(DeltaTime);
+					const FVector InputVector = ConsumeInputVector();
+					if (!HasValidData() || ShouldSkipUpdate(DeltaTime))
+					{
+						return;
+					}
+
+					// Skip the perform movement logic, run the re-seat logic instead - running base movement component tick instead
+					Super::Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+					// See if we fell out of the world.
+					const bool bIsSimulatingPhysics = UpdatedComponent->IsSimulatingPhysics();
+					if (CharacterOwner->GetLocalRole() == ROLE_Authority && (!bCheatFlying || bIsSimulatingPhysics) && !CharacterOwner->CheckStillInWorld())
+					{
+						return;
+					}
+
+					// If we are the owning client or the server then run the re-basing
+					if (CharacterOwner->GetLocalRole() > ROLE_SimulatedProxy)
+					{
+						// Run offset logic here, the server will update simulated proxies with the movement replication
+						if (AVRBaseCharacter* BaseChar = Cast<AVRBaseCharacter>(CharacterOwner))
+						{
+							BaseChar->TickSeatInformation(DeltaTime);
+						}
+
+					}
+					else
+					{
+						if (bNetworkUpdateReceived)
+						{
+							if (bNetworkMovementModeChanged)
+							{
+								ApplyNetworkMovementMode(CharacterOwner->GetReplicatedMovementMode());
+								bNetworkMovementModeChanged = false;
+							}
+						}
+					}
+				}
+				else
+					Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+
+				// This should be valid for both Simulated and owning clients as well as the server
+				// Better here than in perform movement
+				if (UVRRootComponent* VRRoot = Cast<UVRRootComponent>(CharacterOwner->GetCapsuleComponent()))
+				{
+					// If we didn't move the capsule, have it update itself here so the visual and physics representation is correct
+					// We do this specifically to avoid double calling into the render / physics threads.
+					if (!VRRoot->bCalledUpdateTransform)
+						VRRoot->OnUpdateTransform_Public(EUpdateTransformFlags::None, ETeleportType::None);
 				}
 
+				// Make sure these are cleaned out for the next frame
+				AdditionalVRInputVector = FVector::ZeroVector;
+				CustomVRInputVector = FVector::ZeroVector;
 			}
-			else
+
+			if (bRunControlRotationInMovementComponent && CharacterOwner->IsLocallyControlled())
 			{
-				if (bNetworkUpdateReceived)
+				if (BaseVRCharacterOwner)
 				{
-					if (bNetworkMovementModeChanged)
+					if (BaseVRCharacterOwner->VRReplicatedCamera && BaseVRCharacterOwner->VRReplicatedCamera->bUsePawnControlRotation)
 					{
-						ApplyNetworkMovementMode(CharacterOwner->GetReplicatedMovementMode());
-						bNetworkMovementModeChanged = false;
+						const AController* OwningController = BaseVRCharacterOwner->GetController();
+						if (OwningController)
+						{
+							const FRotator PawnViewRotation = BaseVRCharacterOwner->GetViewRotation();
+							if (!PawnViewRotation.Equals(BaseVRCharacterOwner->VRReplicatedCamera->GetComponentRotation()))
+							{
+								BaseVRCharacterOwner->VRReplicatedCamera->SetWorldRotation(PawnViewRotation);
+							}
+						}
 					}
 				}
 			}
+
+			// If some of our important components run inside the cmc updates then lets update them now
+			if (OuterScopeCamera)
+			{
+				OuterScopeCamera->UpdateTracking(DeltaTime);
+			}
+
+			if (OuterScopePRC)
+			{
+				OuterScopePRC->UpdateTracking(DeltaTime);
+			}
 		}
-		else
-			Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-
-		// This should be valid for both Simulated and owning clients as well as the server
-		// Better here than in perform movement
-		if (UVRRootComponent* VRRoot = Cast<UVRRootComponent>(CharacterOwner->GetCapsuleComponent()))
-		{
-			// If we didn't move the capsule, have it update itself here so the visual and physics representation is correct
-			// We do this specifically to avoid double calling into the render / physics threads.
-			if (!VRRoot->bCalledUpdateTransform)
-				VRRoot->OnUpdateTransform_Public(EUpdateTransformFlags::None, ETeleportType::None);
-		}
-
-		// If some of our important components run inside the cmc updates then lets update them now
-		if (AVRBaseCharacter* Basechar = Cast<AVRBaseCharacter>(CharacterOwner))
-		{
-			if (Basechar->ParentRelativeAttachment && Basechar->ParentRelativeAttachment->bUpdateInCharacterMovement)
-				Basechar->ParentRelativeAttachment->UpdateTracking(DeltaTime);
-
-			if (Basechar->LeftMotionController && Basechar->LeftMotionController->bUpdateInCharacterMovement)
-				Basechar->LeftMotionController->UpdateTracking(DeltaTime);
-
-			if (Basechar->RightMotionController && Basechar->RightMotionController->bUpdateInCharacterMovement)
-				Basechar->RightMotionController->UpdateTracking(DeltaTime);
-		}
-
-		// Make sure these are cleaned out for the next frame
-		AdditionalVRInputVector = FVector::ZeroVector;
-		CustomVRInputVector = FVector::ZeroVector;
 	}
 
 	if (bNotifyTeleported)
@@ -265,101 +308,9 @@ void UVRBaseCharacterMovementComponent::OnMoveCompleted(FAIRequestID RequestID, 
 	}
 }
 
-/*
-bool UVRBaseCharacterMovementComponent::FloorSweepTest(
-	FHitResult& OutHit,
-	const FVector& Start,
-	const FVector& End,
-	ECollisionChannel TraceChannel,
-	const struct FCollisionShape& CollisionShape,
-	const struct FCollisionQueryParams& Params,
-	const struct FCollisionResponseParams& ResponseParam
-) const
-{
-	bool bBlockingHit = false;
-	TArray<FHitResult> OutHits;
-
-	if (!bUseFlatBaseForFloorChecks)
-	{
-		if (bIgnoreSimulatingComponentsInFloorCheck)
-		{
-			// Testing all components in the way, skipping simulating components
-			GetWorld()->SweepMultiByChannel(OutHits, Start, End, FQuat::Identity, TraceChannel, CollisionShape, Params, ResponseParam);
-
-			for (int i = 0; i < OutHits.Num(); i++)
-			{
-				if (OutHits[i].bBlockingHit && (OutHits[i].Component.IsValid() && !OutHits[i].Component->IsSimulatingPhysics()))
-				{
-					OutHit = OutHits[i];
-					bBlockingHit = true;
-					break;
-				}
-			}
-		}
-		else
-			bBlockingHit = GetWorld()->SweepSingleByChannel(OutHit, Start, End, FQuat::Identity, TraceChannel, CollisionShape, Params, ResponseParam);
-	}
-	else
-	{
-		// Test with a box that is enclosed by the capsule.
-		const float CapsuleRadius = CollisionShape.GetCapsuleRadius();
-		const float CapsuleHeight = CollisionShape.GetCapsuleHalfHeight();
-		const FCollisionShape BoxShape = FCollisionShape::MakeBox(FVector(CapsuleRadius * 0.707f, CapsuleRadius * 0.707f, CapsuleHeight));
-
-		// First test with the box rotated so the corners are along the major axes (ie rotated 45 degrees).
-		//TArray<FHitResult> OutHits;
-		OutHits.Reset();
-
-		if (bIgnoreSimulatingComponentsInFloorCheck)
-		{
-			// Testing all components in the way, skipping simulating components
-			GetWorld()->SweepMultiByChannel(OutHits, Start, End, FQuat(FVector(0.f, 0.f, -1.f), PI * 0.25f), TraceChannel, BoxShape, Params, ResponseParam);
-
-			for (int i = 0; i < OutHits.Num(); i++)
-			{
-				if (OutHits[i].bBlockingHit && (OutHits[i].Component.IsValid() && !OutHits[i].Component->IsSimulatingPhysics()))
-				{
-					OutHit = OutHits[i];
-					bBlockingHit = true;
-					break;
-				}
-			}
-		}
-		else
-			bBlockingHit = GetWorld()->SweepSingleByChannel(OutHit, Start, End, FQuat(FVector(0.f, 0.f, -1.f), PI * 0.25f), TraceChannel, BoxShape, Params, ResponseParam);
-
-		if (!bBlockingHit)
-		{
-			// Test again with the same box, not rotated.
-			OutHit.Reset(1.f, false);
-
-			if (bIgnoreSimulatingComponentsInFloorCheck)
-			{
-				OutHits.Reset();
-				// Testing all components in the way, skipping simulating components
-				GetWorld()->SweepMultiByChannel(OutHits, Start, End, FQuat::Identity, TraceChannel, BoxShape, Params, ResponseParam);
-
-				for (int i = 0; i < OutHits.Num(); i++)
-				{
-					if (OutHits[i].bBlockingHit && (OutHits[i].Component.IsValid() && !OutHits[i].Component->IsSimulatingPhysics()))
-					{
-						OutHit = OutHits[i];
-						bBlockingHit = true;
-						break;
-					}
-				}
-			}
-			else
-				bBlockingHit = GetWorld()->SweepSingleByChannel(OutHit, Start, End, FQuat::Identity, TraceChannel, BoxShape, Params, ResponseParam);
-		}
-	}
-
-	return bBlockingHit;
-}*/
-
 void UVRBaseCharacterMovementComponent::ComputeFloorDist(const FVector& CapsuleLocation, float LineDistance, float SweepDistance, FFindFloorResult& OutFloorResult, float SweepRadius, const FHitResult* DownwardSweepResult) const
 {
-	//UE_LOG(LogCharacterMovement, VeryVerbose, TEXT("[Role:%d] ComputeFloorDist: %s at location %s"), (int32)CharacterOwner->Role, *GetNameSafe(CharacterOwner), *CapsuleLocation.ToString());
+	UE_LOG(LogVRBaseCharacterMovement, VeryVerbose, TEXT("[Role:%d] ComputeFloorDist: %s at location %s"), (int32)CharacterOwner->GetLocalRole(), *GetNameSafe(CharacterOwner), *CapsuleLocation.ToString());
 	OutFloorResult.Clear();
 
 	float PawnRadius, PawnHalfHeight;
@@ -501,7 +452,6 @@ void UVRBaseCharacterMovementComponent::ComputeFloorDist(const FVector& CapsuleL
 
 	// No hits were acceptable.
 	OutFloorResult.bWalkableFloor = false;
-	OutFloorResult.FloorDist = SweepDistance;
 }
 
 
@@ -590,37 +540,60 @@ void UVRBaseCharacterMovementComponent::CheckServerAuthedMoveAction()
 	}
 }
 
-void UVRBaseCharacterMovementComponent::PerformMoveAction_SnapTurn(float DeltaYawAngle, bool bFlagGripTeleport)
+void UVRBaseCharacterMovementComponent::PerformMoveAction_SnapTurn(float DeltaYawAngle, EVRMoveActionVelocityRetention VelocityRetention, bool bFlagGripTeleport)
 {
 	FVRMoveActionContainer MoveAction;
 	MoveAction.MoveAction = EVRMoveAction::VRMOVEACTION_SnapTurn; 
 	MoveAction.MoveActionRot = FRotator(0.0f, FMath::RoundToFloat(((FRotator(0.f,DeltaYawAngle, 0.f).Quaternion() * UpdatedComponent->GetComponentQuat()).Rotator().Yaw) * 100.f) / 100.f, 0.0f);
 	MoveAction.MoveActionRot.Roll = bFlagGripTeleport ? 1.0f : 0.0f;
-	MoveActionArray.MoveActions.Add(MoveAction);
 
+	if (VelocityRetention == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+	{
+		MoveAction.MoveActionRot.Pitch = FMath::RoundToFloat(DeltaYawAngle * 100.f) / 100.f;
+	}
+
+	MoveAction.VelRetentionSetting = VelocityRetention;
+
+	MoveActionArray.MoveActions.Add(MoveAction);
 	CheckServerAuthedMoveAction();
 }
 
-void UVRBaseCharacterMovementComponent::PerformMoveAction_SetRotation(float NewYaw, bool bFlagGripTeleport)
+void UVRBaseCharacterMovementComponent::PerformMoveAction_SetRotation(float NewYaw, EVRMoveActionVelocityRetention VelocityRetention, bool bFlagGripTeleport)
 {
 	FVRMoveActionContainer MoveAction;
 	MoveAction.MoveAction = EVRMoveAction::VRMOVEACTION_SetRotation;
 	MoveAction.MoveActionRot = FRotator(0.0f, FMath::RoundToFloat(NewYaw * 100.f) / 100.f, 0.0f);
 	MoveAction.MoveActionRot.Roll = bFlagGripTeleport ? 1.0f : 0.0f;
-	MoveActionArray.MoveActions.Add(MoveAction);
 
+	if (VelocityRetention == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+	{
+		float DeltaYawAngle = FMath::FindDeltaAngleDegrees(UpdatedComponent->GetComponentRotation().Yaw, NewYaw);
+		MoveAction.MoveActionRot.Pitch = FMath::RoundToFloat(DeltaYawAngle * 100.f) / 100.f;
+	}
+
+	MoveAction.VelRetentionSetting = VelocityRetention;
+
+	MoveActionArray.MoveActions.Add(MoveAction);
 	CheckServerAuthedMoveAction();
 }
 
-void UVRBaseCharacterMovementComponent::PerformMoveAction_Teleport(FVector TeleportLocation, FRotator TeleportRotation, bool bSkipEncroachmentCheck)
+void UVRBaseCharacterMovementComponent::PerformMoveAction_Teleport(FVector TeleportLocation, FRotator TeleportRotation, EVRMoveActionVelocityRetention VelocityRetention,  bool bSkipEncroachmentCheck)
 {
 	FVRMoveActionContainer MoveAction;
 	MoveAction.MoveAction = EVRMoveAction::VRMOVEACTION_Teleport;
 	MoveAction.MoveActionLoc = RoundDirectMovement(TeleportLocation);
 	MoveAction.MoveActionRot.Yaw = FMath::RoundToFloat(TeleportRotation.Yaw * 100.f) / 100.f;
-	MoveAction.MoveActionRot.Pitch = bSkipEncroachmentCheck ? 1.0f : 0.0f;
-	MoveActionArray.MoveActions.Add(MoveAction);
+	MoveAction.MoveActionRot.Roll = bSkipEncroachmentCheck ? 1.0f : 0.0f;
 
+	if (VelocityRetention == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+	{
+		float DeltaYawAngle = FMath::FindDeltaAngleDegrees(UpdatedComponent->GetComponentRotation().Yaw, TeleportRotation.Yaw);
+		MoveAction.MoveActionRot.Pitch = FMath::RoundToFloat(DeltaYawAngle * 100.f) / 100.f;
+	}
+
+	MoveAction.VelRetentionSetting = VelocityRetention;
+
+	MoveActionArray.MoveActions.Add(MoveAction);
 	CheckServerAuthedMoveAction();
 }
 
@@ -687,9 +660,27 @@ bool UVRBaseCharacterMovementComponent::CheckForMoveAction()
 bool UVRBaseCharacterMovementComponent::DoMASnapTurn(FVRMoveActionContainer& MoveAction)
 {
 	if (AVRBaseCharacter * OwningCharacter = Cast<AVRBaseCharacter>(GetCharacterOwner()))
-	{
+	{	
 		FRotator TargetRot(0.f, MoveAction.MoveActionRot.Yaw, 0.f);
+
+		FQuat OrigRot = OwningCharacter->GetActorQuat();
 		OwningCharacter->SetActorRotationVR(TargetRot, true, false);
+
+		switch (MoveAction.VelRetentionSetting)
+		{
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None:
+		{
+
+		}break;
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Clear:
+		{
+			this->Velocity = FVector::ZeroVector;
+		}break;
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn:
+		{		
+			this->Velocity = FRotator(0.f, MoveAction.MoveActionRot.Pitch, 0.f).RotateVector(this->Velocity);
+		}break;
+		}
 
 		// If we are flagged to teleport the grips
 		if (MoveAction.MoveActionRot.Roll > 0.0f)
@@ -707,6 +698,22 @@ bool UVRBaseCharacterMovementComponent::DoMASetRotation(FVRMoveActionContainer& 
 	{
 		FRotator TargetRot(0.f, MoveAction.MoveActionRot.Yaw, 0.f);
 		OwningCharacter->SetActorRotationVR(TargetRot, true);
+
+		switch (MoveAction.VelRetentionSetting)
+		{
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None:
+		{
+
+		}break;
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Clear:
+		{
+			this->Velocity = FVector::ZeroVector;
+		}break;
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn:
+		{
+			this->Velocity = FRotator(0.f, MoveAction.MoveActionRot.Pitch, 0.f).RotateVector(this->Velocity);
+		}break;
+		}
 
 		// If we are flagged to teleport the grips
 		if (MoveAction.MoveActionRot.Roll > 0.0f)
@@ -730,9 +737,25 @@ bool UVRBaseCharacterMovementComponent::DoMATeleport(FVRMoveActionContainer& Mov
 			return false;
 		}
 
-		bool bSkipEncroachmentCheck = MoveAction.MoveActionRot.Pitch > 0.0f;
+		bool bSkipEncroachmentCheck = MoveAction.MoveActionRot.Roll > 0.0f;
 		FRotator TargetRot(0.f, MoveAction.MoveActionRot.Yaw, 0.f);
 		OwningCharacter->TeleportTo(MoveAction.MoveActionLoc, TargetRot, false, bSkipEncroachmentCheck);
+
+		switch (MoveAction.VelRetentionSetting)
+		{
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None:
+		{
+
+		}break;
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Clear:
+		{
+			this->Velocity = FVector::ZeroVector;
+		}break;
+		case EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn:
+		{
+			this->Velocity = FRotator(0.f, MoveAction.MoveActionRot.Pitch, 0.f).RotateVector(this->Velocity);
+		}break;
+		}
 
 		if (OwningCharacter->bUseControllerRotationYaw)
 			OwningController->SetControlRotation(MoveAction.MoveActionRot);
@@ -1170,6 +1193,15 @@ void UVRBaseCharacterMovementComponent::ApplyNetworkMovementMode(const uint8 Rec
 	ServerData->bForceClientUpdate = false;
 }
 */
+
+void  UVRBaseCharacterMovementComponent::SetUpdatedComponent(USceneComponent* NewUpdatedComponent)
+{
+	Super::SetUpdatedComponent(NewUpdatedComponent);
+
+	BaseVRCharacterOwner = Cast<AVRBaseCharacter>(CharacterOwner);
+}
+
+
 void UVRBaseCharacterMovementComponent::PerformMovement(float DeltaSeconds)
 {
 	// Scope these, they nest with Outer references so it should work fine
@@ -1178,12 +1210,12 @@ void UVRBaseCharacterMovementComponent::PerformMovement(float DeltaSeconds)
 	// This moves it into update scope
 	if (bRunControlRotationInMovementComponent && CharacterOwner->IsLocallyControlled())
 	{
-		if (AVRPlayerController * PC = Cast<AVRPlayerController>(CharacterOwner->GetController()))
+		if (BaseVRCharacterOwner && BaseVRCharacterOwner->OwningVRPlayerController)
 		{
-			PC->RotationInput = PC->LastRotationInput;
-			PC->UpdateRotation(DeltaSeconds);
-			PC->LastRotationInput = FRotator::ZeroRotator;
-			PC->RotationInput = FRotator::ZeroRotator;
+			BaseVRCharacterOwner->OwningVRPlayerController->RotationInput = BaseVRCharacterOwner->OwningVRPlayerController->LastRotationInput;
+			BaseVRCharacterOwner->OwningVRPlayerController->UpdateRotation(DeltaSeconds);
+			BaseVRCharacterOwner->OwningVRPlayerController->LastRotationInput = FRotator::ZeroRotator;
+			BaseVRCharacterOwner->OwningVRPlayerController->RotationInput = FRotator::ZeroRotator;
 		}
 	}
 
@@ -1374,13 +1406,226 @@ void UVRBaseCharacterMovementComponent::OnClientCorrectionReceived(class FNetwor
 
 
 	// If we got corrected then lets teleport our grips, this means that we were out of sync with the server or the server moved us
-	AVRBaseCharacter* Basechar = Cast<AVRBaseCharacter>(CharacterOwner);
-
-	if (Basechar)
+	if (BaseVRCharacterOwner)
 	{
-		Basechar->NotifyOfTeleport();
+		BaseVRCharacterOwner->OnCharacterNetworkCorrected_Bind.Broadcast();
+		BaseVRCharacterOwner->NotifyOfTeleport(false);
 	}
 }
+
+void UVRBaseCharacterMovementComponent::SimulatedTick(float DeltaSeconds)
+{
+	//return Super::SimulatedTick(DeltaSeconds);
+
+	QUICK_SCOPE_CYCLE_COUNTER(STAT_Character_CharacterMovementSimulated);
+	checkSlow(CharacterOwner != nullptr);
+
+	if (NetworkSmoothingMode == ENetworkSmoothingMode::Replay)
+	{
+		const FVector OldLocation = UpdatedComponent ? UpdatedComponent->GetComponentLocation() : FVector::ZeroVector;
+		const FVector OldVelocity = Velocity;
+
+		// Interpolate between appropriate samples
+		{
+			QUICK_SCOPE_CYCLE_COUNTER(STAT_Character_CharacterMovementSmoothClientPosition);
+			SmoothClientPosition(DeltaSeconds);
+		}
+
+		// Update replicated movement mode
+		ApplyNetworkMovementMode(GetCharacterOwner()->GetReplicatedMovementMode());
+
+		UpdateComponentVelocity();
+		bJustTeleported = false;
+
+		if (CharacterOwner)
+		{
+			CharacterOwner->RootMotionRepMoves.Empty();
+			CurrentRootMotion.Clear();
+			CharacterOwner->SavedRootMotion.Clear();
+		}
+
+		// Note: we do not call the Super implementation, that runs prediction.
+		// We do still need to call these though
+		OnMovementUpdated(DeltaSeconds, OldLocation, OldVelocity);
+		CallMovementUpdateDelegate(DeltaSeconds, OldLocation, OldVelocity);
+
+		LastUpdateLocation = UpdatedComponent ? UpdatedComponent->GetComponentLocation() : FVector::ZeroVector;
+		LastUpdateRotation = UpdatedComponent ? UpdatedComponent->GetComponentQuat() : FQuat::Identity;
+		LastUpdateVelocity = Velocity;
+
+		//TickCharacterPose( DeltaSeconds );
+		return;
+	}
+
+	// If we are playing a RootMotion AnimMontage.
+	if (CharacterOwner->IsPlayingNetworkedRootMotionMontage())
+	{
+		bWasSimulatingRootMotion = true;
+		UE_LOG(LogRootMotion, Verbose, TEXT("UCharacterMovementComponent::SimulatedTick"));
+
+		// Tick animations before physics.
+		if (CharacterOwner && CharacterOwner->GetMesh())
+		{
+			TickCharacterPose(DeltaSeconds);
+
+			// Make sure animation didn't trigger an event that destroyed us
+			if (!HasValidData())
+			{
+				return;
+			}
+		}
+
+		if (RootMotionParams.bHasRootMotion)
+		{
+			const FQuat OldRotationQuat = UpdatedComponent->GetComponentQuat();
+			const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+			SimulateRootMotion(DeltaSeconds, RootMotionParams.GetRootMotionTransform());
+
+#if !(UE_BUILD_SHIPPING)
+			// debug
+			/*if (CharacterOwner && false)
+			{
+				const FRotator OldRotation = OldRotationQuat.Rotator();
+				const FRotator NewRotation = UpdatedComponent->GetComponentRotation();
+				const FVector NewLocation = UpdatedComponent->GetComponentLocation();
+				DrawDebugCoordinateSystem(GetWorld(), CharacterOwner->GetMesh()->GetComponentLocation() + FVector(0, 0, 1), NewRotation, 50.f, false);
+				DrawDebugLine(GetWorld(), OldLocation, NewLocation, FColor::Red, false, 10.f);
+
+				UE_LOG(LogRootMotion, Log, TEXT("UCharacterMovementComponent::SimulatedTick DeltaMovement Translation: %s, Rotation: %s, MovementBase: %s"),
+					*(NewLocation - OldLocation).ToCompactString(), *(NewRotation - OldRotation).GetNormalized().ToCompactString(), *GetNameSafe(CharacterOwner->GetMovementBase()));
+			}*/
+#endif // !(UE_BUILD_SHIPPING)
+		}
+
+		// then, once our position is up to date with our animation, 
+		// handle position correction if we have any pending updates received from the server.
+		if (CharacterOwner && (CharacterOwner->RootMotionRepMoves.Num() > 0))
+		{
+			CharacterOwner->SimulatedRootMotionPositionFixup(DeltaSeconds);
+		}
+	}
+	else if (CurrentRootMotion.HasActiveRootMotionSources())
+	{
+		// We have root motion sources and possibly animated root motion
+		bWasSimulatingRootMotion = true;
+		UE_LOG(LogRootMotion, Verbose, TEXT("UCharacterMovementComponent::SimulatedTick"));
+
+		// If we have RootMotionRepMoves, find the most recent important one and set position/rotation to it
+		bool bCorrectedToServer = false;
+		const FVector OldLocation = UpdatedComponent->GetComponentLocation();
+		const FQuat OldRotation = UpdatedComponent->GetComponentQuat();
+		if (CharacterOwner->RootMotionRepMoves.Num() > 0)
+		{
+			// Move Actor back to position of that buffered move. (server replicated position).
+			FSimulatedRootMotionReplicatedMove& RootMotionRepMove = CharacterOwner->RootMotionRepMoves.Last();
+			if (CharacterOwner->RestoreReplicatedMove(RootMotionRepMove))
+			{
+				bCorrectedToServer = true;
+			}
+			Acceleration = RootMotionRepMove.RootMotion.Acceleration;
+
+			CharacterOwner->PostNetReceiveVelocity(RootMotionRepMove.RootMotion.LinearVelocity);
+			LastUpdateVelocity = RootMotionRepMove.RootMotion.LinearVelocity;
+
+			// Convert RootMotionSource Server IDs -> Local IDs in AuthoritativeRootMotion and cull invalid
+			// so that when we use this root motion it has the correct IDs
+			ConvertRootMotionServerIDsToLocalIDs(CurrentRootMotion, RootMotionRepMove.RootMotion.AuthoritativeRootMotion, RootMotionRepMove.Time);
+			RootMotionRepMove.RootMotion.AuthoritativeRootMotion.CullInvalidSources();
+
+			// Set root motion states to that of repped in state
+			CurrentRootMotion.UpdateStateFrom(RootMotionRepMove.RootMotion.AuthoritativeRootMotion, true);
+
+			// Clear out existing RootMotionRepMoves since we've consumed the most recent
+			UE_LOG(LogRootMotion, Log, TEXT("\tClearing old moves in SimulatedTick (%d)"), CharacterOwner->RootMotionRepMoves.Num());
+			CharacterOwner->RootMotionRepMoves.Reset();
+		}
+
+		// Perform movement
+		PerformMovement(DeltaSeconds);
+
+		// After movement correction, smooth out error in position if any.
+		if (bCorrectedToServer)
+		{
+			SmoothCorrection(OldLocation, OldRotation, UpdatedComponent->GetComponentLocation(), UpdatedComponent->GetComponentQuat());
+		}
+	}
+	// Not playing RootMotion AnimMontage
+	else
+	{
+		// if we were simulating root motion, we've been ignoring regular ReplicatedMovement updates.
+		// If we're not simulating root motion anymore, force us to sync our movement properties.
+		// (Root Motion could leave Velocity out of sync w/ ReplicatedMovement)
+		if (bWasSimulatingRootMotion)
+		{
+			bWasSimulatingRootMotion = false;
+			CharacterOwner->RootMotionRepMoves.Empty();
+			CharacterOwner->OnRep_ReplicatedMovement();
+			CharacterOwner->OnRep_ReplicatedBasedMovement();
+			ApplyNetworkMovementMode(GetCharacterOwner()->GetReplicatedMovementMode());
+		}
+
+		if (CharacterOwner->IsReplicatingMovement() && UpdatedComponent)
+		{
+			//USkeletalMeshComponent* Mesh = CharacterOwner->GetMesh();
+			//const FVector SavedMeshRelativeLocation = Mesh ? Mesh->GetRelativeLocation() : FVector::ZeroVector;
+			//const FQuat SavedCapsuleRotation = UpdatedComponent->GetComponentQuat();
+			const bool bPreventMeshMovement = !bNetworkSmoothingComplete;
+
+			// Avoid moving the mesh during movement if SmoothClientPosition will take care of it.
+			if(NetworkSmoothingMode != ENetworkSmoothingMode::Disabled)
+			{
+				const FScopedPreventAttachedComponentMove PreventMeshMove(BaseVRCharacterOwner->NetSmoother);
+				//const FScopedPreventAttachedComponentMove PreventMeshMovement(bPreventMeshMovement ? Mesh : nullptr);
+				if (CharacterOwner->IsMatineeControlled() || CharacterOwner->IsPlayingRootMotion())
+				{
+					PerformMovement(DeltaSeconds);
+				}
+				else
+				{
+					SimulateMovement(DeltaSeconds);
+				}
+			}
+			else
+			{
+				if (CharacterOwner->IsMatineeControlled() || CharacterOwner->IsPlayingRootMotion())
+				{
+					PerformMovement(DeltaSeconds);
+				}
+				else
+				{
+					SimulateMovement(DeltaSeconds);
+				}
+			}
+
+			// With Linear smoothing we need to know if the rotation changes, since the mesh should follow along with that (if it was prevented above).
+			// This should be rare that rotation changes during simulation, but it can happen when ShouldRemainVertical() changes, or standing on a moving base.
+			/*const bool bValidateRotation = bPreventMeshMovement && (NetworkSmoothingMode == ENetworkSmoothingMode::Linear);
+			if (bValidateRotation && UpdatedComponent)
+			{
+				// Same mesh with different rotation?
+				const FQuat NewCapsuleRotation = UpdatedComponent->GetComponentQuat();
+				if (Mesh == CharacterOwner->GetMesh() && !NewCapsuleRotation.Equals(SavedCapsuleRotation, 1e-6f) && ClientPredictionData)
+				{
+					// Smoothing should lerp toward this new rotation target, otherwise it will just try to go back toward the old rotation.
+					ClientPredictionData->MeshRotationTarget = NewCapsuleRotation;
+					Mesh->SetRelativeLocationAndRotation(SavedMeshRelativeLocation, CharacterOwner->GetBaseRotationOffset());
+				}
+			}*/
+		}
+	}
+
+	// Smooth mesh location after moving the capsule above.
+	if (!bNetworkSmoothingComplete)
+	{
+		QUICK_SCOPE_CYCLE_COUNTER(STAT_Character_CharacterMovementSmoothClientPosition);
+		SmoothClientPosition(DeltaSeconds);
+	}
+	else
+	{
+		UE_LOG(LogVRBaseCharacterMovement, Verbose, TEXT("Skipping network smoothing for %s."), *GetNameSafe(CharacterOwner));
+	}
+}
+
 
 void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocation, const FQuat& OldRotation, const FVector& NewLocation, const FQuat& NewRotation)
 {
@@ -1391,9 +1636,7 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 		return;
 	}
 
-	AVRBaseCharacter * Basechar = Cast<AVRBaseCharacter>(CharacterOwner);
-
-	if (!Basechar)
+	if (!BaseVRCharacterOwner)
 		Super::SmoothCorrection(OldLocation, OldRotation, NewLocation, NewRotation);
 
 	// We shouldn't be running this on a server that is not a listen server.
@@ -1449,14 +1692,14 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 			ClientData->MeshTranslationOffset = ClientData->MeshTranslationOffset + NewToOldVector;
 		}
 
-		//UE_LOG(LogCharacterNetSmoothing, Verbose, TEXT("Proxy %s SmoothCorrection(%.2f)"), *GetNameSafe(CharacterOwner), FMath::Sqrt(DistSq));
+		UE_LOG(LogVRBaseCharacterMovement, Verbose, TEXT("Proxy %s SmoothCorrection(%.2f)"), *GetNameSafe(CharacterOwner), FMath::Sqrt(DistSq));
 		if (NetworkSmoothingMode == ENetworkSmoothingMode::Linear)
 		{
 			// #TODO: Get this working in the future?
 			// I am currently skipping smoothing on rotation operations
 			if ((!OldRotation.Equals(NewRotation, 1e-5f)/* || Velocity.IsNearlyZero()*/))
 			{
-				Basechar->NetSmoother->SetRelativeLocation(FVector::ZeroVector);
+				BaseVRCharacterOwner->NetSmoother->SetRelativeLocation(FVector::ZeroVector);
 				UpdatedComponent->SetWorldLocationAndRotation(NewLocation, NewRotation, false, nullptr, GetTeleportType());
 				ClientData->MeshTranslationOffset = FVector::ZeroVector;
 				ClientData->MeshRotationOffset = ClientData->MeshRotationTarget;
@@ -1475,7 +1718,7 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 				// Note: we don't change rotation, we lerp towards it in SmoothClientPosition.
 				if (NewLocation != OldLocation)
 				{
-					const FScopedPreventAttachedComponentMove PreventMeshMove(Basechar->NetSmoother);
+					const FScopedPreventAttachedComponentMove PreventMeshMove(BaseVRCharacterOwner->NetSmoother);
 					UpdatedComponent->SetWorldLocation(NewLocation, false, nullptr, GetTeleportType());
 				}
 			}
@@ -1486,7 +1729,7 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 			// I am currently skipping smoothing on rotation operations
 			if ((!OldRotation.Equals(NewRotation, 1e-5f)/* || Velocity.IsNearlyZero()*/))
 			{
-				Basechar->NetSmoother->SetRelativeLocation(FVector::ZeroVector);
+				BaseVRCharacterOwner->NetSmoother->SetRelativeLocation(FVector::ZeroVector);
 				UpdatedComponent->SetWorldLocationAndRotation(NewLocation, NewRotation, false, nullptr, GetTeleportType());
 				ClientData->MeshTranslationOffset = FVector::ZeroVector;
 				ClientData->MeshRotationOffset = ClientData->MeshRotationTarget;
@@ -1499,7 +1742,7 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 				ClientData->MeshRotationOffset = (NewRotation.Inverse() * OldRotation) * ClientData->MeshRotationOffset;
 				ClientData->MeshRotationTarget = FQuat::Identity;
 
-				const FScopedPreventAttachedComponentMove PreventMeshMove(Basechar->NetSmoother);
+				const FScopedPreventAttachedComponentMove PreventMeshMove(BaseVRCharacterOwner->NetSmoother);
 				UpdatedComponent->SetWorldLocationAndRotation(NewLocation, NewRotation, false, nullptr, GetTeleportType());
 			}
 		}
@@ -1513,13 +1756,19 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 			const double OldClientTimeStamp = ClientData->SmoothingClientTimeStamp;
 			ClientData->SmoothingClientTimeStamp = FMath::LerpStable(ClientData->SmoothingServerTimeStamp, OldClientTimeStamp, 0.5);
 
-			//UE_LOG(LogCharacterNetSmoothing, VeryVerbose, TEXT("SmoothCorrection: Pull back client from ClientTimeStamp: %.6f to %.6f, ServerTimeStamp: %.6f for %s"),
-			//	OldClientTimeStamp, ClientData->SmoothingClientTimeStamp, ClientData->SmoothingServerTimeStamp, *GetNameSafe(CharacterOwner));
+			UE_LOG(LogVRBaseCharacterMovement, VeryVerbose, TEXT("SmoothCorrection: Pull back client from ClientTimeStamp: %.6f to %.6f, ServerTimeStamp: %.6f for %s"),
+				OldClientTimeStamp, ClientData->SmoothingClientTimeStamp, ClientData->SmoothingServerTimeStamp, *GetNameSafe(CharacterOwner));
 		}
 
 		// Using server timestamp lets us know how much time actually elapsed, regardless of packet lag variance.
 		double OldServerTimeStamp = ClientData->SmoothingServerTimeStamp;
-		ClientData->SmoothingServerTimeStamp = (bIsSimulatedProxy ? CharacterOwner->GetReplicatedServerLastTransformUpdateTimeStamp() : ServerLastTransformUpdateTimeStamp);
+			
+		if (bIsSimulatedProxy)
+		{
+			// This value is normally only updated on the server, however some code paths might try to read it instead of the replicated value so copy it for proxies as well.
+			ServerLastTransformUpdateTimeStamp = CharacterOwner->GetReplicatedServerLastTransformUpdateTimeStamp();
+		}
+		ClientData->SmoothingServerTimeStamp = ServerLastTransformUpdateTimeStamp;
 
 		// Initial update has no delta.
 		if (ClientData->LastCorrectionTime == 0)
@@ -1541,8 +1790,8 @@ void UVRBaseCharacterMovementComponent::SmoothCorrection(const FVector& OldLocat
 		ClientData->LastCorrectionDelta = ClientData->SmoothingServerTimeStamp - ClientData->SmoothingClientTimeStamp;
 		ClientData->LastCorrectionTime = MyWorld->GetTimeSeconds();
 
-		//UE_LOG(LogCharacterNetSmoothing, VeryVerbose, TEXT("SmoothCorrection: WorldTime: %.6f, ServerTimeStamp: %.6f, ClientTimeStamp: %.6f, Delta: %.6f for %s"),
-		//MyWorld->GetTimeSeconds(), ClientData->SmoothingServerTimeStamp, ClientData->SmoothingClientTimeStamp, ClientData->LastCorrectionDelta, *GetNameSafe(CharacterOwner));
+		UE_LOG(LogVRBaseCharacterMovement, VeryVerbose, TEXT("SmoothCorrection: WorldTime: %.6f, ServerTimeStamp: %.6f, ClientTimeStamp: %.6f, Delta: %.6f for %s"),
+		MyWorld->GetTimeSeconds(), ClientData->SmoothingServerTimeStamp, ClientData->SmoothingClientTimeStamp, ClientData->LastCorrectionDelta, *GetNameSafe(CharacterOwner));
 		/*
 		Visualize network smoothing was here, removed it
 		*/
@@ -1579,9 +1828,7 @@ void UVRBaseCharacterMovementComponent::SmoothClientPosition_UpdateVRVisuals()
 	//SCOPE_CYCLE_COUNTER(STAT_CharacterMovementSmoothClientPosition_Visual);
 	FNetworkPredictionData_Client_Character* ClientData = GetPredictionData_Client_Character();
 
-	AVRBaseCharacter * Basechar = Cast<AVRBaseCharacter>(CharacterOwner);
-
-	if (!Basechar || !ClientData)
+	if (!BaseVRCharacterOwner || !ClientData)
 		return;
 
 	if (ClientData)
@@ -1590,7 +1837,7 @@ void UVRBaseCharacterMovementComponent::SmoothClientPosition_UpdateVRVisuals()
 		{
 			// Erased most of the code here, check back in later
 			const FVector NewRelLocation = ClientData->MeshRotationOffset.UnrotateVector(ClientData->MeshTranslationOffset) + CharacterOwner->GetBaseTranslationOffset();
-			Basechar->NetSmoother->SetRelativeLocation(NewRelLocation);
+			BaseVRCharacterOwner->NetSmoother->SetRelativeLocation(NewRelLocation);
 		}
 		else if (NetworkSmoothingMode == ENetworkSmoothingMode::Exponential)
 		{
@@ -1599,7 +1846,7 @@ void UVRBaseCharacterMovementComponent::SmoothClientPosition_UpdateVRVisuals()
 			const FQuat NewRelRotation = ClientData->MeshRotationOffset * CharacterOwner->GetBaseRotationOffset();
 			//Basechar->NetSmoother->SetRelativeLocation(NewRelTranslation);
 
-			Basechar->NetSmoother->SetRelativeLocationAndRotation(NewRelTranslation, NewRelRotation);
+			BaseVRCharacterOwner->NetSmoother->SetRelativeLocationAndRotation(NewRelTranslation, NewRelRotation);
 		}
 		else if (NetworkSmoothingMode == ENetworkSmoothingMode::Replay)
 		{

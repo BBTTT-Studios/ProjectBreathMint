@@ -49,6 +49,7 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = "VRDialComponent|Lerping")
 		bool bIsLerping;
+
 	UPROPERTY(BlueprintAssignable, Category = "VRDialComponent|Lerping")
 		FVRDialFinishedLerpingSignature OnDialFinishedLerping;
 
@@ -58,21 +59,33 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "VRDialComponent")
 	float CurrentDialAngle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (ClampMin = "0.0", ClampMax = "360.0", UIMin = "0.0", UIMax = "360.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent")//, meta = (ClampMin = "0.0", ClampMax = "360.0", UIMin = "0.0", UIMax = "360.0"))
 	float ClockwiseMaximumDialAngle;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (ClampMin = "0.0", ClampMax = "360.0", UIMin = "0.0", UIMax = "360.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent")//, meta = (ClampMin = "0.0", ClampMax = "360.0", UIMin = "0.0", UIMax = "360.0"))
 	float CClockwiseMaximumDialAngle;
+
+	// If true then the dial can "roll over" past 360/0 degrees in a direction
+	// Allowing unlimited dial angle values
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent")
+		bool bUseRollover;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent")
 	bool bDialUsesAngleSnap;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent")
+	bool bDialUseSnapAngleList;
+
+	// Optional list of snap angles for the dial
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (editcondition = "bDialUseSnapAngleList"))
+		TArray<float> DialSnapAngleList;
+
 	// Angle that the dial snaps to on release and when within the threshold distance
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (ClampMin = "0.0", ClampMax = "180.0", UIMin = "0.0", UIMax = "180.0"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (editcondition = "!bDialUseSnapAngleList", ClampMin = "0.0", ClampMax = "180.0", UIMin = "0.0", UIMax = "180.0"))
 	float SnapAngleIncrement;
 
-	// Threshold distance that when within the dial will stay snapped to its snap increment
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (ClampMin = "0.0", ClampMax = "180.0", UIMin = "0.0", UIMax = "180.0"))
+	// Threshold distance that when within the dial will stay snapped to its closest snap increment
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (editcondition = "!bDialUseSnapAngleList", ClampMin = "0.0", ClampMax = "180.0", UIMin = "0.0", UIMax = "180.0"))
 	float SnapAngleThreshold;
 
 	// Scales rotational input to speed up or slow down the rotation
@@ -88,12 +101,18 @@ public:
 		bool bDialUseDirectHandRotation;
 
 	float LastGripRot;
+	float InitialGripRot;
+	float InitialRotBackEnd;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent", meta = (editcondition = "bDialUseDirectHandRotation"))
 	EVRInteractibleAxis InteractorRotationAxis;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRDialComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GripSettings")
 		int GripPriority;
+
+	// Sets the grip priority
+	UFUNCTION(BlueprintCallable, Category = "GripSettings")
+		void SetGripPriority(int NewGripPriority);
 
 	// Resetting the initial transform here so that it comes in prior to BeginPlay and save loading.
 	virtual void OnRegister() override;
@@ -231,7 +250,7 @@ public:
 
 	// Get grip slot in range
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")
-		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
+		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName,  UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
 
 	// Check if an object allows multiple grips at one time
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")

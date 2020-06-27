@@ -1073,6 +1073,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = "SecondaryGripInfo")
 		bool bIsSlotGrip;
 
+	UPROPERTY(BlueprintReadWrite, Category = "SecondaryGripInfo")
+		FName SecondarySlotName;
+
 	// Lerp transitions
 	// Max value is 16 seconds with two decimal precision, this is to reduce replication overhead
 	UPROPERTY()
@@ -1101,6 +1104,7 @@ public:
 		SecondaryAttachment(nullptr),
 		SecondaryRelativeTransform(FTransform::Identity),
 		bIsSlotGrip(false),
+		SecondarySlotName(NAME_None),
 		LerpToRate(0.0f),
 		SecondaryGripDistance(0.0f),
 		GripLerpState(EGripLerpState::NotLerping),
@@ -1119,6 +1123,7 @@ public:
 		{
 			this->SecondaryRelativeTransform = Other.SecondaryRelativeTransform;
 			this->bIsSlotGrip = Other.bIsSlotGrip;
+			this->SecondarySlotName = Other.SecondarySlotName;
 		}
 
 		this->LerpToRate = Other.LerpToRate;
@@ -1141,6 +1146,8 @@ public:
 
 			//Ar << bIsSlotGrip;
 			Ar.SerializeBits(&bIsSlotGrip, 1);
+
+			Ar << SecondarySlotName;
 		}
 
 		// This is 0.0 - 16.0, using compression to get it smaller, 4 bits = max 16 + 1 bit for sign and 7 bits precision for 128 / full 2 digit precision
@@ -1190,12 +1197,18 @@ public:
 		bool bIsSlotGrip;
 	UPROPERTY(BlueprintReadWrite, Category = "Settings")
 		FName GrippedBoneName;
+	UPROPERTY(BlueprintReadWrite, Category = "Settings")
+		FName SlotName;
 	UPROPERTY(BlueprintReadOnly, Category = "Settings")
 		EGripMovementReplicationSettings GripMovementReplicationSetting;
 
 	// Whether the grip is currently paused
 	UPROPERTY(BlueprintReadWrite, NotReplicated, Category = "Settings")
 		bool bIsPaused;
+
+	// When true, will lock a hybrid grip into its collision state
+	UPROPERTY(BlueprintReadWrite, NotReplicated, Category = "Settings")
+		bool bLockHybridGrip;
 
 	// I would have loved to have both of these not be replicated (and in normal grips they wouldn't have to be)
 	// However for serialization purposes and Client_Authority grips they need to be....
@@ -1242,6 +1255,11 @@ public:
 	// Need to skip one frame of length check post teleport with constrained objects, the constraint may have not been updated yet.
 	bool bSkipNextConstraintLengthCheck;
 
+	bool IsLocalAuthGrip()
+	{
+		return GripMovementReplicationSetting == EGripMovementReplicationSettings::ClientSide_Authoritive || GripMovementReplicationSetting == EGripMovementReplicationSettings::ClientSide_Authoritive_NoRep;
+	}
+
 	// Cached values - since not using a full serialize now the old array state may not contain what i need to diff
 	// I set these in On_Rep now and check against them when new replications happen to control some actions.
 	struct FGripValueCache
@@ -1284,9 +1302,10 @@ public:
 		this->RelativeTransform = Other.RelativeTransform;
 		this->bIsSlotGrip = Other.bIsSlotGrip;
 		this->GrippedBoneName = Other.GrippedBoneName;
+		this->SlotName = Other.SlotName;
 		this->GripMovementReplicationSetting = Other.GripMovementReplicationSetting;
-		this->bOriginalReplicatesMovement = Other.bOriginalReplicatesMovement;
-		this->bOriginalGravity = Other.bOriginalGravity;
+		//this->bOriginalReplicatesMovement = Other.bOriginalReplicatesMovement;
+		//this->bOriginalGravity = Other.bOriginalGravity;
 		this->Damping = Other.Damping;
 		this->Stiffness = Other.Stiffness;
 		this->AdvancedGripSettings = Other.AdvancedGripSettings;		
@@ -1361,6 +1380,7 @@ public:
 		RelativeTransform(FTransform::Identity),
 		bIsSlotGrip(false),
 		GrippedBoneName(NAME_None),
+		SlotName(NAME_None),
 		GripMovementReplicationSetting(EGripMovementReplicationSettings::ForceClientSideMovement),
 		bIsPaused(false),
 		bOriginalReplicatesMovement(false),

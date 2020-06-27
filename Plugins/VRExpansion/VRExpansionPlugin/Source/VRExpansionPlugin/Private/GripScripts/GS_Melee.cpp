@@ -26,11 +26,12 @@ UGS_Melee::UGS_Melee(const FObjectInitializer& ObjectInitializer) :
 	PrimaryHandSelectionType = EVRMeleePrimaryHandType::VRPHAND_Rear;
 	bHasValidPrimaryHand = false;
 
-	RollingVelocityAverage = FVector::ZeroVector;
-	NumberOfFramesToAverageVelocity = 1;
+	//RollingVelocityAverage = FVector::ZeroVector;
 	bIsLodged = false;
 
-	bCanEverTick = true;
+	//bCanEverTick = true;
+	bCheckLodge = false;
+	bCanEverTick = false;
 	bAlwaysTickPenetration = true;
 	COMType = EVRMeleeComType::VRPMELEECOM_BetweenHands;
 	bSkipGripMassChecks = true;
@@ -165,6 +166,104 @@ void UGS_Melee::UpdateDualHandInfo()
 	}
 }
 
+void UGS_Melee::UpdateHandPositionAndRotation(FBPGripPair HandPair, FTransform HandWorldTransform, FVector& LocDifference, float& RotDifference, bool bUpdateLocation, bool bUpdateRotation)
+{
+	LocDifference = FVector::ZeroVector;
+
+	if (HandPair.IsValid())
+	{
+		FBPActorGripInformation* GripInfo = HandPair.HoldingController->GetGripPtrByID(HandPair.GripID);
+
+		if (GripInfo)
+		{
+			// Make hand relative to object transform
+			FTransform RelativeTrans = GripInfo->RelativeTransform.Inverse();
+			FVector OriginalLoc = RelativeTrans.GetLocation();
+			FQuat OriginalRot = RelativeTrans.GetRotation();
+
+			// Get our current parent transform
+			FTransform ParentTransform = GetParentTransform();
+
+			FQuat orientationRot = OrientationComponentRelativeFacing.GetRotation();
+
+			if (bUpdateLocation)
+			{
+				FVector currentRelVec = orientationRot.RotateVector(ParentTransform.InverseTransformPosition(HandWorldTransform.GetLocation()));
+				FVector currentLoc = orientationRot.RotateVector(RelativeTrans.GetLocation());
+				currentLoc.X = currentRelVec.X;
+				RelativeTrans.SetLocation(orientationRot.UnrotateVector(currentLoc));
+			}
+
+			if (bUpdateRotation)
+			{
+				FRotator currentRelRot = (orientationRot * (ParentTransform.GetRotation().Inverse() * HandWorldTransform.GetRotation())).Rotator();
+				FRotator currentRot = (orientationRot * RelativeTrans.GetRotation()).Rotator();
+				currentRot.Roll = currentRelRot.Roll;
+				RelativeTrans.SetRotation(orientationRot.Inverse() * currentRot.Quaternion());
+			}
+
+			GripInfo->RelativeTransform = RelativeTrans.Inverse();
+			HandPair.HoldingController->UpdatePhysicsHandle(*GripInfo, true);
+
+			LocDifference = RelativeTrans.GetLocation() - OriginalLoc;
+			RotDifference = RelativeTrans.GetRotation().Rotator().Roll - OriginalRot.Rotator().Roll;
+
+			// Instead of recreating, can directly set local pose here
+
+
+			FBPGripPair SecHand = SecondaryHand;
+			UpdateDualHandInfo();
+
+			if (SecondaryHand.IsValid() && !(SecHand == SecondaryHand))
+			{
+
+				GripInfo = SecondaryHand.HoldingController->GetGripPtrByID(SecondaryHand.GripID);
+				GripInfo->AdvancedGripSettings.PhysicsSettings.PhysicsGripLocationSettings = EPhysicsGripCOMType::COM_GripAtControllerLoc;
+
+				FBPActorPhysicsHandleInformation* HandleInfo = SecondaryHand.HoldingController->GetPhysicsGrip(SecondaryHand.GripID);
+				if (HandleInfo)
+				{
+					SecondaryHandPhysicsSettings.FillTo(HandleInfo);
+					SecondaryHand.HoldingController->UpdatePhysicsHandle(SecondaryHand.GripID, true);
+				}
+
+				GripInfo = PrimaryHand.HoldingController->GetGripPtrByID(PrimaryHand.GripID);
+
+				switch (COMType)
+				{
+				case EVRMeleeComType::VRPMELEECOM_Normal:
+				case EVRMeleeComType::VRPMELEECOM_BetweenHands:
+				{
+					GripInfo->AdvancedGripSettings.PhysicsSettings.PhysicsGripLocationSettings = EPhysicsGripCOMType::COM_GripAtControllerLoc;
+				}break;
+
+				case EVRMeleeComType::VRPMELEECOM_PrimaryHand:
+				{
+					GripInfo->AdvancedGripSettings.PhysicsSettings.PhysicsGripLocationSettings = EPhysicsGripCOMType::COM_SetAndGripAt;
+				}
+				}
+
+				HandleInfo = PrimaryHand.HoldingController->GetPhysicsGrip(PrimaryHand.GripID);
+				if (HandleInfo)
+				{
+					if (bHasValidPrimaryHand)
+					{
+						PrimaryHandPhysicsSettings.FillTo(HandleInfo);
+					}
+					else
+					{
+						SecondaryHandPhysicsSettings.FillTo(HandleInfo);
+					}
+					PrimaryHand.HoldingController->UpdatePhysicsHandle(PrimaryHand.GripID, true);
+				}
+			}
+
+			if (COMType != EVRMeleeComType::VRPMELEECOM_Normal)
+				SetComBetweenHands(HandPair.HoldingController, HandPair.HoldingController->GetPhysicsGrip(HandPair.GripID));
+		}
+	}
+}
+
 void UGS_Melee::UpdateHandPosition(FBPGripPair HandPair, FVector HandWorldPosition, FVector& LocDifference)
 {
 	LocDifference = FVector::ZeroVector;
@@ -274,7 +373,8 @@ void UGS_Melee::OnGrip_Implementation(UGripMotionControllerComponent* GrippingCo
 //	GetOwner()->OnActorHit.AddDynamic(this, &UGS_Melee::OnActorHit);
 
 	// This lets us change the grip settings prior to actually starting the grip off
-	SetTickEnabled(true);
+	//SetTickEnabled(true);
+	bCheckLodge = true;
 
 	//if (GrippingController->HasGripAuthority(GripInformation))
 	{
@@ -332,8 +432,11 @@ void UGS_Melee::OnGripRelease_Implementation(UGripMotionControllerComponent* Rel
 	if (!bIsActive)
 		return;
 
-	if(!bAlwaysTickPenetration)
-		SetTickEnabled(false);
+	//if(!bAlwaysTickPenetration)
+		//SetTickEnabled(false);
+
+	if (!bAlwaysTickPenetration)
+		bCheckLodge = false;
 
 	if (SecondaryHand.IsValid() && SecondaryHand.HoldingController == ReleasingController && SecondaryHand.GripID == GripInformation.GripID)
 	{
@@ -447,6 +550,7 @@ void UGS_Melee::OnBeginPlay_Implementation(UObject * CallingOwner)
 		if (RemainingCount < PenetrationNotifierComponents.Num())
 		{
 			Owner->OnActorHit.AddDynamic(this, &UGS_Melee::OnLodgeHitCallback);
+			bCheckLodge = bAlwaysTickPenetration;
 		}
 	}
 }
@@ -461,7 +565,7 @@ void UGS_Melee::OnEndPlay_Implementation(const EEndPlayReason::Type EndPlayReaso
 
 void UGS_Melee::OnLodgeHitCallback(AActor* SelfActor, AActor* OtherActor, FVector NormalImpulse, const FHitResult& Hit)
 {
-	if (!bIsActive || bIsLodged || OtherActor == SelfActor)
+	if (!bCheckLodge || !bIsActive || bIsLodged || OtherActor == SelfActor)
 		return;
 
 	// Reject bad surface types
@@ -471,20 +575,21 @@ void UGS_Melee::OnLodgeHitCallback(AActor* SelfActor, AActor* OtherActor, FVecto
 	if (bOnlyPenetrateWithTwoHands && !SecondaryHand.IsValid())
 		return;
 
-	if (UPrimitiveComponent * root = Cast<UPrimitiveComponent>(SelfActor->GetRootComponent()))
+	/*if (UPrimitiveComponent * root = Cast<UPrimitiveComponent>(SelfActor->GetRootComponent()))
 	{	
 		if (FBodyInstance * rBodyInstance = root->GetBodyInstance())
-		{
-			RollingVelocityAverage += FVector::CrossProduct(RollingAngVelocityAverage, Hit.ImpactPoint - rBodyInstance->GetCOMPosition());
+		{			
+			//float mass =rBodyInstance->GetBodyMass();
+			//ImpulseVelocity = (NormalImpulse / rBodyInstance->GetBodyMass()).SizeSquared();
+			RollingVelocityAverage += FVector::CrossProduct(RollingAngVelocityAverage, Hit.ImpactPoint - (rBodyInstance->GetCOMPosition()));
 		}
-	}
+	}*/
 
-	FVector FrameToFrameVelocity = RollingVelocityAverage;
+//	FVector FrameToFrameVelocity = RollingVelocityAverage;
 
 	// If we hit, then regardless of penetration, end the velocity history and reset
-	RollingVelocityAverage = FVector::ZeroVector;
-	RollingAngVelocityAverage = FVector::ZeroVector;
-
+//	RollingVelocityAverage = FVector::ZeroVector;
+//	RollingAngVelocityAverage = FVector::ZeroVector;
 
 	for(FBPLodgeComponentInfo &LodgeData : PenetrationNotifierComponents)
 	{
@@ -495,15 +600,15 @@ void UGS_Melee::OnLodgeHitCallback(AActor* SelfActor, AActor* OtherActor, FVecto
 		if (LodgeData.TargetComponent.IsValid() && LodgeBox.IsInsideOrOn(Hit.ImpactPoint))
 		{
 			FVector ForwardVec = LodgeData.TargetComponent->GetForwardVector();
-
+			
 			// Using swept objects hit normal as we are looking for a facing from ourselves
 			float DotValue = FMath::Abs(FVector::DotProduct(Hit.Normal, ForwardVec));
-			FVector Velocity = FrameToFrameVelocity.ProjectOnToNormal(ForwardVec);
-
+			FVector Velocity = NormalImpulse.ProjectOnToNormal(ForwardVec);//FrameToFrameVelocity.ProjectOnToNormal(ForwardVec);
 			// Check if the velocity was strong enough along our axis to count as a lodge event
 			// Also that our facing was in the relatively correct direction
+
 			if(DotValue >= (1.0f - LodgeData.AcceptableForwardProductRange) && Velocity.SizeSquared() >= FMath::Square(LodgeData.PenetrationVelocity))
-			{
+			{			
 				OnShouldLodgeInObject.Broadcast(LodgeData, OtherActor, Hit.GetComponent(), Hit.GetComponent()->GetCollisionObjectType(), NormalImpulse, Hit);
 				break;
 			}
@@ -594,7 +699,7 @@ void UGS_Melee::SetComBetweenHands(UGripMotionControllerComponent* GrippingContr
 	}
 }
 
-void UGS_Melee::Tick(float DeltaTime)
+/*void UGS_Melee::Tick(float DeltaTime)
 {
 	AActor* myOwner = GetOwner();
 
@@ -603,11 +708,11 @@ void UGS_Melee::Tick(float DeltaTime)
 		FBodyInstance* rBodyInstance = root->GetBodyInstance();
 		if (rBodyInstance && rBodyInstance->IsValidBodyInstance())
 		{
-			UVRExpansionFunctionLibrary::LowPassFilter_RollingAverage(RollingVelocityAverage, rBodyInstance->GetUnrealWorldVelocity(), RollingVelocityAverage, NumberOfFramesToAverageVelocity);
-			UVRExpansionFunctionLibrary::LowPassFilter_RollingAverage(RollingAngVelocityAverage, rBodyInstance->GetUnrealWorldAngularVelocityInRadians(), RollingAngVelocityAverage, NumberOfFramesToAverageVelocity);
+			RollingVelocityAverage = rBodyInstance->GetUnrealWorldVelocity();
+			RollingAngVelocityAverage = rBodyInstance->GetUnrealWorldAngularVelocityInRadians();
 		}
 	}
-}
+}*/
 
 bool UGS_Melee::Wants_DenyTeleport_Implementation(UGripMotionControllerComponent* Controller)
 {

@@ -88,11 +88,9 @@ void UVRSliderComponent::PreReplication(IRepChangedPropertyTracker & ChangedProp
 	// Don't replicate if set to not do it
 	DOREPLIFETIME_ACTIVE_OVERRIDE(UVRSliderComponent, GameplayTags, bRepGameplayTags);
 
-	PRAGMA_DISABLE_DEPRECATION_WARNINGS
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeLocation, bReplicateMovement);
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeRotation, bReplicateMovement);
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeScale3D, bReplicateMovement);
-	PRAGMA_ENABLE_DEPRECATION_WARNINGS
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeLocation, bReplicateMovement);
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeRotation, bReplicateMovement);
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeScale3D, bReplicateMovement);
 }
 
 void UVRSliderComponent::OnRegister()
@@ -390,6 +388,11 @@ void UVRSliderComponent::OnGripRelease_Implementation(UGripMotionControllerCompo
 	OnDropped.Broadcast(ReleasingController, GripInformation, bWasSocketed);
 }
 
+void UVRSliderComponent::SetGripPriority(int NewGripPriority)
+{
+	GripPriority = NewGripPriority;
+}
+
 void UVRSliderComponent::OnChildGrip_Implementation(UGripMotionControllerComponent * GrippingController, const FBPActorGripInformation & GripInformation) {}
 void UVRSliderComponent::OnChildGripRelease_Implementation(UGripMotionControllerComponent * ReleasingController, const FBPActorGripInformation & GripInformation, bool bWasSocketed) {}
 void UVRSliderComponent::OnSecondaryGrip_Implementation(UGripMotionControllerComponent * GripOwningController, USceneComponent * SecondaryGripComponent, const FBPActorGripInformation & GripInformation) {}
@@ -482,7 +485,7 @@ void UVRSliderComponent::ClosestPrimarySlotInRange_Implementation(FVector WorldL
 	bHadSlotInRange = false;
 }*/
 
-void UVRSliderComponent::ClosestGripSlotInRange_Implementation(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController, FName OverridePrefix)
+void UVRSliderComponent::ClosestGripSlotInRange_Implementation(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName, UGripMotionControllerComponent * CallingController, FName OverridePrefix)
 {
 	bHadSlotInRange = false;
 }
@@ -737,10 +740,7 @@ float UVRSliderComponent::CalculateSliderProgress()
 		FTransform CurrentRelativeTransform = InitialRelativeTransform * ParentTransform;
 		FVector CalculatedLocation = CurrentRelativeTransform.InverseTransformPosition(this->GetComponentLocation());
 
-		//if (bSlideDistanceIsInParentSpace)
-			//CalculatedLocation *= FVector(1.0f) / InitialRelativeTransform.GetScale3D();
-
-		CurrentSliderProgress = GetCurrentSliderProgress(CalculatedLocation);
+		CurrentSliderProgress = GetCurrentSliderProgress(bSlideDistanceIsInParentSpace ? CalculatedLocation * InitialRelativeTransform.GetScale3D() : CalculatedLocation);
 	}
 
 	return CurrentSliderProgress;

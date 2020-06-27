@@ -58,7 +58,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "LodgeComponentInfo")
 		bool bAllowPenetrationInReverseAsWell;
 
-	// This is the velocity (along forward axis of component) required to throw an OnPenetrated event from a PenetrationNotifierComponent
+	// This is the impulse velocity (along forward axis of component) required to throw an OnPenetrated event from a PenetrationNotifierComponent
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Settings")
 		float PenetrationVelocity;
 
@@ -72,7 +72,7 @@ public:
 		ComponentName = NAME_None;
 		PenetrationDepth = 100.f;
 		bAllowPenetrationInReverseAsWell = false;
-		PenetrationVelocity = 200.f;
+		PenetrationVelocity = 8000.f;
 		AcceptableForwardProductRange = 0.1f;
 	}
 
@@ -115,7 +115,7 @@ public:
 	bool bIsLodged;
 	TWeakObjectPtr<UPrimitiveComponent> LodgedComponent;
 
-	virtual void Tick(float DeltaTime) override;
+	//virtual void Tick(float DeltaTime) override;
 
 	// Thrown if we should lodge into a hit object
 	UPROPERTY(BlueprintAssignable, Category = "Melee|Lodging")
@@ -135,9 +135,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Melee|Lodging")
 		TArray<TEnumAsByte<EPhysicalSurface>> AllowedPenetrationSurfaceTypes;
 
-	FVector RollingVelocityAverage;
-	FVector RollingAngVelocityAverage;
-	float NumberOfFramesToAverageVelocity;
+//	FVector RollingVelocityAverage;
+	//FVector RollingAngVelocityAverage;
 
 	// The name of the component that is used to orient the weapon along its primary axis
 	// If it does not exist then the weapon is assumed to be X+ facing.
@@ -153,13 +152,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Weapon Settings")
 		void UpdateHandPosition(FBPGripPair HandPair, FVector HandWorldPosition, FVector & LocDifference);
 
+	// UpdateHand location and rotation on the shaft in the X axis
+	// If primary hand is false then it will do the secondary hand
+	// World location is of the pivot generally, I have it passing in so people can snap
+	// LocDifference returns the relative distance of the change in position (or zero if there was none).
+	UFUNCTION(BlueprintCallable, Category = "Weapon Settings")
+	void UpdateHandPositionAndRotation(FBPGripPair HandPair, FTransform HandWorldTransform, FVector& LocDifference, float& RotDifference, bool bUpdateLocation = true, bool bUpdateRotation = true);
+
+
 	// This is a built list of components that act as penetration notifiers, they will have their OnHit bound too and we will handle penetration logic
 	// off of it.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Settings")
 		TArray<FBPLodgeComponentInfo> PenetrationNotifierComponents;
 
+	bool bCheckLodge;
+
 	FVector LastRelativePos;
-	bool bTickedAlready;
 	FVector RelativeBetweenGripsCenterPos;
 
 	// If true then we won't bind to the objects mass updates, we don't expect thing to attach to us

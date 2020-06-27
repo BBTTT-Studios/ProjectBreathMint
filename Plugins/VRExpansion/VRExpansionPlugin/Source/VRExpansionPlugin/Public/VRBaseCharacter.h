@@ -13,12 +13,15 @@
 #include "Components/CapsuleComponent.h"
 #include "VRBaseCharacter.generated.h"
 
+class AVRPlayerController;
+
 DECLARE_LOG_CATEGORY_EXTERN(LogBaseVRCharacter, Log, All);
 
 /** Delegate for notification when the lever state changes. */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FVRSeatThresholdChangedSignature, bool, bIsWithinThreshold, float, ToThresholdScaler);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FVRPlayerStateReplicatedSignature, const APlayerState *, NewPlayerState);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVRPlayerTeleportedSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FVRPlayerNetworkCorrectedSignature);
 
 USTRUCT()
 struct VREXPANSIONPLUGIN_API FRepMovementVRCharacter : public FRepMovement
@@ -235,6 +238,15 @@ class VREXPANSIONPLUGIN_API AVRBaseCharacter : public ACharacter
 public:
 	AVRBaseCharacter(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
+	/** BaseVR Character movement component belongs to */
+	UPROPERTY(Transient, DuplicateTransient)
+		AVRPlayerController* OwningVRPlayerController;
+
+	virtual void CacheInitialMeshOffset(FVector MeshRelativeLocation, FRotator MeshRelativeRotation) override;
+	virtual void PostInitializeComponents() override;
+
+	virtual void PossessedBy(AController* NewController);
+	virtual void OnRep_Controller() override;
 	virtual void OnRep_PlayerState() override;
 
 	/** Used for replication of our RootComponent's position and velocity */
@@ -248,11 +260,15 @@ public:
 	virtual void GatherCurrentMovement() override;
 
 	// Give my users direct access to an event for when the player has teleported
-	UPROPERTY(BlueprintAssignable, Category = "BaseVRCharacter")
+	UPROPERTY(BlueprintAssignable, Category = "VRMovement")
 		FVRPlayerTeleportedSignature OnCharacterTeleported_Bind;
 
+	// Give my users direct access to an event for when the player has been network corrected
+	UPROPERTY(BlueprintAssignable, Category = "VRMovement")
+		FVRPlayerNetworkCorrectedSignature OnCharacterNetworkCorrected_Bind;
+
 	// Give my users direct access to an event for when the player state has changed
-	UPROPERTY(BlueprintAssignable, Category = "BaseVRCharacter")
+	UPROPERTY(BlueprintAssignable, Category = "VRMovement")
 		FVRPlayerStateReplicatedSignature OnPlayerStateReplicated_Bind;
 
 	//These functions are now housed in the base character and used when possible, it saves about 7 bits of packet header overhead per send.
@@ -294,9 +310,9 @@ public:
 
 	// Override this in c++ or blueprints to pass in an IK mesh to be used in some optimizations
 	// May be extended in the future
-	UFUNCTION(BlueprintNativeEvent, Category = "BaseVRCharacter")
-	USkeletalMeshComponent * GetIKMesh() const;
-	virtual USkeletalMeshComponent *  GetIKMesh_Implementation() const;
+	//UFUNCTION(BlueprintNativeEvent, Category = "BaseVRCharacter")
+	//USkeletalMeshComponent * GetIKMesh() const;
+	//virtual USkeletalMeshComponent *  GetIKMesh_Implementation() const;1
 	// #TODO: Work with the above, can do multiple things with it
 
 
@@ -387,22 +403,22 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRBaseCharacter")
 		bool bUseExperimentalUnseatModeFix;
 
-	UPROPERTY(BlueprintReadOnly, Replicated, EditAnywhere, Category = "BaseVRCharacter|Seating", ReplicatedUsing = OnRep_SeatedCharInfo)
+	UPROPERTY(BlueprintReadOnly, Replicated, EditAnywhere, Category = "Seating", ReplicatedUsing = OnRep_SeatedCharInfo)
 	FVRSeatedCharacterInfo SeatInformation;
 
 	// Called when the seated mode is changed
-	UFUNCTION(BlueprintNativeEvent, Category = "BaseVRCharacter")
+	UFUNCTION(BlueprintNativeEvent, Category = "Seating")
 		void OnSeatedModeChanged(bool bNewSeatedMode, bool bWasAlreadySeated);
 	virtual void OnSeatedModeChanged_Implementation(bool bNewSeatedMode, bool bWasAlreadySeated) {}
 
 	// Called when the the player either transitions to/from the threshold boundry or the scaler value of being outside the boundry changes
 	// Can be used for warnings or screen darkening, ect
-	UFUNCTION(BlueprintNativeEvent, Category = "BaseVRCharacter")
+	UFUNCTION(BlueprintNativeEvent, Category = "Seating")
 		void OnSeatThreshholdChanged(bool bIsWithinThreshold, float ToThresholdScaler);
 	virtual void OnSeatThreshholdChanged_Implementation(bool bIsWithinThreshold, float ToThresholdScaler) {}
 	
 	// Call to use an object
-	UPROPERTY(BlueprintAssignable, Category = "BaseVRCharacter")
+	UPROPERTY(BlueprintAssignable, Category = "Seating")
 		FVRSeatThresholdChangedSignature OnSeatThreshholdChanged_Bind;
 	
 	void ZeroToSeatInformation()
@@ -514,7 +530,7 @@ public:
 	// When called server side will automatically apply to remote clients as well.
 	// Owning clients get it on server correction automatically already.
 	UFUNCTION(BlueprintCallable, Category = "VRGrip")
-		virtual void NotifyOfTeleport();
+		virtual void NotifyOfTeleport(bool bRegisterAsTeleport = true);
 
 
 	// Event triggered when a move action is performed, this is ran just prior to PerformMovement in the character tick

@@ -12,6 +12,10 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "VRBaseCharacterMovementComponent.generated.h"
 
+class AVRBaseCharacter;
+
+DECLARE_LOG_CATEGORY_EXTERN(LogVRBaseCharacterMovement, Log, All);
+
 /** Delegate for notification when to handle a climbing step up, will override default step up logic if is bound to. */
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FVROnPerformClimbingStepUp, FVector, FinalStepUpLocation);
 
@@ -53,6 +57,22 @@ enum class EVRMoveAction : uint8
 	VRMOVEACTION_CUSTOM10 = 0x0E,
 };
 
+// What to do with the players velocity when specific move actions are called
+// Default of none leaves it as is, for people with 0 ramp up time on acelleration
+// This likely won't be that useful.
+UENUM(Blueprintable)
+enum class EVRMoveActionVelocityRetention : uint8
+{
+	// Leaves velocity as is
+	VRMOVEACTION_Velocity_None = 0x00,
+
+	// Clears velocity entirely
+	VRMOVEACTION_Velocity_Clear = 0x01,
+
+	// Rotates the velocity to match new heading
+	VRMOVEACTION_Velocity_Turn = 0x02
+};
+
 UENUM(Blueprintable)
 enum class EVRMoveActionDataReq : uint8
 {
@@ -77,6 +97,8 @@ public:
 	FVector MoveActionLoc;
 	UPROPERTY()
 	FRotator MoveActionRot;
+	UPROPERTY()
+	EVRMoveActionVelocityRetention VelRetentionSetting;
 
 	FVRMoveActionContainer()
 	{
@@ -89,6 +111,7 @@ public:
 		MoveActionDataReq = EVRMoveActionDataReq::VRMOVEACTIONDATA_None;
 		MoveActionLoc = FVector::ZeroVector;
 		MoveActionRot = FRotator::ZeroRotator;
+		VelRetentionSetting = EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None;
 	}
 
 	/** Network serialization */
@@ -105,42 +128,82 @@ public:
 		case EVRMoveAction::VRMOVEACTION_SetRotation:
 		case EVRMoveAction::VRMOVEACTION_SnapTurn:
 		{
-			uint16 Yaw;
+			uint16 Yaw = 0;
+			uint16 Pitch = 0;
 			
 			if (Ar.IsSaving())
 			{
 				Yaw = FRotator::CompressAxisToShort(MoveActionRot.Yaw);
-
 				Ar << Yaw;
+
+				bool bTeleportGrips = MoveActionRot.Roll > 0.0f;
+				Ar.SerializeBits(&bTeleportGrips, 1);
+
+				Ar.SerializeBits(&VelRetentionSetting, 2);
+
+				if (VelRetentionSetting == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+				{
+					Pitch = FRotator::CompressAxisToShort(MoveActionRot.Pitch);
+					Ar << Pitch;
+				}
 			}
 			else
 			{
 				Ar << Yaw;
 				MoveActionRot.Yaw = FRotator::DecompressAxisFromShort(Yaw);
+
+
+
+				bool bTeleportGrips = false;
+				Ar.SerializeBits(&bTeleportGrips, 1);
+				MoveActionRot.Roll = bTeleportGrips ? 1.0f : 0.0f;
+
+				Ar.SerializeBits(&VelRetentionSetting, 2);
+
+				if (VelRetentionSetting == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+				{
+					Ar << Pitch;
+					MoveActionRot.Pitch = FRotator::DecompressAxisFromShort(Pitch);
+				}
 			}
 
 			//bOutSuccess &= SerializePackedVector<100, 30>(MoveActionLoc, Ar);
 		}break;
 		case EVRMoveAction::VRMOVEACTION_Teleport: // Not replicating rot as Control rot does that already
 		{
-			uint16 Yaw;
+			uint16 Yaw = 0;
+			uint16 Pitch = 0;
 
 			if (Ar.IsSaving())
 			{
 				Yaw = FRotator::CompressAxisToShort(MoveActionRot.Yaw);
 				Ar << Yaw;
 
-				bool bSkipEncroachment = MoveActionRot.Pitch > 0.0f;
+				bool bSkipEncroachment = MoveActionRot.Roll > 0.0f;
 				Ar.SerializeBits(&bSkipEncroachment, 1);
+				Ar.SerializeBits(&VelRetentionSetting, 2);
+
+				if (VelRetentionSetting == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+				{
+					Pitch = FRotator::CompressAxisToShort(MoveActionRot.Pitch);
+					Ar << Pitch;
+				}
 			}
 			else
 			{
 				Ar << Yaw;
 				MoveActionRot.Yaw = FRotator::DecompressAxisFromShort(Yaw);
 
-				bool bSkipEncroachment;
+				bool bSkipEncroachment = false;
 				Ar.SerializeBits(&bSkipEncroachment, 1);
-				MoveActionRot.Pitch = bSkipEncroachment ? 1.0f : 0.0f;
+				MoveActionRot.Roll = bSkipEncroachment ? 1.0f : 0.0f;
+				Ar.SerializeBits(&VelRetentionSetting, 2);
+
+				if (VelRetentionSetting == EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_Turn)
+				{
+					Ar << Pitch;
+					MoveActionRot.Pitch = FRotator::DecompressAxisFromShort(Pitch);
+				}
 			}
 
 			bOutSuccess &= SerializePackedVector<100, 30>(MoveActionLoc, Ar);
@@ -572,6 +635,12 @@ public:
 
 	bool bNotifyTeleported;
 
+	/** BaseVR Character movement component belongs to */
+	UPROPERTY(Transient, DuplicateTransient)
+		AVRBaseCharacter* BaseVRCharacterOwner;
+
+	virtual void SetUpdatedComponent(USceneComponent* NewUpdatedComponent);
+
 	virtual void PerformMovement(float DeltaSeconds) override;
 	//virtual void ReplicateMoveToServer(float DeltaTime, const FVector& NewAcceleration) override;
 
@@ -623,16 +692,16 @@ public:
 
 	// Perform a snap turn in line with the move action system
 	UFUNCTION(BlueprintCallable, Category = "VRMovement")
-		void PerformMoveAction_SnapTurn(float SnapTurnDeltaYaw, bool bFlagGripTeleport = false);
+		void PerformMoveAction_SnapTurn(float SnapTurnDeltaYaw, EVRMoveActionVelocityRetention VelocityRetention = EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None, bool bFlagGripTeleport = false);
 
 	// Perform a rotation set in line with the move actions system
 	// This node specifically sets the FACING direction to a value, where your HMD is pointed
 	UFUNCTION(BlueprintCallable, Category = "VRMovement")
-		void PerformMoveAction_SetRotation(float NewYaw, bool bFlagGripTeleport = false);
+		void PerformMoveAction_SetRotation(float NewYaw, EVRMoveActionVelocityRetention VelocityRetention = EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None, bool bFlagGripTeleport = false);
 
 	// Perform a teleport in line with the move action system
 	UFUNCTION(BlueprintCallable, Category = "VRMovement")
-		void PerformMoveAction_Teleport(FVector TeleportLocation, FRotator TeleportRotation, bool bSkipEncroachmentCheck = false);
+		void PerformMoveAction_Teleport(FVector TeleportLocation, FRotator TeleportRotation, EVRMoveActionVelocityRetention VelocityRetention = EVRMoveActionVelocityRetention::VRMOVEACTION_Velocity_None, bool bSkipEncroachmentCheck = false);
 
 	// Perform StopAllMovementImmediately in line with the move action system
 	UFUNCTION(BlueprintCallable, Category = "VRMovement")
@@ -693,6 +762,8 @@ public:
 	void StartPushBackNotification(FHitResult HitResult);
 	void EndPushBackNotification();
 
+	bool bJustUnseated;
+
 	//virtual void SendClientAdjustment() override;
 
 	virtual bool VerifyClientTimeStamp(float TimeStamp, FNetworkPredictionData_Server_Character & ServerData) override;
@@ -701,14 +772,14 @@ public:
 	{
 		bHadExtremeInput = false;
 
-		if (AdditionalVRInputVector.IsNearlyZero())
+		if (AdditionalVRInputVector.IsNearlyZero() && CustomVRInputVector.IsNearlyZero())
 		{
 			LastPreAdditiveVRVelocity = FVector::ZeroVector;
 			return;
 		}
 
-		LastPreAdditiveVRVelocity = (AdditionalVRInputVector) / deltaTime; // Save off pre-additive Velocity for restoration next tick	
-		
+		LastPreAdditiveVRVelocity = (AdditionalVRInputVector / deltaTime); // Save off pre-additive Velocity for restoration next tick	
+
 		if (LastPreAdditiveVRVelocity.SizeSquared() > FMath::Square(TrackingLossThreshold))
 		{
 			bHadExtremeInput = true;
@@ -717,6 +788,9 @@ public:
 				LastPreAdditiveVRVelocity = FVector::ZeroVector;
 			}
 		}
+
+		// Post the HMD velocity checks, add in our direct movement now
+		LastPreAdditiveVRVelocity += (CustomVRInputVector / deltaTime);
 
 		Velocity += LastPreAdditiveVRVelocity;
 	}
@@ -756,6 +830,9 @@ public:
 
 	// Teleport grips on correction to fixup issues
 	virtual void OnClientCorrectionReceived(class FNetworkPredictionData_Client_Character& ClientData, float TimeStamp, FVector NewLocation, FVector NewVelocity, UPrimitiveComponent* NewBase, FName NewBaseBoneName, bool bHasBase, bool bBaseRelativePosition, uint8 ServerMovementMode) override;
+
+	// Fix network smoothing with our default mesh back in
+	virtual void SimulatedTick(float DeltaSeconds) override;
 
 	// Skip updates with rotational differences
 	virtual void SmoothCorrection(const FVector& OldLocation, const FQuat& OldRotation, const FVector& NewLocation, const FQuat& NewRotation) override;

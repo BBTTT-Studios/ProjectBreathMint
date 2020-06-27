@@ -36,11 +36,9 @@ void UOptionalRepStaticMeshComponent::PreReplication(IRepChangedPropertyTracker 
 	Super::PreReplication(ChangedPropertyTracker);
 
 	// Don't replicate if set to not do it
-	PRAGMA_DISABLE_DEPRECATION_WARNINGS
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeLocation, bReplicateMovement);
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeRotation, bReplicateMovement);
-	DOREPLIFETIME_ACTIVE_OVERRIDE(USceneComponent, RelativeScale3D, bReplicateMovement);
-	PRAGMA_ENABLE_DEPRECATION_WARNINGS
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeLocation, bReplicateMovement);
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeRotation, bReplicateMovement);
+	DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(USceneComponent, RelativeScale3D, bReplicateMovement);
 }
 
 void UOptionalRepStaticMeshComponent::GetLifetimeReplicatedProps(TArray< class FLifetimeProperty > & OutLifetimeProps) const
@@ -145,6 +143,11 @@ void AGrippableStaticMeshActor::SetDenyGripping(bool bDenyGripping)
 	VRGripInterfaceSettings.bDenyGripping = bDenyGripping;
 }
 
+void AGrippableStaticMeshActor::SetGripPriority(int NewGripPriority)
+{
+	VRGripInterfaceSettings.AdvancedGripSettings.GripPriority = NewGripPriority;
+}
+
 void AGrippableStaticMeshActor::TickGrip_Implementation(UGripMotionControllerComponent * GrippingController, const FBPActorGripInformation & GripInformation, float DeltaTime) {}
 void AGrippableStaticMeshActor::OnGrip_Implementation(UGripMotionControllerComponent* GrippingController, const FBPActorGripInformation& GripInformation) { OnGripped.Broadcast(GrippingController, GripInformation); }
 void AGrippableStaticMeshActor::OnGripRelease_Implementation(UGripMotionControllerComponent* ReleasingController, const FBPActorGripInformation& GripInformation, bool bWasSocketed) { OnDropped.Broadcast(ReleasingController, GripInformation, bWasSocketed); }
@@ -211,12 +214,12 @@ float AGrippableStaticMeshActor::GripBreakDistance_Implementation()
 	return VRGripInterfaceSettings.ConstraintBreakDistance;
 }
 
-void AGrippableStaticMeshActor::ClosestGripSlotInRange_Implementation(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController, FName OverridePrefix)
+void AGrippableStaticMeshActor::ClosestGripSlotInRange_Implementation(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName, UGripMotionControllerComponent * CallingController, FName OverridePrefix)
 {
 	if (OverridePrefix.IsNone())
 		bSecondarySlot ? OverridePrefix = "VRGripS" : OverridePrefix = "VRGripP";
 
-	UVRExpansionFunctionLibrary::GetGripSlotInRangeByTypeName(OverridePrefix, this, WorldLocation, bSecondarySlot ? VRGripInterfaceSettings.SecondarySlotRange : VRGripInterfaceSettings.PrimarySlotRange, bHadSlotInRange, SlotWorldTransform);
+	UVRExpansionFunctionLibrary::GetGripSlotInRangeByTypeName(OverridePrefix, this, WorldLocation, bSecondarySlot ? VRGripInterfaceSettings.SecondarySlotRange : VRGripInterfaceSettings.PrimarySlotRange, bHadSlotInRange, SlotWorldTransform, SlotName);
 }
 
 bool AGrippableStaticMeshActor::AllowsMultipleGrips_Implementation()
@@ -267,23 +270,28 @@ void AGrippableStaticMeshActor::SetHeld_Implementation(UGripMotionControllerComp
 		RemoveFromClientReplicationBucket();
 
 		VRGripInterfaceSettings.bWasHeld = true;
+		VRGripInterfaceSettings.bIsHeld = VRGripInterfaceSettings.HoldingControllers.Num() > 0;
 	}
 	else
 	{
 		VRGripInterfaceSettings.HoldingControllers.Remove(FBPGripPair(HoldingController, GripID));
-		if (ClientAuthReplicationData.bUseClientAuthThrowing && ShouldWeSkipAttachmentReplication(false))
+		VRGripInterfaceSettings.bIsHeld = VRGripInterfaceSettings.HoldingControllers.Num() > 0;
+
+		if (ClientAuthReplicationData.bUseClientAuthThrowing && !VRGripInterfaceSettings.bIsHeld)
 		{
-			if (UPrimitiveComponent * PrimComp = Cast<UPrimitiveComponent>(GetRootComponent()))
+			bool bWasLocallyOwned = HoldingController ? HoldingController->IsLocallyControlled() : false;
+			if (bWasLocallyOwned && ShouldWeSkipAttachmentReplication(false))
 			{
-				if (PrimComp->IsSimulatingPhysics())
+				if (UPrimitiveComponent* PrimComp = Cast<UPrimitiveComponent>(GetRootComponent()))
 				{
-					AddToClientReplicationBucket();
+					if (PrimComp->IsSimulatingPhysics())
+					{
+						AddToClientReplicationBucket();
+					}
 				}
 			}
 		}
 	}
-
-	VRGripInterfaceSettings.bIsHeld = VRGripInterfaceSettings.HoldingControllers.Num() > 0;
 }
 
 bool AGrippableStaticMeshActor::GetGripScripts_Implementation(TArray<UVRGripScriptBase*> & ArrayReference)
@@ -294,55 +302,65 @@ bool AGrippableStaticMeshActor::GetGripScripts_Implementation(TArray<UVRGripScri
 
 bool AGrippableStaticMeshActor::PollReplicationEvent()
 {
-	if (!ClientAuthReplicationData.bIsCurrentlyClientAuth)
+	if (!ClientAuthReplicationData.bIsCurrentlyClientAuth || !this->HasLocalNetOwner() || VRGripInterfaceSettings.bIsHeld)
 		return false; // Tell the bucket subsystem to remove us from consideration
 
 	UWorld *OurWorld = GetWorld();
 	if (!OurWorld)
 		return false; // Tell the bucket subsystem to remove us from consideration
 
+	bool bRemoveBlocking = false;
+
 	if ((OurWorld->GetTimeSeconds() - ClientAuthReplicationData.TimeAtInitialThrow) > 10.0f)
 	{
 		// Lets time out sending, its been 10 seconds since we threw the object and its likely that it is conflicting with some server
 		// Authed movement that is forcing it to keep momentum.
-		return false; // Tell the bucket subsystem to remove us from consideration
+		//return false; // Tell the bucket subsystem to remove us from consideration
+		bRemoveBlocking = true;
 	}
 
 	// Store current transform for resting check
 	FTransform CurTransform = this->GetActorTransform();
 
-	if (!CurTransform.GetRotation().Equals(ClientAuthReplicationData.LastActorTransform.GetRotation()) || !CurTransform.GetLocation().Equals(ClientAuthReplicationData.LastActorTransform.GetLocation()))
+	if (!bRemoveBlocking)
 	{
-		ClientAuthReplicationData.LastActorTransform = CurTransform;
-
-		if (UPrimitiveComponent * PrimComp = Cast<UPrimitiveComponent>(RootComponent))
+		if (!CurTransform.GetRotation().Equals(ClientAuthReplicationData.LastActorTransform.GetRotation()) || !CurTransform.GetLocation().Equals(ClientAuthReplicationData.LastActorTransform.GetLocation()))
 		{
-			// Need to clamp to a max time since start, to handle cases with conflicting collisions
-			if (PrimComp->IsSimulatingPhysics() && ShouldWeSkipAttachmentReplication(false))
-			{
-				FRepMovementVR ClientAuthMovementRep;
-				if (ClientAuthMovementRep.GatherActorsMovement(this))
-				{
-					Server_GetClientAuthReplication(ClientAuthMovementRep);
+			ClientAuthReplicationData.LastActorTransform = CurTransform;
 
-					if (PrimComp->RigidBodyIsAwake())
-						return true;
+			if (UPrimitiveComponent * PrimComp = Cast<UPrimitiveComponent>(RootComponent))
+			{
+				// Need to clamp to a max time since start, to handle cases with conflicting collisions
+				if (PrimComp->IsSimulatingPhysics() && ShouldWeSkipAttachmentReplication(false))
+				{
+					FRepMovementVR ClientAuthMovementRep;
+					if (ClientAuthMovementRep.GatherActorsMovement(this))
+					{
+						Server_GetClientAuthReplication(ClientAuthMovementRep);
+
+						if (PrimComp->RigidBodyIsAwake())
+						{
+							return true;
+						}
+					}
 				}
 			}
+			else
+			{
+				bRemoveBlocking = true;
+				//return false; // Tell the bucket subsystem to remove us from consideration
+			}
 		}
-		else
-		{
-			return false; // Tell the bucket subsystem to remove us from consideration
-		}
+		//else
+	//	{
+			// Difference is too small, lets end sending location
+			//ClientAuthReplicationData.LastActorTransform = FTransform::Identity;
+	//	}
 	}
-	else
-	{
-		// Difference is too small, lets end sending location
-		ClientAuthReplicationData.LastActorTransform = FTransform::Identity;
-	}
+
+	bool TimedBlockingRelease = false;
 
 	AActor* TopOwner = GetOwner();
-
 	if (TopOwner != nullptr)
 	{
 		AActor * tempOwner = TopOwner->GetOwner();
@@ -366,9 +384,17 @@ bool AGrippableStaticMeshActor::PollReplicationEvent()
 				// Lets clamp the ping to a min / max value just in case
 				float clampedPing = FMath::Clamp(PlayerState->ExactPing * 0.001f, 0.0f, 1000.0f);
 				OurWorld->GetTimerManager().SetTimer(ClientAuthReplicationData.ResetReplicationHandle, this, &AGrippableStaticMeshActor::CeaseReplicationBlocking, clampedPing, false);
+				TimedBlockingRelease = true;
 			}
 		}
 	}
+
+	if (!TimedBlockingRelease)
+	{
+		CeaseReplicationBlocking();
+	}
+
+	//ClientAuthReplicationData.LastActorTransform = FTransform::Identity;
 
 	return false; // Tell the bucket subsystem to remove us from consideration
 }
@@ -377,6 +403,8 @@ void AGrippableStaticMeshActor::CeaseReplicationBlocking()
 {
 	if(ClientAuthReplicationData.bIsCurrentlyClientAuth)
 		ClientAuthReplicationData.bIsCurrentlyClientAuth = false;
+
+	ClientAuthReplicationData.LastActorTransform = FTransform::Identity;
 
 	if (ClientAuthReplicationData.ResetReplicationHandle.IsValid())
 	{
@@ -411,9 +439,12 @@ bool AGrippableStaticMeshActor::Server_GetClientAuthReplication_Validate(const F
 
 void AGrippableStaticMeshActor::Server_GetClientAuthReplication_Implementation(const FRepMovementVR & newMovement)
 {
-	FRepMovement& MovementRep = GetReplicatedMovement_Mutable();
-	newMovement.CopyTo(MovementRep);
-	OnRep_ReplicatedMovement();
+	if (!VRGripInterfaceSettings.bIsHeld)
+	{
+		FRepMovement& MovementRep = GetReplicatedMovement_Mutable();
+		newMovement.CopyTo(MovementRep);
+		OnRep_ReplicatedMovement();
+	}
 }
 
 void AGrippableStaticMeshActor::OnRep_AttachmentReplication()
@@ -429,7 +460,7 @@ void AGrippableStaticMeshActor::OnRep_AttachmentReplication()
 
 void AGrippableStaticMeshActor::OnRep_ReplicateMovement()
 {
-	if (bAllowIgnoringAttachOnOwner && ShouldWeSkipAttachmentReplication())
+	if (bAllowIgnoringAttachOnOwner && (ClientAuthReplicationData.bIsCurrentlyClientAuth || ShouldWeSkipAttachmentReplication()))
 	{
 		return;
 	}
@@ -469,7 +500,7 @@ void AGrippableStaticMeshActor::OnRep_ReplicatedMovement()
 
 void AGrippableStaticMeshActor::PostNetReceivePhysicState()
 {
-	if (VRGripInterfaceSettings.bIsHeld && bAllowIgnoringAttachOnOwner && ShouldWeSkipAttachmentReplication(false))
+	if ((ClientAuthReplicationData.bIsCurrentlyClientAuth || VRGripInterfaceSettings.bIsHeld) && bAllowIgnoringAttachOnOwner && ShouldWeSkipAttachmentReplication(false))
 	{
 		return;
 	}

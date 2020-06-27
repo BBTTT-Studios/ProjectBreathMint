@@ -111,8 +111,12 @@ public:
 		float EventThrowThreshold;
 	bool bHitEventThreshold;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRSliderComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GripSettings")
 	int GripPriority;
+
+	// Sets the grip priority
+	UFUNCTION(BlueprintCallable, Category = "GripSettings")
+		void SetGripPriority(int NewGripPriority);
 
 	// Set this to assign a spline component to the slider
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Replicated/*Using = OnRep_SplineComponentToFollow*/, Category = "VRSliderComponent")
@@ -310,7 +314,7 @@ public:
 
 		// Get closest primary slot in range
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")
-		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
+		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName,  UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
 
 	// Check if an object allows multiple grips at one time
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")

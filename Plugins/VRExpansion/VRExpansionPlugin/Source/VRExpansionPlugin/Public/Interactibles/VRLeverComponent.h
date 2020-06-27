@@ -166,8 +166,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "VRLeverComponent")
 		bool bIsLerping;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "VRLeverComponent")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GripSettings")
 		int GripPriority;
+
+	// Sets the grip priority
+	UFUNCTION(BlueprintCallable, Category = "GripSettings")
+		void SetGripPriority(int NewGripPriority);
 
 	// Full precision current angle
 	float FullCurrentAngle;
@@ -345,7 +349,7 @@ public:
 
 	// Get grip primary slot in range
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")
-		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
+		void ClosestGripSlotInRange(FVector WorldLocation, bool bSecondarySlot, bool & bHadSlotInRange, FTransform & SlotWorldTransform, FName & SlotName,  UGripMotionControllerComponent * CallingController = nullptr, FName OverridePrefix = NAME_None);
 
 	// Check if an object allows multiple grips at one time
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "VRGripInterface")

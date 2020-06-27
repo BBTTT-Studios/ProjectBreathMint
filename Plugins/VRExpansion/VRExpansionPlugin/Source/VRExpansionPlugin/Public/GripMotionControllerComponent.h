@@ -23,6 +23,17 @@ class AVRBaseCharacter;
 *
 */
 
+/** Override replication control variable for inherited properties that are private. Be careful since it removes a compile-time error when the variable doesn't exist */
+// This is a temp macro until epic adds their own equivilant
+#define DOREPLIFETIME_ACTIVE_OVERRIDE_PRIVATE_PROPERTY(c,v,active) \
+{ \
+	static FProperty* sp##v = GetReplicatedProperty(StaticClass(), c::StaticClass(),FName(TEXT(#v))); \
+	for (int32 i = 0; i < sp##v->ArrayDim; i++) \
+	{ \
+		ChangedPropertyTracker.SetCustomIsActiveOverride(this, sp##v->RepIndex + i, active); \
+	} \
+}
+
 DECLARE_LOG_CATEGORY_EXTERN(LogVRMotionController, Log, All);
 //For UE4 Profiler ~ Stat Group
 DECLARE_STATS_GROUP(TEXT("TICKGrip"), STATGROUP_TickGrip, STATCAT_Advanced);
@@ -161,11 +172,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GripMotionController")
 	bool bOffsetByHMD;
 
-	// If true, this component will not move itself in its tick, it will instead allow the character movement component to move it (unless the CMC is inactive, then it will go back to self managing)
-	// This will make it fall inside of the deferred updates of the CMC
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GripMotionController")
-		bool bUpdateInCharacterMovement;
-
 	UPROPERTY()
 		TWeakObjectPtr<AVRBaseCharacter> AttachChar;
 	void UpdateTracking(float DeltaTime);
@@ -233,7 +239,7 @@ public:
 
 protected:
 	//~ Begin UActorComponent Interface.
-	virtual void CreateRenderState_Concurrent() override;
+	virtual void CreateRenderState_Concurrent(FRegisterComponentContext* Context) override;
 	virtual void SendRenderTransform_Concurrent() override;
 	//~ End UActorComponent Interface.
 
@@ -358,7 +364,7 @@ public:
 
 	// Notify a client that their local grip was bad
 	UFUNCTION(Reliable, Client, WithValidation, Category = "GripMotionController")
-	void Client_NotifyInvalidLocalGrip(UObject * LocallyGrippedObject);
+	void Client_NotifyInvalidLocalGrip(UObject * LocallyGrippedObject, uint8 GripID);
 
 	// Notify the server that we locally gripped something
 	UFUNCTION(Reliable, Server, WithValidation, Category = "GripMotionController")
@@ -486,7 +492,7 @@ public:
 
 				if (bSendReleaseEvent)
 				{
-					if (Grip.GrippedObject && Grip.GrippedObject->GetClass()->ImplementsInterface(UVRGripInterface::StaticClass()))
+					if (Grip.GrippedObject->IsValidLowLevelFast() && Grip.GrippedObject->GetClass()->ImplementsInterface(UVRGripInterface::StaticClass()))
 					{
 						IVRGripInterface::Execute_OnSecondaryGripRelease(Grip.GrippedObject, this, OldGripInfo->SecondaryGripInfo.SecondaryAttachment, Grip);
 
@@ -508,7 +514,7 @@ public:
 
 				if (bSendGripEvent)
 				{
-					if (Grip.GrippedObject && Grip.GrippedObject->GetClass()->ImplementsInterface(UVRGripInterface::StaticClass()))
+					if (Grip.GrippedObject->IsValidLowLevelFast() && Grip.GrippedObject->GetClass()->ImplementsInterface(UVRGripInterface::StaticClass()))
 					{
 						IVRGripInterface::Execute_OnSecondaryGrip(Grip.GrippedObject, this, Grip.SecondaryGripInfo.SecondaryAttachment, Grip);
 
@@ -571,7 +577,7 @@ public:
 					LocalTransactionBuffer[i].ClearNonReppingItems();
 				}
 
-				if (LocalTransactionBuffer[i].GrippedObject && !LocalTransactionBuffer[i].ValueCache.bWasInitiallyRepped)
+				if (!LocalTransactionBuffer[i].ValueCache.bWasInitiallyRepped && LocalTransactionBuffer[i].GrippedObject->IsValidLowLevelFast())
 				{
 					LocalTransactionBuffer[i].ValueCache.bWasInitiallyRepped = true;
 					LocalTransactionBuffer[i].ValueCache.CachedGripID = LocalTransactionBuffer[i].GripID;
@@ -705,15 +711,7 @@ public:
 	{
 		if (GEngine != nullptr && GWorld != nullptr)
 		{
-			switch (GEngine->GetNetMode(GWorld))
-			{
-			case NM_Client: 
-			{return false;} break;
-			case NM_DedicatedServer:
-			case NM_ListenServer:
-			default: 
-			{return true; } break;
-			}
+			return GEngine->GetNetMode(GWorld) < NM_Client;
 		}
 
 		return false;
@@ -760,7 +758,10 @@ public:
 	You could pass in a socket relative transform with this set for snapping or an empty transform to snap the object at its 0,0,0 point.
 
 	If you declare a valid OptionSnapToSocketName then it will instead snap the actor to the relative offset
-	location that the socket is to its parent actor.
+	location that the socket is to its parent actor. 
+	
+	It will only do this if the WorldOffset value is left default, if it is not, then it will treat this as the name of the slot
+	that you already have the transform for.
 
 	If you declare a valid OptionalBoneToGripName then it will grip that physics body with physics grips (It will expect a bone worldspace transform then,
 	if you pass in the normal actor/root component world space transform then the grip will not be positioned correctly).
@@ -791,7 +792,7 @@ public:
 
 	// Auto grip any uobject that is/root is a primitive component
 	UFUNCTION(BlueprintCallable, Category = "GripMotionController")
-		bool GripObjectByInterface(UObject * ObjectToGrip, const FTransform &WorldOffset, bool bWorldOffsetIsRelative = false, FName OptionalBoneToGripName = NAME_None, bool bIsSlotGrip = false);
+		bool GripObjectByInterface(UObject * ObjectToGrip, const FTransform &WorldOffset, bool bWorldOffsetIsRelative = false, FName OptionalBoneToGripName = NAME_None, FName OptionalSnapToSocketName = NAME_None, bool bIsSlotGrip = false);
 
 	// Auto drop any uobject that is/root is a primitive component and has the VR Grip Interface
 	// If an object is passed in it will attempt to drop it, otherwise it will attempt to find and drop the given grip id
@@ -807,6 +808,9 @@ public:
 
 	   If you declare a valid OptionSnapToSocketName then it will instead snap the actor to the relative offset
 	   location that the socket is to its parent actor.
+
+		It will only do this if the WorldOffset value is left default, if it is not, then it will treat this as the name of the slot
+		that you already have the transform for.
 
 	   If you declare a valid OptionalBoneToGripName then it will grip that physics body with physics grips (It will expect a bone worldspace transform then, 
 	   if you pass in the normal actor/root component world space transform then the grip will not be positioned correctly).
@@ -839,7 +843,7 @@ public:
 	bool GripComponent(
 		UPrimitiveComponent* ComponentToGrip, 
 		const FTransform &WorldOffset, bool bWorldOffsetIsRelative = false, 
-		FName OptionalBoneToGrip_Name = NAME_None, 
+		FName OptionalsnapToSocketName = NAME_None, 
 		FName OptionalBoneToGripName = NAME_None,
 		EGripCollisionType GripCollisionType = EGripCollisionType::InteractiveCollisionWithPhysics, 
 		EGripLateUpdateSettings GripLateUpdateSetting = EGripLateUpdateSettings::NotWhenCollidingOrDoubleGripping,
@@ -917,6 +921,14 @@ public:
 			EBPVRResultSwitch &Result,
 			bool bIsPaused = false,
 			bool bNoConstraintWhenPaused = false
+		);
+
+	// Sets whether an active hybrid grip is locked to its soft setting (is not replicated by default as it is likely you will want to pass variables with this setting).
+	UFUNCTION(BlueprintCallable, Category = "GripMotionController", meta = (ExpandEnumAsExecs = "Result"))
+		void SetGripHybridLock(
+			const FBPActorGripInformation& Grip,
+			EBPVRResultSwitch& Result,
+			bool bIsLocked = false
 		);
 
 	// Sets the transform to stay at during pause
@@ -1094,11 +1106,11 @@ public:
 
 	// Adds a secondary attachment point to the grip
 	UFUNCTION(BlueprintCallable, Category = "GripMotionController")
-	bool AddSecondaryAttachmentPoint(UObject * GrippedObjectToAddAttachment, USceneComponent * SecondaryPointComponent, const FTransform &OriginalTransform, bool bTransformIsAlreadyRelative = false, float LerpToTime = 0.25f, bool bIsSlotGrip = false);
+	bool AddSecondaryAttachmentPoint(UObject * GrippedObjectToAddAttachment, USceneComponent * SecondaryPointComponent, const FTransform &OriginalTransform, bool bTransformIsAlreadyRelative = false, float LerpToTime = 0.25f, bool bIsSlotGrip = false, FName SecondarySlotName = NAME_None);
 
 	// Adds a secondary attachment point to the grip
 	UFUNCTION(BlueprintCallable, Category = "GripMotionController")
-	bool AddSecondaryAttachmentToGrip(const FBPActorGripInformation & GripToAddAttachment, USceneComponent * SecondaryPointComponent, const FTransform &OriginalTransform, bool bTransformIsAlreadyRelative = false, float LerpToTime = 0.25f, bool bIsSlotGrip = false);
+	bool AddSecondaryAttachmentToGrip(const FBPActorGripInformation & GripToAddAttachment, USceneComponent * SecondaryPointComponent, const FTransform &OriginalTransform, bool bTransformIsAlreadyRelative = false, float LerpToTime = 0.25f, bool bIsSlotGrip = false, FName SecondarySlotName = NAME_None);
 
 
 	// Removes a secondary attachment point from a grip
