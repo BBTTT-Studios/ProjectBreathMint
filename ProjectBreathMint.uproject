@@ -43,10 +43,6 @@
 			"Enabled": true
 		},
 		{
-			"Name": "OceanPlugin",
-			"Enabled": true
-		},
-		{
 			"Name": "Landmass",
 			"Enabled": true
 		},
@@ -59,19 +55,11 @@
 			"Name": "VictoryBPLibrary",
 			"Enabled": true,
 			"MarketplaceURL": "http://www.ue4code.com"
-		},
-		{
-			"Name": "OculusVR",
-			"Enabled": false,
-			"SupportedTargetPlatforms": [
-				"Win32",
-				"Win64",
-				"Android"
-			]
 		}
 	],
 	"TargetPlatforms": [
 		"PS4",
-		"WindowsNoEditor"
+		"WindowsNoEditor",
+		"Android"
 	]
 }
